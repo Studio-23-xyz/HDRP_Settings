@@ -16,26 +16,29 @@ namespace GameSettings
     public class ShadowQualitySettings : Settings, ISettings
     {
 
-        [SerializeField] private HDAdditionalLightData data;
+       private HDAdditionalLightData data;
 
         public string[] settings { get; private set; }
         private SettingsUIManager _settingsUIManager;
         private TMP_Dropdown dropdown;
-
+        [SerializeField] private ShadowQuality defaultVal = ShadowQuality.Medium;
         private void OnEnable()
         {
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
             _settingsUIManager.ApplyAction += ApplyAction;
             _settingsUIManager.RestoreAction += RestoreAction;
 
-            _settingsUIManager.QualityChangedAction += QualityChangedAction;
+            SettingsUIManager.QualityChangedAction += QualityChangedAction;
         }
 
         private void QualityChangedAction(QualityName qualityName)
         {
-            var value = (int) _settingsUIManager.QualitySettings.FirstOrDefault(x => x.names == qualityName)!
-                .shadowQuality;
-            dropdown.value = value;
+            var setting = _settingsUIManager.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
+            if (setting != null)
+            {
+                int value = (int)setting.shadowQuality;
+                dropdown.value = value;
+            }
         }
 
         private void OnDisable()
@@ -43,18 +46,19 @@ namespace GameSettings
             _settingsUIManager.ApplyAction -= ApplyAction;
             _settingsUIManager.RestoreAction -= RestoreAction;
 
-            _settingsUIManager.QualityChangedAction -= QualityChangedAction;
+           SettingsUIManager.QualityChangedAction -= QualityChangedAction;
         }
 
         public override void Awake()
         {
-
-            data.SetShadowResolutionOverride(false);
+            data = FindObjectOfType<HDAdditionalLightData>();
+            if(data)data.SetShadowResolutionOverride(false);
             // levels will only take effect if res is disabled
 
             dropdown = GetComponent<TMP_Dropdown>();
             dropdown.AddOptionNew(GenerateOptions());
 
+            defaultValue = (int) defaultVal;
             base.Awake();
 
 

@@ -1,5 +1,6 @@
 ﻿using Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 namespace GameSettings
@@ -11,9 +12,9 @@ namespace GameSettings
         private SettingsUIManager _settingsUIManager;
         private Toggle uiItem;
         
-        [SerializeField] private bool defaultVal = true; 
-        
-      
+        [SerializeField] private bool defaultVal = true;
+
+       private HDAdditionalLightData data;
         private void OnEnable()
         {
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
@@ -30,6 +31,7 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Toggle>();
+            data = FindObjectOfType<HDAdditionalLightData>();
             
             defaultValue = defaultVal;
             
@@ -55,7 +57,10 @@ namespace GameSettings
             if(!isLive) Apply();  // if Live then already applied this
         }
 
-        public void Apply()=>  QualitySettings.vSyncCount = currentValue.ToBool() ? 1 : 0; //? 0 dont, 1 every v blank;
+        public void Apply()
+        {
+            data.affectsVolumetric = currentValue.ToBool();
+        }
 
         
     }

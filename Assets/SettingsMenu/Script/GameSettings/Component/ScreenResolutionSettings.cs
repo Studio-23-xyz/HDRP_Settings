@@ -17,9 +17,11 @@ namespace GameSettings
     {
         private List<Resolution> settings { get; set; }
         private SettingsUIManager _settingsUIManager;
-        private TMP_Dropdown dropdown;
+        private TMP_Dropdown uiItem;
         
         private FullScreenModeSettings _fullScreenModeSettings;
+        
+        [SerializeField] private int defaultVal = 0;
         private void OnEnable()
         {
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
@@ -35,15 +37,16 @@ namespace GameSettings
         public override void Awake()
         {
             _fullScreenModeSettings = FindObjectOfType<FullScreenModeSettings>();
-            dropdown = GetComponent<TMP_Dropdown>();
-            dropdown.AddOptionNew(GenerateOptions());
+            uiItem = GetComponent<TMP_Dropdown>();
+            uiItem.AddOptionNew(GenerateOptions());
            
+            defaultValue = defaultVal;
             base.Awake();
            
           
-            dropdown.value =  currentValue.ToInt();
+            uiItem.value =  currentValue.ToInt();
             
-            dropdown.onValueChanged.AddListener((value) =>
+            uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
@@ -51,7 +54,7 @@ namespace GameSettings
         }
         private void RestoreAction()
         {
-            dropdown.value = defaultValue.ToInt(); // on change currentValue will be changed
+            uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }

@@ -11,10 +11,9 @@ namespace GameSettings
     public class SettingsUIManager : MonoBehaviour
     {
 
-       public List<QualitySetting> QualitySettings;
+        public List<QualitySetting> QualitySettingsPreset;
 
-        public Action<QualityName> QualityChangedAction;
-
+        public static Action<QualityName> QualityChangedAction;
         public Action ApplyAction;
         public Action RestoreAction;
 
@@ -24,41 +23,54 @@ namespace GameSettings
 
         [SerializeField] private FullScreenModeSettings fullScreenModeSettings;
         [SerializeField] private ScreenResolutionSettings screenResolutionSettings;
+        [SerializeField] private FovSettings fovSettings;
+        [SerializeField] private DpiResolutionSettings dpiResolutionSettings;
         [SerializeField] private GameQualitySettings gameQualitySettings;
         [SerializeField] private TextureQualitySettings textureQualitySettings;
         [SerializeField] private ShadowQualitySettings shadowQualitySettings;
-        [SerializeField] private FovSettings fovSettings;
-        [SerializeField] private DpiResolutionSettings dpiResolutionSettings;
-
-
+        [SerializeField] private VSyncSettings vSyncSettings;
+        
+        [SerializeField] private VolumetricLightSettings bVolumetricLightSettings;
+        [SerializeField] private BloomSettings bloomSettings;
+        [SerializeField] private VignetteSettings vignetteSettings;
+        [SerializeField] private AmbientOcclusionSettings ambientOcclusionSettings;
         private void Start()
         {
-
             applyButton.onClick.AddListener(ApplyAction.Invoke);
             restoreButton.onClick.AddListener(RestoreAction.Invoke);
 
             fullScreenModeSettings.Apply();
             screenResolutionSettings.Apply();
+            fovSettings.Apply();
+            dpiResolutionSettings.Apply();
             gameQualitySettings.Apply();
             textureQualitySettings.Apply();
             shadowQualitySettings.Apply();
-            fovSettings.Apply();
-            dpiResolutionSettings.Apply();
+           
+            vSyncSettings.Apply();
+            bVolumetricLightSettings.Apply();
+            bloomSettings.Apply();
+            vignetteSettings.Apply();
+            ambientOcclusionSettings.Apply();
 
             statusText.text = DeviceSettings();
-
         }
-
+        
+      
         public string DeviceSettings()
         {
             string output = null;
-            output += $"GetQualityLevel: {UnityEngine.QualitySettings.GetQualityLevel()} \n";
-            output += $"masterTextureLimit: {UnityEngine.QualitySettings.masterTextureLimit.ToString()} \n";
-            output += $"Shadow: {UnityEngine.QualitySettings.shadows} \n";
+            output += $"fullScreenMode: {Screen.fullScreenMode} \n";
+            output += $"currentResolution: {Screen.currentResolution} \n";
+            output += $"vSyncCount: {QualitySettings.vSyncCount} \n";
+            // output += $"brightness: {_autoExposure.keyValue.value/4.0f} \n";
+           // output += $"fov: {virtualCamera.m_Lens.FieldOfView} \n";
+            output += $"dpi: {QualitySettings.resolutionScalingFixedDPIFactor} \n";
+            output += $"GetQualityLevel: {QualitySettings.GetQualityLevel()} \n";
+            output += $"masterTextureLimit: {QualitySettings.masterTextureLimit.ToString()} \n";
+            output += $"Shadow: {QualitySettings.shadows} \n";
             return output;
         }
-
-
        
     }
     

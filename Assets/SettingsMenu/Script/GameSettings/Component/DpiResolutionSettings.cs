@@ -23,7 +23,7 @@ namespace GameSettings
         [SerializeField] private float maxValue = 1; 
         [SerializeField] private float defaultVal = 1; 
         
-        private CinemachineVirtualCamera virtualCamera;
+        
         private void OnEnable()
         {
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
@@ -40,10 +40,9 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Slider>();
-            virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+           
 
             defaultValue = defaultVal;
-            
             base.Awake();
             
             uiItem.Init(minValue, maxValue, currentValue.ToFloat());

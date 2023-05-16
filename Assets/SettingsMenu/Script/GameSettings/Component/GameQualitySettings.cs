@@ -16,12 +16,13 @@ namespace GameSettings
     {
 
 
-        private SettingsUIManager _settingsUIManager;
-        private TMP_Dropdown dropdown;
+        public SettingsUIManager _settingsUIManager;
+        private TMP_Dropdown uiItem;
 
-        [SerializeField] private int defaultVal = 1; //default 1; medium, 0 high, 2 low 
+        [SerializeField] private QualityName defaultVal = QualityName.Medium ; //default 1; medium, 0 high, 2 low 
 
-
+       
+        
         private void OnEnable()
         {
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
@@ -37,22 +38,23 @@ namespace GameSettings
 
         public override void Awake()
         {
-            dropdown = GetComponent<TMP_Dropdown>();
+            uiItem = GetComponent<TMP_Dropdown>();
 
-            dropdown.ClearOptions();
-            dropdown.AddOptions(QualitySettings.names.ToList());
+            uiItem.ClearOptions();
+            uiItem.AddOptions(GenerateOptions());
+          
 
-            defaultValue = defaultVal;
+            defaultValue = (int)defaultVal;
             base.Awake();
 
 
-            dropdown.value = currentValue.ToInt();
+            uiItem.value = currentValue.ToInt();
 
-            dropdown.onValueChanged.AddListener((value) =>
+            uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if (isLive) Apply();
-                _settingsUIManager.QualityChangedAction.Invoke( (QualityName)currentValue.ToInt());
+                SettingsUIManager.QualityChangedAction?.Invoke( (QualityName)currentValue.ToInt());
             });
 
 
@@ -60,7 +62,7 @@ namespace GameSettings
 
         private void RestoreAction()
         {
-            dropdown.value = defaultValue.ToInt(); // on change currentValue will be changed
+            uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
             base.Save();
             if (!isLive) Apply(); // if Live then already applied this
         }
@@ -76,7 +78,17 @@ namespace GameSettings
             QualitySettings.SetQualityLevel(currentValue.ToInt(), true);
         }
 
-        
+        private List<TMP_Dropdown.OptionData> GenerateOptions()
+        {
+            
+        //uiItem.AddOptions(QualitySettings.names.ToList());
+            List<TMP_Dropdown.OptionData> optionData = new List<TMP_Dropdown.OptionData>();
+            foreach (var item in  Enum.GetValues(typeof(QualityName))  )
+            {
+                optionData.Add(new TMP_Dropdown.OptionData(item.ToString()));
+            }
+            return optionData;
+        }
         
     }
 

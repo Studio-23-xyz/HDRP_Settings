@@ -1,5 +1,8 @@
-﻿using Cinemachine;
+﻿using System.Linq;
+using Cinemachine;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 namespace GameSettings
@@ -12,7 +15,7 @@ namespace GameSettings
         private Toggle uiItem;
         
         [SerializeField] private bool defaultVal = true; 
-        
+        private Volume data;
       
         private void OnEnable()
         {
@@ -30,7 +33,7 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Toggle>();
-            
+            data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0]; //FindObjectOfType<Volume>();
             defaultValue = defaultVal;
             
             base.Awake();
@@ -55,7 +58,10 @@ namespace GameSettings
             if(!isLive) Apply();  // if Live then already applied this
         }
 
-        public void Apply()=>  QualitySettings.vSyncCount = currentValue.ToBool() ? 1 : 0; //? 0 dont, 1 every v blank;
+        public void Apply()
+        {
+          //  if(data)  data.GetComponent<Vignette>().active = currentValue.ToBool();
+        }
 
         
     }

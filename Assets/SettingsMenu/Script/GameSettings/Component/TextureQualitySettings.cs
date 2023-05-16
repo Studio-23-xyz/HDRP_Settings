@@ -17,13 +17,14 @@ namespace GameSettings
     private SettingsUIManager _settingsUIManager;
     private TMP_Dropdown dropdown;
 
+    [SerializeField] private TextureQuality defaultVal = TextureQuality.Medium;
     private void OnEnable()
     {
         _settingsUIManager = FindObjectOfType<SettingsUIManager>();
         _settingsUIManager.ApplyAction += ApplyAction;
         _settingsUIManager.RestoreAction += RestoreAction;
         
-        _settingsUIManager.QualityChangedAction += QualityChangedAction;
+        SettingsUIManager.QualityChangedAction += QualityChangedAction;
     }
 
     private void OnDisable()
@@ -31,15 +32,18 @@ namespace GameSettings
         _settingsUIManager.ApplyAction -= ApplyAction;
         _settingsUIManager.RestoreAction -= RestoreAction;
         
-        _settingsUIManager.QualityChangedAction -= QualityChangedAction;
+       SettingsUIManager.QualityChangedAction -= QualityChangedAction;
     }
 
     private void QualityChangedAction(QualityName qualityName)
     {
 
-        var value = (int) _settingsUIManager.QualitySettings.FirstOrDefault(x => x.names == qualityName)!
-            .textureQuality;
-        dropdown.value = value;
+        var setting = _settingsUIManager.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
+        if (setting != null)
+        {
+            int value = (int)setting.textureQuality;
+            dropdown.value = value;
+        }
     }
     
     public override void Awake()
@@ -47,6 +51,7 @@ namespace GameSettings
         dropdown = GetComponent<TMP_Dropdown>();
         dropdown.AddOptionNew(GenerateOptions());
 
+        defaultValue = (int)defaultVal;
         base.Awake();
 
        

@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -19,14 +20,27 @@ namespace GameSettings
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
             _settingsUIManager.ApplyAction += ApplyAction;
             _settingsUIManager.RestoreAction += RestoreAction;
+
+            SettingsUIManager.QualityChangedAction += QualityChangedAction;
+        }
+
+        private void QualityChangedAction(QualityName qualityName)
+        {
+            var setting = _settingsUIManager.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
+            if (setting != null)
+            {
+                
+                uiItem.isOn = setting.vSyncCount;;
+            }
         }
 
         private void OnDisable()
         {
             _settingsUIManager.ApplyAction -= ApplyAction;
             _settingsUIManager.RestoreAction -= RestoreAction;
-        }
 
+            SettingsUIManager.QualityChangedAction -= QualityChangedAction;
+        }
         public override void Awake()
         {
             uiItem = GetComponent<Toggle>();

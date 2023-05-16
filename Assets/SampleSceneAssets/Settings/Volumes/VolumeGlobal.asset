@@ -118,10 +118,10 @@ MonoBehaviour:
     m_OverrideState: 0
     m_Value: 1
   upperHemisphereLuxValue:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: 0.4660715
   upperHemisphereLuxColor:
-    m_OverrideState: 0
+    m_OverrideState: 1
     m_Value: {x: 0.18750614, y: 0.29181972, z: 0.5}
   desiredLuxValue:
     m_OverrideState: 1
@@ -239,6 +239,7 @@ MonoBehaviour:
   - {fileID: 747098994415714109}
   - {fileID: 4566301752631259820}
   - {fileID: 6726343302422785154}
+  - {fileID: 2541122056268847564}
 --- !u!114 &747098994415714109
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -344,6 +345,46 @@ MonoBehaviour:
   m_SampleCount:
     m_OverrideState: 1
     m_Value: 12
+--- !u!114 &2541122056268847564
+MonoBehaviour:
+  m_ObjectHideFlags: 3
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 0}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 2c1be1b6c95cd2e41b27903b9270817f, type: 3}
+  m_Name: Vignette
+  m_EditorClassIdentifier: 
+  active: 1
+  mode:
+    m_OverrideState: 1
+    m_Value: 0
+  color:
+    m_OverrideState: 1
+    m_Value: {r: 0, g: 0, b: 0, a: 1}
+  center:
+    m_OverrideState: 1
+    m_Value: {x: 0.5, y: 0.5}
+  intensity:
+    m_OverrideState: 1
+    m_Value: 0.31
+  smoothness:
+    m_OverrideState: 1
+    m_Value: 0.2
+  roundness:
+    m_OverrideState: 1
+    m_Value: 1
+  rounded:
+    m_OverrideState: 1
+    m_Value: 1
+  mask:
+    m_OverrideState: 0
+    m_Value: {fileID: 0}
+  opacity:
+    m_OverrideState: 0
+    m_Value: 1
 --- !u!114 &2759069934644561995
 MonoBehaviour:
   m_ObjectHideFlags: 3
@@ -469,7 +510,7 @@ MonoBehaviour:
     m_Value: 0
   intensity:
     m_OverrideState: 1
-    m_Value: 0.4
+    m_Value: 4
   directLightingStrength:
     m_OverrideState: 1
     m_Value: 0.1
@@ -729,9 +770,11 @@ MonoBehaviour:
   cloudMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cloudLut:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cloudControl:
     m_OverrideState: 0
     m_Value: 0
@@ -741,24 +784,28 @@ MonoBehaviour:
   cumulusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cumulusMapMultiplier:
     m_OverrideState: 0
     m_Value: 1
   altoStratusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   altoStratusMapMultiplier:
     m_OverrideState: 0
     m_Value: 1
   cumulonimbusMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cumulonimbusMapMultiplier:
     m_OverrideState: 0
     m_Value: 1
   rainMap:
     m_OverrideState: 0
     m_Value: {fileID: 0}
+    dimension: 2
   cloudMapResolution:
     m_OverrideState: 0
     m_Value: 64
@@ -971,6 +1018,9 @@ MonoBehaviour:
   ghostingReduction:
     m_OverrideState: 0
     m_Value: 0
+  perceptualBlending:
+    m_OverrideState: 0
+    m_Value: 1
   shadows:
     m_OverrideState: 0
     m_Value: 0

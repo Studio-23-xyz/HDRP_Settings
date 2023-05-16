@@ -34,7 +34,6 @@ namespace GameSettings
             virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
             defaultValue = defaultVal;
-            
             base.Awake();
             
             uiItem.Init(minValue, maxValue, currentValue.ToFloat());
