@@ -1,14 +1,4 @@
-﻿using System;
-using System.Collections;
-using System.Collections.Generic;
-using System.IO;
-using System.Linq;
-using System.Text.RegularExpressions;
-using Cinemachine;
-using TMPro;
-using UnityEngine;
-using UnityEngine.Rendering.HighDefinition;
-using UnityEngine.Serialization;
+﻿using UnityEngine;
 using UnityEngine.UI;
 
 namespace GameSettings
@@ -69,6 +59,7 @@ namespace GameSettings
         public void Apply()
         {
             QualitySettings.resolutionScalingFixedDPIFactor = Mathf.Clamp01(currentValue.ToFloat()); // default 1, 0-1
+          
         }
 
         

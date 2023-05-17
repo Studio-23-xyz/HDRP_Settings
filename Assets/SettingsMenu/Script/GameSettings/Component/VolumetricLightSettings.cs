@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System.Linq;
+using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
@@ -34,7 +35,9 @@ namespace GameSettings
             uiItem = GetComponent<Toggle>();
             
             
-            data = FindObjectOfType<HDAdditionalLightData>();
+            data = FindObjectsOfType<HDAdditionalLightData>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0];
+            
+           
             
             
             defaultValue = defaultVal;
@@ -63,6 +66,7 @@ namespace GameSettings
 
         public void Apply()
         {
+            
             data.affectsVolumetric = currentValue.ToBool();
         }
 

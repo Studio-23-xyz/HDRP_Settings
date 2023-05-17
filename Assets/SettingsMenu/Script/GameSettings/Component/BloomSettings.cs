@@ -18,7 +18,7 @@ namespace GameSettings
         [SerializeField] private bool defaultVal = true; 
         
          public VolumeProfile data;
-        public Vignette component;
+        public Bloom component;
     
         private void OnEnable()
         {
@@ -37,7 +37,7 @@ namespace GameSettings
         {
             uiItem = GetComponent<Toggle>();
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
-            data.TryGet(typeof(Vignette), out component);
+            data.TryGet(typeof(Bloom), out component);
             
             defaultValue = defaultVal;
             

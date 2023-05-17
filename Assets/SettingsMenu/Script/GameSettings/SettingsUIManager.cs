@@ -39,7 +39,7 @@ namespace GameSettings
             applyButton.onClick.AddListener(ApplyAction.Invoke);
             restoreButton.onClick.AddListener(RestoreAction.Invoke);
 
-             /*fullScreenModeSettings.Apply();
+            /*fullScreenModeSettings.Apply();
             screenResolutionSettings.Apply();
             fovSettings.Apply();
             dpiResolutionSettings.Apply();
@@ -81,6 +81,10 @@ namespace GameSettings
         public TextureQuality textureQuality;
         public ShadowQuality shadowQuality;
         public bool vSyncCount;
+        public bool volumetricLight;
+        public bool bloom;
+        public bool vignette;
+        public bool ambientOcclusion;
     }
 
     [Serializable]
