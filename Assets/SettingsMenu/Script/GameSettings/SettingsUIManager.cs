@@ -39,7 +39,7 @@ namespace GameSettings
             applyButton.onClick.AddListener(ApplyAction.Invoke);
             restoreButton.onClick.AddListener(RestoreAction.Invoke);
 
-            fullScreenModeSettings.Apply();
+             /*fullScreenModeSettings.Apply();
             screenResolutionSettings.Apply();
             fovSettings.Apply();
             dpiResolutionSettings.Apply();
@@ -51,7 +51,7 @@ namespace GameSettings
             bVolumetricLightSettings.Apply();
             bloomSettings.Apply();
             vignetteSettings.Apply();
-            ambientOcclusionSettings.Apply();
+            ambientOcclusionSettings.Apply();*/
 
             statusText.text = DeviceSettings();
         }

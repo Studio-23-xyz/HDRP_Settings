@@ -3,6 +3,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GameSettings
@@ -15,7 +16,8 @@ namespace GameSettings
         private Toggle uiItem;
         
         [SerializeField] private bool defaultVal = true; 
-        private Volume data;
+        public VolumeProfile data;
+         public Vignette component;
       
         private void OnEnable()
         {
@@ -33,7 +35,8 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Toggle>();
-            data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0]; //FindObjectOfType<Volume>();
+            data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
+            data.TryGet(typeof(Vignette), out component);
             defaultValue = defaultVal;
             
             base.Awake();
@@ -60,7 +63,7 @@ namespace GameSettings
 
         public void Apply()
         {
-          //  if(data)  data.GetComponent<Vignette>().active = currentValue.ToBool();
+           component.active = currentValue.ToBool();
         }
 
         

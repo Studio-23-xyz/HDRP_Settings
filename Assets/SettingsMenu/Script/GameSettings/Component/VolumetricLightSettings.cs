@@ -14,7 +14,8 @@ namespace GameSettings
         
         [SerializeField] private bool defaultVal = true;
 
-       private HDAdditionalLightData data;
+       public HDAdditionalLightData data;
+       
         private void OnEnable()
         {
             _settingsUIManager = FindObjectOfType<SettingsUIManager>();
@@ -31,7 +32,10 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Toggle>();
+            
+            
             data = FindObjectOfType<HDAdditionalLightData>();
+            
             
             defaultValue = defaultVal;
             

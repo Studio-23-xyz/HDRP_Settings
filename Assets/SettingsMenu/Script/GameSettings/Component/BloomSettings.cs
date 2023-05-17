@@ -3,6 +3,7 @@ using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.Serialization;
 using UnityEngine.UI;
 
 namespace GameSettings
@@ -16,7 +17,8 @@ namespace GameSettings
         
         [SerializeField] private bool defaultVal = true; 
         
-        public Volume data;
+         public VolumeProfile data;
+        public Vignette component;
     
         private void OnEnable()
         {
@@ -34,8 +36,8 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Toggle>();
-            data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0]; //(Volume) FindObjectOfType(typeof(Volume));
-          
+            data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
+            data.TryGet(typeof(Vignette), out component);
             
             defaultValue = defaultVal;
             
@@ -63,7 +65,7 @@ namespace GameSettings
 
         public void Apply()
         {
-           // data.GetComponent<Bloom>().active = currentValue.ToBool();
+            component.active = currentValue.ToBool();
         }
 
         
