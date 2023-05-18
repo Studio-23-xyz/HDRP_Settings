@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2166.8008, g: 2341.9355, b: 2829.0547, a: 1}
+  m_IndirectSpecularColor: {r: 2107.0176, g: 2257.92, b: 2691.6094, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -34579,7 +34579,7 @@ GameObject:
   - component: {fileID: 4269820211345325806}
   - component: {fileID: 4269820211345325807}
   m_Layer: 5
-  m_Name: Contets
+  m_Name: Row2
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -34606,13 +34606,13 @@ RectTransform:
   - {fileID: 7962756689500915463}
   - {fileID: 7962756689604772973}
   m_Father: {fileID: 4269820211964395624}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 46.5, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: 224, y: 0}
   m_SizeDelta: {x: 300, y: 518}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!114 &4269820211345325807
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35525,11 +35525,11 @@ RectTransform:
   m_Father: {fileID: 4269820211964395624}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 1, y: 0}
-  m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -40, y: 20}
+  m_AnchorMin: {x: 0.5, y: 0}
+  m_AnchorMax: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: 0, y: 33}
   m_SizeDelta: {x: 233.18, y: 50}
-  m_Pivot: {x: 1, y: 0}
+  m_Pivot: {x: 0.5, y: 0}
 --- !u!114 &4269820211936907422
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -35703,8 +35703,8 @@ RectTransform:
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_ConstrainProportionsScale: 0
   m_Children:
-  - {fileID: 4269820211345325806}
   - {fileID: 7962756690231887208}
+  - {fileID: 4269820211345325806}
   - {fileID: 4269820211936907417}
   - {fileID: 4269820212501060699}
   m_Father: {fileID: 4269820212018695079}
@@ -35757,7 +35757,7 @@ GameObject:
   - component: {fileID: 4269820211964395630}
   - component: {fileID: 4269820211964395625}
   m_Layer: 5
-  m_Name: 3_GameSettings
+  m_Name: VIDEO_SETTINGS
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -36463,11 +36463,11 @@ RectTransform:
   m_Father: {fileID: 4269820211964395624}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0}
+  m_AnchorMin: {x: 1, y: 0}
   m_AnchorMax: {x: 1, y: 0}
-  m_AnchoredPosition: {x: -199.12, y: 7.790039}
-  m_SizeDelta: {x: -418.88, y: 100}
-  m_Pivot: {x: 0.5, y: 0}
+  m_AnchoredPosition: {x: -20.0303, y: 33}
+  m_SizeDelta: {x: 223.4889, y: 430.88}
+  m_Pivot: {x: 1, y: 0}
 --- !u!114 &4269820212535969308
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -44370,13 +44370,13 @@ RectTransform:
   - {fileID: 385758990}
   - {fileID: 1743297899}
   m_Father: {fileID: 4269820211964395624}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
-  m_AnchorMin: {x: 0, y: 0.5}
-  m_AnchorMax: {x: 0, y: 0.5}
-  m_AnchoredPosition: {x: 354.07, y: 0}
+  m_AnchorMin: {x: 0.5, y: 0.5}
+  m_AnchorMax: {x: 0.5, y: 0.5}
+  m_AnchoredPosition: {x: -78, y: 0}
   m_SizeDelta: {x: 300, y: 518}
-  m_Pivot: {x: 0, y: 0.5}
+  m_Pivot: {x: 0.5, y: 0.5}
 --- !u!1 &7962756690231887209
 GameObject:
   m_ObjectHideFlags: 0
@@ -44388,7 +44388,7 @@ GameObject:
   - component: {fileID: 7962756690231887208}
   - component: {fileID: 7962756690231887215}
   m_Layer: 5
-  m_Name: Contets (1)
+  m_Name: Row1
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
