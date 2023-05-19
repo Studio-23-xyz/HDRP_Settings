@@ -44,6 +44,13 @@ namespace Studio23.Input.Rebinding
                 GetBindingInfo();
                 UpdateUI();
             }
+
+            InputManager.OnRebindComplete += UpdateUI;
+        }
+
+        private void OnDisable()
+        {
+            InputManager.OnRebindComplete -= UpdateUI;
         }
 
         private void ResetBinding()
@@ -53,7 +60,7 @@ namespace Studio23.Input.Rebinding
 
         private void DoRebind()
         {
-            throw new System.NotImplementedException();
+            InputManager.StartRebinding(_actionName, _bindingIndex, _rebindText);
         }
 
         private void OnValidate()
@@ -85,7 +92,7 @@ namespace Studio23.Input.Rebinding
             {
                 if (Application.isPlaying)
                 {
-                    //Grab from input hook
+                    _rebindText.text = InputManager.GetBindingName(_actionName, _bindingIndex);
                 }
                 else
                 {
