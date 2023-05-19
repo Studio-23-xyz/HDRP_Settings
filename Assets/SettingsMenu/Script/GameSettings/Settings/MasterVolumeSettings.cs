@@ -1,8 +1,12 @@
-﻿using Cinemachine;
+﻿using System;
+using System.Text.RegularExpressions;
+using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
 using UnityEngine.Serialization;
-using UnityEngine.UI;
+using UnityEngine.UIElements;
+using Slider = UnityEngine.UI.Slider;
 
 namespace GameSettings
 {
@@ -13,10 +17,10 @@ namespace GameSettings
         private AudioSettingsController _audioSettingsController;
         private Slider uiItem;
         
-        [SerializeField] private float minValue = 0; 
-        [SerializeField] private float maxValue = 1; 
-        [SerializeField] private float defaultVal = 0.75f;
        
+        [Range(0,1)]
+        [SerializeField] private float defaultVal = .75f;
+        [SerializeField] private TMP_Text label;
           
         [SerializeField] private AudioMixerGroup _audioMixerGroup;
         private void OnEnable()
@@ -38,22 +42,28 @@ namespace GameSettings
             
 
             defaultValue = defaultVal;
+           
             base.Awake();
             
-            uiItem.Init(minValue, maxValue, currentValue.ToFloat());
-            
+            uiItem.Init(currentValue.ToFloat());
+            label.text = FloatToText(defaultValue.ToFloat());
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
+                label.text = FloatToText(value);
             });
             
             Apply();
+            
         }
+
+        
+
         private void RestoreAction()
         {
-            uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
+            uiItem.value = defaultValue.ToFloat(); // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }
@@ -68,8 +78,8 @@ namespace GameSettings
             _audioMixerGroup.audioMixer.SetFloat("MasterVol",currentValue.ToFloat().GetAttenuation());
            
         }
+
        
-        
     }
     
   

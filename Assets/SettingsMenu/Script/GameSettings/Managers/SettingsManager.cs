@@ -39,9 +39,9 @@ namespace GameSettings
             else Destroy(gameObject);
         }
 
-        public void ShowStatus(string status)
+        public void ShowStatus()
         {
-            statusText.text = status;
+            statusText.text = DeviceSettings();
         }
 
         private void Start()
@@ -67,5 +67,21 @@ namespace GameSettings
             vignetteSettings.Awake();
             ambientOcclusionSettings.Awake();
         }
+        
+        private string DeviceSettings()
+        {
+            string output = null;
+            output += $"fullScreenMode: {Screen.fullScreenMode} \n";
+            output += $"currentResolution: {Screen.currentResolution} \n";
+            output += $"vSyncCount: {QualitySettings.vSyncCount} \n";
+            // output += $"brightness: {_autoExposure.keyValue.value/4.0f} \n";
+            // output += $"fov: {virtualCamera.m_Lens.FieldOfView} \n";
+            output += $"dpi: {QualitySettings.resolutionScalingFixedDPIFactor} \n";
+            output += $"GetQualityLevel: {QualitySettings.GetQualityLevel()} \n";
+            output += $"masterTextureLimit: {QualitySettings.masterTextureLimit.ToString()} \n";
+            output += $"Shadow: {QualitySettings.shadows} \n";
+            return output;
+        }
+        
     }
 }

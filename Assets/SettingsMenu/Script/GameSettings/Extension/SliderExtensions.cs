@@ -10,5 +10,11 @@ namespace GameSettings
             slider.maxValue = maxValue;
             slider.value = value;
         }
+        public static void Init(this Slider slider, float value)
+        {
+            slider.minValue = 0;
+            slider.maxValue = 1;
+            slider.value = value;
+        }
     }
 }

@@ -1,4 +1,5 @@
 ﻿using Cinemachine;
+using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -11,9 +12,9 @@ namespace GameSettings
         private VideoSettingsController _videoSettingsController;
         private Slider uiItem;
         
-        [SerializeField] private float minValue = 0; 
-        [SerializeField] private float maxValue = 1; 
+        [Range(0,1)]
         [SerializeField] private float defaultVal = 0;
+        [SerializeField] private TMP_Text label;
         private CinemachineVirtualCamera virtualCamera;
         private void OnEnable()
         {
@@ -31,21 +32,26 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Slider>();
-            virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
+            
 
             defaultValue = defaultVal;
+           
             base.Awake();
             
-            uiItem.Init(minValue, maxValue, currentValue.ToFloat());
-            
+            uiItem.Init(currentValue.ToFloat());
+            label.text = FloatToText(defaultValue.ToFloat());
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
+                label.text = FloatToText(value);
             });
+            
             Apply();
+            
         }
+        
         private void RestoreAction()
         {
             uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed

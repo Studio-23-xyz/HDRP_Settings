@@ -2,6 +2,7 @@ using System;
 using System.IO;
 using System.Collections.Generic;
 using System.Linq;
+using System.Text.RegularExpressions;
 using Newtonsoft.Json;
 using TMPro;
 using UnityEngine;
@@ -51,7 +52,15 @@ namespace GameSettings
             var json = File.ReadAllText(settingsPath);
             return JsonConvert.DeserializeObject<object>(json);
         }
-        
+
+        /*protected string GetName()
+        {
+           return $"{Regex.Replace(gameObject.name, "[A-Z]", " $0")}";
+        }*/
+        protected string FloatToText(float value)
+        {
+            return $"{gameObject.name} ({Math.Round(value * 100)}%)";
+        }
     }
 
 }
