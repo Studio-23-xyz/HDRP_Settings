@@ -46,21 +46,26 @@ namespace Studio23.Input.Rebinding
             }
 
             InputManager.OnRebindComplete += UpdateUI;
+            InputManager.OnRebindCanceled += UpdateUI;
         }
+
+        public void SetInputActionReference(InputActionReference targetAction) => _inputActionReference = targetAction;
 
         private void OnDisable()
         {
             InputManager.OnRebindComplete -= UpdateUI;
+            InputManager.OnRebindCanceled -= UpdateUI;
         }
 
         private void ResetBinding()
         {
-            throw new System.NotImplementedException();
+            InputManager.ResetBinding(_actionName, _bindingIndex);
+            UpdateUI();
         }
 
         private void DoRebind()
         {
-            InputManager.StartRebinding(_actionName, _bindingIndex, _rebindText);
+            InputManager.StartRebinding(_actionName, _bindingIndex, _rebindText, _excludeMouse);
         }
 
         private void OnValidate()
