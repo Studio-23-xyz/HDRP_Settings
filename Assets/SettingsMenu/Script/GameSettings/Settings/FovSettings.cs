@@ -66,7 +66,9 @@ namespace GameSettings
 
         public void Apply()
         {
-            if(virtualCamera) virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(currentValue.ToFloat()) * 60f; // float : 0 - 1, 60-120
+            if(virtualCamera) 
+                virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(currentValue.ToFloat()) * 60f; 
+            // float : 0 - 1, 60-120
         }
 
         
