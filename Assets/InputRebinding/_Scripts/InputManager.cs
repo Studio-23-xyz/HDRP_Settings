@@ -34,7 +34,7 @@ namespace Studio23.Input
             {
                 var firstPartIndex = bindingIndex + 1;
                 if (firstPartIndex < actionToRebind.bindings.Count &&
-                    actionToRebind.bindings[firstPartIndex].isComposite)
+                    actionToRebind.bindings[firstPartIndex].isPartOfComposite)
                 {
                     DoRebind(actionToRebind, firstPartIndex, statusText, true, excludeMouse);
                 }
@@ -50,7 +50,10 @@ namespace Studio23.Input
             if (actionToRebind == null || bindingIndex < 0)
                 return;
 
-            statusText.text = $"Press {actionToRebind.expectedControlType}";
+            if (actionToRebind.bindings[bindingIndex].isPartOfComposite)
+                statusText.text = $"Binding {actionToRebind.bindings[bindingIndex].name}";
+            else
+                statusText.text = $"Press {actionToRebind.expectedControlType}";
             actionToRebind.Disable();
 
             var rebind = actionToRebind.PerformInteractiveRebinding(bindingIndex);
@@ -63,7 +66,7 @@ namespace Studio23.Input
                 if (isComposite)
                 {
                     var nextBindingIndex = bindingIndex + 1;
-                    if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isComposite)
+                    if (nextBindingIndex < actionToRebind.bindings.Count && actionToRebind.bindings[nextBindingIndex].isPartOfComposite)
                         DoRebind(actionToRebind, nextBindingIndex, statusText, isComposite, excludeMouse);
                 }
 

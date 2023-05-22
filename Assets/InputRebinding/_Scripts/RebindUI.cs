@@ -49,7 +49,12 @@ namespace Studio23.Input.Rebinding
             InputManager.OnRebindCanceled += UpdateUI;
         }
 
-        public void SetInputActionReference(InputActionReference targetAction) => _inputActionReference = targetAction;
+        public void SetInputActionReference(InputActionReference targetAction, int bindingIndex)
+        {
+            _inputActionReference = targetAction;
+            GetBindingInfo();
+            UpdateUI();
+        }
 
         private void OnDisable()
         {
@@ -76,15 +81,23 @@ namespace Studio23.Input.Rebinding
             UpdateUI();
         }
 
-        private void GetBindingInfo()
+        private void GetBindingInfo(int compositeIndex = -1)
         {
             if (_inputActionReference.action != null)
                 _actionName = _inputActionReference.action.name;
 
             if (_inputActionReference.action.bindings.Count > _selectedBindingIndex)
             {
-                _inputBinding = _inputActionReference.action.bindings[_selectedBindingIndex];
-                _bindingIndex = _selectedBindingIndex;
+                if (compositeIndex < 0)
+                {
+                    _inputBinding = _inputActionReference.action.bindings[_selectedBindingIndex];
+                    _bindingIndex = _selectedBindingIndex;
+                }
+                else
+                {
+                    _inputBinding = _inputActionReference.action.bindings[compositeIndex];
+                    _bindingIndex = compositeIndex;
+                }
             }
         }
 

@@ -353,17 +353,6 @@
                 },
                 {
                     "name": "2D Vector",
-                    "id": "5e41df3c-9469-4296-aa5a-ec2fe5bab9e3",
-                    "path": "2DVector",
-                    "interactions": "",
-                    "processors": "",
-                    "groups": "",
-                    "action": "HorizontalMovement",
-                    "isComposite": true,
-                    "isPartOfComposite": false
-                },
-                {
-                    "name": "2D Vector",
                     "id": "158ea737-317b-4f66-9fd0-cf86c68a2255",
                     "path": "2DVector",
                     "interactions": "",
