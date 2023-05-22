@@ -9,8 +9,7 @@ namespace GameSettings
        
         private VideoSettingsController _videoSettingsController;
         private Slider uiItem;
-        [SerializeField] private float minValue = 0; 
-        [SerializeField] private float maxValue = 1; 
+        
         [SerializeField] private float defaultVal = 1; 
         
         
@@ -35,7 +34,7 @@ namespace GameSettings
             defaultValue = defaultVal;
             base.Awake();
             
-            uiItem.Init(minValue, maxValue, currentValue.ToFloat());
+            uiItem.Init(currentValue.ToFloat());
             
            
             uiItem.onValueChanged.AddListener((value) =>

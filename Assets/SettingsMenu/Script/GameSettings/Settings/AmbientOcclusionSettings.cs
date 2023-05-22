@@ -16,8 +16,8 @@ namespace GameSettings
         private Toggle uiItem;
         
         [SerializeField] private bool defaultVal = true; 
-        public VolumeProfile data;
-         public AmbientOcclusion component;
+        private VolumeProfile data;
+         private AmbientOcclusion component;
       
         private void OnEnable()
         {

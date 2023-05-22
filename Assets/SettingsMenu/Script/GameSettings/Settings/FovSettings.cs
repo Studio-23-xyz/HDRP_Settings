@@ -32,7 +32,7 @@ namespace GameSettings
         public override void Awake()
         {
             uiItem = GetComponent<Slider>();
-            
+            virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
             defaultValue = defaultVal;
            
@@ -66,9 +66,11 @@ namespace GameSettings
 
         public void Apply()
         {
-            if(virtualCamera) 
+           Debug.Log($" virtualCamera.m_Lens.FieldOfView { virtualCamera.m_Lens.FieldOfView }");
                 virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(currentValue.ToFloat()) * 60f; 
+                Debug.Log($" virtualCamera.m_Lens.FieldOfView { virtualCamera.m_Lens.FieldOfView }");
             // float : 0 - 1, 60-120
+            
         }
 
         

@@ -15,7 +15,7 @@ namespace GameSettings
         
         [SerializeField] private bool defaultVal = true;
 
-       public HDAdditionalLightData data;
+       private HDAdditionalLightData data;
        
         private void OnEnable()
         {

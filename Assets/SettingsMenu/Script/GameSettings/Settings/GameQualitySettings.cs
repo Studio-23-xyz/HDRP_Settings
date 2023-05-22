@@ -16,7 +16,7 @@ namespace GameSettings
     {
 
 
-        [FormerlySerializedAs("settingsManager")] [FormerlySerializedAs("_settingsUIManager")] public VideoSettingsController videoSettingsController;
+        private VideoSettingsController videoSettingsController;
         private TMP_Dropdown uiItem;
 
         [SerializeField] private QualityName defaultVal = QualityName.Medium ; //default 1; medium, 0 high, 2 low 

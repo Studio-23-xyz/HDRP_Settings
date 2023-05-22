@@ -17,8 +17,8 @@ namespace GameSettings
         
         [SerializeField] private bool defaultVal = true; 
         
-         public VolumeProfile data;
-        public Bloom component;
+         private VolumeProfile data;
+        private Bloom component;
     
         private void OnEnable()
         {

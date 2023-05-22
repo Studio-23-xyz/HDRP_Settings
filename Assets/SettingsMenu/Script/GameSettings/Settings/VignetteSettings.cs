@@ -17,8 +17,8 @@ namespace GameSettings
         
         [SerializeField] private bool defaultVal = true; 
         
-         public VolumeProfile data;
-        public Vignette component;
+         private VolumeProfile data;
+        private Vignette component;
         private void OnEnable()
         {
             _videoSettingsController = FindObjectOfType<VideoSettingsController>();
