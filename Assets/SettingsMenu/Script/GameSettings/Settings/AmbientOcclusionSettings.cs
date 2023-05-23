@@ -37,8 +37,8 @@ namespace GameSettings
         {
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; 
             data.TryGet(typeof(AmbientOcclusion), out component);
-            defaultValue = defaultVal;
-            base.Initialized();
+             
+            base.Initialized(defaultVal);
             uiItem.isOn = currentValue.ToBool();
             Apply();
         }
@@ -56,7 +56,7 @@ namespace GameSettings
       
         private void RestoreAction()
         {
-            uiItem.isOn = defaultValue.ToBool(); // on change currentValue will be changed
+            uiItem.isOn = defaultVal; // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }

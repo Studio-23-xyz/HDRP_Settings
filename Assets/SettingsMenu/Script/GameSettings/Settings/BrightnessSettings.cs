@@ -18,10 +18,10 @@ namespace GameSettings
         private VolumeProfile data;
         private ColorAdjustments component;
         
-        [SerializeField] private float minVal = -3; 
-        [SerializeField] private float maxVal = 1; 
+        [SerializeField] private float minVal = -3f; 
+        [SerializeField] private float maxVal = 1f; 
          
-        [SerializeField] private float defaultVal = -1; 
+        [SerializeField] private float defaultVal = -1f; 
         [SerializeField] private TMP_Text label;
         
         private void OnEnable()
@@ -43,9 +43,9 @@ namespace GameSettings
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
             data.TryGet(typeof(ColorAdjustments), out component);
             
-            defaultValue = defaultVal;
            
-            base.Initialized();
+           
+            base.Initialized(defaultVal);
             
             uiItem.Init(minVal, maxVal, currentValue.ToFloat());
             
@@ -56,7 +56,7 @@ namespace GameSettings
         private void Start()
         {
            
-            label.text = FloatToText(defaultValue.ToFloat());
+            label.text = FloatToText(defaultVal);
            
             uiItem.onValueChanged.AddListener((value) =>
             {
@@ -68,7 +68,7 @@ namespace GameSettings
 
         private void RestoreAction()
         {
-            uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
+            uiItem.value = defaultVal; // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }

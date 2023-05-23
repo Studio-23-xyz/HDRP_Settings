@@ -32,8 +32,8 @@ namespace GameSettings
             
             uiItem.Init(currentValue.ToFloat());
 
-            defaultValue = defaultVal;
-            base.Initialized();
+           
+            base.Initialized(defaultVal);
             
            
             Apply();
@@ -53,7 +53,7 @@ namespace GameSettings
 
         private void RestoreAction()
         {
-            uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
+            uiItem.value = defaultVal; // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }

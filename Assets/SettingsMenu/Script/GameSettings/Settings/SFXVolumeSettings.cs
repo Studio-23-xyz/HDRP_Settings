@@ -36,8 +36,8 @@ namespace GameSettings
 
         public override void Setup()
         {
-            defaultValue = defaultVal;
-            base.Initialized();
+             
+            base.Initialized(defaultVal);
             uiItem.Init(currentValue.ToFloat());
             Apply();
             
@@ -46,7 +46,7 @@ namespace GameSettings
         private void Start()
         {
            
-            label.text = FloatToText(defaultValue.ToFloat());
+            label.text = FloatToText(defaultVal);
            
             uiItem.onValueChanged.AddListener((value) =>
             {
@@ -58,7 +58,7 @@ namespace GameSettings
 
         private void RestoreAction()
         {
-            uiItem.value = defaultValue.ToFloat(); // on change currentValue will be changed
+            uiItem.value = defaultVal; // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }
