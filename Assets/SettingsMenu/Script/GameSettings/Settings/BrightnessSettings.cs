@@ -1,18 +1,28 @@
 ﻿using System;
+using System.Linq;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 namespace GameSettings
 {
     [RequireComponent(typeof(Slider))]
-    public class DpiResolutionSettings : Settings
+    public class BrightnessSettings : Settings
     {
        
         private VideoSettingsController _videoSettingsController;
         [SerializeField] private Slider uiItem;
         
-        [SerializeField] private float defaultVal = 1; 
+        private VolumeProfile data;
+        private ColorAdjustments component;
         
+        [SerializeField] private float minVal = -3; 
+        [SerializeField] private float maxVal = 1; 
+         
+        [SerializeField] private float defaultVal = -1; 
+        [SerializeField] private TMP_Text label;
         
         private void OnEnable()
         {
@@ -27,27 +37,32 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
+
         public override void Setup()
         {
+            data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
+            data.TryGet(typeof(ColorAdjustments), out component);
             
-            uiItem.Init(currentValue.ToFloat());
-
             defaultValue = defaultVal;
+           
             base.Initialized();
             
-           
+            uiItem.Init(minVal, maxVal, currentValue.ToFloat());
+            
             Apply();
+            
         }
 
         private void Start()
         {
-          
-            
+           
+            label.text = FloatToText(defaultValue.ToFloat());
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
+                label.text = FloatToText(value);
             });
         }
 
@@ -65,8 +80,8 @@ namespace GameSettings
 
         public void Apply()
         {
-            QualitySettings.resolutionScalingFixedDPIFactor = Mathf.Clamp01(currentValue.ToFloat()); // default 1, 0-1
-          
+
+            component.postExposure.value = Mathf.Clamp(currentValue.ToFloat(),minVal,maxVal) ;
         }
 
         

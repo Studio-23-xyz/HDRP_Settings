@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Audio;
@@ -7,11 +8,11 @@ using UnityEngine.UI;
 namespace GameSettings
 {
     [RequireComponent(typeof(Slider))]
-    public class SFXVolumeSettings : Settings, ISettings
+    public class SFXVolumeSettings : Settings
     {
        
         private AudioSettingsController _audioSettingsController;
-        private Slider uiItem;
+        [SerializeField] private Slider uiItem;
         
        
         [Range(0,1)]
@@ -32,17 +33,19 @@ namespace GameSettings
             _audioSettingsController.RestoreAction -= RestoreAction;
         }
 
-        
-        public override void Awake()
-        {
-            uiItem = GetComponent<Slider>();
-            
 
+        public override void Setup()
+        {
             defaultValue = defaultVal;
-           
-            base.Awake();
-            
+            base.Initialized();
             uiItem.Init(currentValue.ToFloat());
+            Apply();
+            
+        }
+
+        private void Start()
+        {
+           
             label.text = FloatToText(defaultValue.ToFloat());
            
             uiItem.onValueChanged.AddListener((value) =>
@@ -51,10 +54,8 @@ namespace GameSettings
                 if(isLive) Apply();
                 label.text = FloatToText(value);
             });
-            
-            Apply();
-            
         }
+
         private void RestoreAction()
         {
             uiItem.value = defaultValue.ToFloat(); // on change currentValue will be changed

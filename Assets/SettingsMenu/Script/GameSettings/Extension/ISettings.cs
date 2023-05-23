@@ -6,6 +6,7 @@ namespace GameSettings
 {
     public interface ISettings
     {
+        void Initialized();
         void Apply();
 
     }

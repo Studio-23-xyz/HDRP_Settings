@@ -6,16 +6,17 @@ using System.Linq;
 using System.Text.RegularExpressions;
 using TMPro;
 using UnityEngine;
+using UnityEngine.Serialization;
 
 
 namespace GameSettings
 {
     [RequireComponent(typeof(TMP_Dropdown))]
-    public class TextureQualitySettings : Settings, ISettings
+    public class TextureQualitySettings : Settings
     {
      //   public string[] settings { get; private set; }
     private VideoSettingsController _videoSettingsController;
-    private TMP_Dropdown dropdown;
+    [SerializeField] private TMP_Dropdown uiItem;
 
     [SerializeField] private TextureQuality defaultVal = TextureQuality.Medium;
     private void OnEnable()
@@ -42,32 +43,42 @@ namespace GameSettings
         if (setting != null)
         {
             int value = (int)setting.textureQuality;
-            dropdown.value = value;
+            uiItem.value = value;
         }
     }
     
-    public override void Awake()
+    public override void Setup()
     {
-        dropdown = GetComponent<TMP_Dropdown>();
-        dropdown.AddOptionNew(GenerateOptions());
+        
+        
+        uiItem.ClearOptions();
+        uiItem.AddOptionNew(GenerateOptions());
 
         defaultValue = (int)defaultVal;
-        base.Awake();
-
+        base.Initialized();
+        uiItem.value = currentValue.ToInt();
        
-        dropdown.value = currentValue.ToInt();
+       
+        Apply();
+    }
 
-        dropdown.onValueChanged.AddListener((value) =>
+    
+
+    
+    private void Start()
+    {
+      
+
+        uiItem.onValueChanged.AddListener((value) =>
         {
             currentValue = value;
             if (isLive) Apply();
         });
-        Apply();
     }
 
     private void RestoreAction()
     {
-        dropdown.value = defaultValue.ToInt(); // on change currentValue will be changed
+        uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
         base.Save();
         if (!isLive) Apply(); // if Live then already applied this
     }

@@ -1,4 +1,5 @@
-﻿using System.Linq;
+﻿using System;
+using System.Linq;
 using Cinemachine;
 using UnityEngine;
 using UnityEngine.Rendering;
@@ -9,11 +10,11 @@ using UnityEngine.UI;
 namespace GameSettings
 {
     [RequireComponent(typeof(Toggle))]
-    public class BloomSettings : Settings, ISettings
+    public class BloomSettings : Settings
     {
        
         private VideoSettingsController _videoSettingsController;
-        private Toggle uiItem;
+        [SerializeField] private Toggle uiItem;
         
         [SerializeField] private bool defaultVal = true; 
         
@@ -32,26 +33,31 @@ namespace GameSettings
             _videoSettingsController.ApplyAction -= ApplyAction;
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
-        
-        public override void Awake()
+
+        public override void Setup()
         {
-            uiItem = GetComponent<Toggle>();
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
             data.TryGet(typeof(Bloom), out component);
             
             defaultValue = defaultVal;
             
-            base.Awake();
-            
+            base.Initialized();
             uiItem.isOn = currentValue.ToBool();
+           
+            Apply();
+        }
+
+        private void Start()
+        {
+          
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
             });
-            Apply();
         }
+
         private void RestoreAction()
         {
             uiItem.isOn = defaultValue.ToBool(); // on change currentValue will be changed

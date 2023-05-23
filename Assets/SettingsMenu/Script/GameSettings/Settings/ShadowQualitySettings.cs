@@ -8,19 +8,20 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
+using UnityEngine.Serialization;
 
 
 namespace GameSettings
 {
     [RequireComponent(typeof(TMP_Dropdown))]
-    public class ShadowQualitySettings : Settings, ISettings
+    public class ShadowQualitySettings : Settings
     {
 
        private HDAdditionalLightData data;
 
         public string[] settings { get; private set; }
         private VideoSettingsController _videoSettingsController;
-        private TMP_Dropdown dropdown;
+        [SerializeField] private TMP_Dropdown uiItem;
         [SerializeField] private ShadowQuality defaultVal = ShadowQuality.Medium;
         private void OnEnable()
         {
@@ -37,7 +38,7 @@ namespace GameSettings
             if (setting != null)
             {
                 int value = (int)setting.shadowQuality;
-                dropdown.value = value;
+                uiItem.value = value;
             }
         }
 
@@ -49,33 +50,29 @@ namespace GameSettings
            VideoSettingsController.QualityChangedAction -= QualityChangedAction;
         }
 
-        public override void Awake()
+        public override void Setup()
         {
             data = FindObjectOfType<HDAdditionalLightData>();
             if(data)data.SetShadowResolutionOverride(false);
-            // levels will only take effect if res is disabled
-
-            dropdown = GetComponent<TMP_Dropdown>();
-            dropdown.AddOptionNew(GenerateOptions());
-
+            uiItem.AddOptionNew(GenerateOptions());
             defaultValue = (int) defaultVal;
-            base.Awake();
+            base.Initialized();
+            uiItem.value = currentValue.ToInt();
+            Apply();
+        }
 
-
-            dropdown.value = currentValue.ToInt();
-
-            dropdown.onValueChanged.AddListener((value) =>
+        private void Start()
+        {
+            uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if (isLive) Apply();
             });
-            Apply();
         }
-
 
         private void RestoreAction()
         {
-            dropdown.value = defaultValue.ToInt(); // on change currentValue will be changed
+            uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
             base.Save();
             if (!isLive) Apply(); // if Live then already applied this
         }

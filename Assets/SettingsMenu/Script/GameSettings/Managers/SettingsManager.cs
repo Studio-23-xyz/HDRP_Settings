@@ -1,74 +1,68 @@
 ﻿using System;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
+ 
+using System.Reflection;
 
 namespace GameSettings
 {
     public class SettingsManager : MonoBehaviour
     {
-        public static SettingsManager Instance;
+       
         
         [SerializeField] private TMP_Text statusText;
-          [SerializeField] private bool InitOnStart;
-        [FormerlySerializedAs("masterVolumeController")]
-        [Header("Audio Settings")]
+
+
+        
+       
+          public static SettingsManager InstanceX;
+          [Header("Audio Settings")]
         [SerializeField] private MasterVolumeSettings masterVolumeSettings;
         [SerializeField] private SFXVolumeSettings sfxVolumeSettings;
-        [FormerlySerializedAs("musicVolumeController")] [SerializeField] private MusicVolumeSettings musicVolumeSettings;
+         [SerializeField] private MusicVolumeSettings musicVolumeSettings;
         [Header("Video Settings")]
         [SerializeField] private FullScreenModeSettings fullScreenModeSettings;
         [SerializeField] private ScreenResolutionSettings screenResolutionSettings;
         [SerializeField] private FovSettings fovSettings;
-        [SerializeField] private DpiResolutionSettings dpiResolutionSettings;
-        [SerializeField] private GameQualitySettings gameQualitySettings;
-        [SerializeField] private TextureQualitySettings textureQualitySettings;
-        [SerializeField] private ShadowQualitySettings shadowQualitySettings;
+       
+      
         [SerializeField] private VSyncSettings vSyncSettings;
         [SerializeField] private VolumetricLightSettings bVolumetricLightSettings;
         [SerializeField] private BloomSettings bloomSettings;
         [SerializeField] private VignetteSettings vignetteSettings;
         [SerializeField] private AmbientOcclusionSettings ambientOcclusionSettings;
-       
-       
-        private void Awake()
-        {
-            if (Instance == null) Instance = this;
-            else Destroy(gameObject);
-        }
+        
+       [SerializeField] private GameQualitySettings gameQualitySettings;
+       [SerializeField] private TextureQualitySettings textureQualitySettings;
+       [SerializeField] private ShadowQualitySettings shadowQualitySettings;
+       [SerializeField] private BrightnessSettings brightnessSettings;
 
-        public void ShowStatus()
-        {
-            statusText.text = DeviceSettings();
-        }
+       private void Awake()=>Initialized();
 
-        private void Start()
+       private void Initialized()
         {
-           if(InitOnStart) Initialized();
-        }
-
-        private void Initialized()
-        {
-            masterVolumeSettings.Awake();
-            sfxVolumeSettings.Awake();
-            musicVolumeSettings.Awake();
-            fullScreenModeSettings.Awake();
-            screenResolutionSettings.Awake();
-            fovSettings.Awake();
-            dpiResolutionSettings.Awake();
-            gameQualitySettings.Awake();
-            textureQualitySettings.Awake();
-            shadowQualitySettings.Awake();
-            vSyncSettings.Awake();
-            bVolumetricLightSettings.Awake();
-            bloomSettings.Awake();
-            vignetteSettings.Awake();
-            ambientOcclusionSettings.Awake();
+            
+            
+            masterVolumeSettings.Setup();
+            sfxVolumeSettings.Setup();
+            musicVolumeSettings.Setup();
+            fullScreenModeSettings.Setup();
+            screenResolutionSettings.Setup();
+            fovSettings.Setup();
+            gameQualitySettings.Setup();
+            textureQualitySettings.Setup();
+            shadowQualitySettings.Setup();
+            vSyncSettings.Setup();
+            bVolumetricLightSettings.Setup();
+            bloomSettings.Setup();
+            vignetteSettings.Setup();
+            ambientOcclusionSettings.Setup();
+            brightnessSettings.Setup(); 
         }
         
-        private string DeviceSettings()
+        /*private string DeviceSettings()
         {
             string output = null;
             output += $"fullScreenMode: {Screen.fullScreenMode} \n";
@@ -81,7 +75,9 @@ namespace GameSettings
             output += $"masterTextureLimit: {QualitySettings.masterTextureLimit.ToString()} \n";
             output += $"Shadow: {QualitySettings.shadows} \n";
             return output;
-        }
+        }*/
+
+        
         
     }
 }

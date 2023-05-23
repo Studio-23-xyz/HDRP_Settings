@@ -12,12 +12,12 @@ using UnityEngine.Serialization;
 namespace GameSettings
 {
     [RequireComponent(typeof(TMP_Dropdown))]
-    public class GameQualitySettings : Settings, ISettings
+    public class GameQualitySettings : Settings
     {
 
 
         private VideoSettingsController videoSettingsController;
-        private TMP_Dropdown uiItem;
+        [SerializeField] private TMP_Dropdown uiItem;
 
         [SerializeField] private QualityName defaultVal = QualityName.Medium ; //default 1; medium, 0 high, 2 low 
 
@@ -36,28 +36,25 @@ namespace GameSettings
             videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Awake()
+        public override void Setup()
         {
-            uiItem = GetComponent<TMP_Dropdown>();
-
-            uiItem.ClearOptions();
-            uiItem.AddOptions(GenerateOptions());
-          
-
-            defaultValue = (int)defaultVal;
-            base.Awake();
-
-
+            uiItem.AddOptionNew(GenerateOptions());
+            defaultValue = (int) defaultVal; 
+            base.Initialized();
             uiItem.value = currentValue.ToInt();
+            Apply();
+        }
 
+       
+
+        private void Start()
+        {
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if (isLive) Apply();
                 VideoSettingsController.QualityChangedAction?.Invoke( (QualityName)currentValue.ToInt());
             });
-
-            Apply();
         }
 
         private void RestoreAction()

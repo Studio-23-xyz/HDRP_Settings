@@ -1,4 +1,5 @@
-﻿using Cinemachine;
+﻿using System;
+using Cinemachine;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -6,11 +7,11 @@ using UnityEngine.UI;
 namespace GameSettings
 {
     [RequireComponent(typeof(Slider))]
-    public class FovSettings : Settings, ISettings
+    public class FovSettings : Settings
     {
        
         private VideoSettingsController _videoSettingsController;
-        private Slider uiItem;
+        [SerializeField] private Slider uiItem;
         
         [Range(0,1)]
         [SerializeField] private float defaultVal = 0;
@@ -29,16 +30,26 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Awake()
+        public override void Setup()
         {
-            uiItem = GetComponent<Slider>();
+             
+          
+           
             virtualCamera = FindObjectOfType<CinemachineVirtualCamera>();
 
             defaultValue = defaultVal;
            
-            base.Awake();
+            base.Initialized();
             
             uiItem.Init(currentValue.ToFloat());
+            
+            Apply();
+            
+        }
+
+        private void Start()
+        {
+           
             label.text = FloatToText(defaultValue.ToFloat());
            
             uiItem.onValueChanged.AddListener((value) =>
@@ -47,11 +58,8 @@ namespace GameSettings
                 if(isLive) Apply();
                 label.text = FloatToText(value);
             });
-            
-            Apply();
-            
         }
-        
+
         private void RestoreAction()
         {
             uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed
@@ -66,9 +74,8 @@ namespace GameSettings
 
         public void Apply()
         {
-           Debug.Log($" virtualCamera.m_Lens.FieldOfView { virtualCamera.m_Lens.FieldOfView }");
-                virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(currentValue.ToFloat()) * 60f; 
-                Debug.Log($" virtualCamera.m_Lens.FieldOfView { virtualCamera.m_Lens.FieldOfView }");
+            virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(currentValue.ToFloat()) * 60f; 
+                
             // float : 0 - 1, 60-120
             
         }

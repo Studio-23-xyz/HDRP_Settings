@@ -13,11 +13,11 @@ using UnityEngine.UI;
 namespace GameSettings
 {
     [RequireComponent(typeof(TMP_Dropdown))]
-    public class FullScreenModeSettings : Settings, ISettings
+    public class FullScreenModeSettings : Settings
     {
         private List<FullScreenMode> settings { get; set; }
         private VideoSettingsController _videoSettingsController;
-        private TMP_Dropdown uiItem;
+        [SerializeField] private TMP_Dropdown uiItem;
         
         [SerializeField] private FullScreenMode defaultVal;
         private void OnEnable()
@@ -33,23 +33,32 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Awake()
+        public override void Setup()
         {
-            uiItem = GetComponent<TMP_Dropdown>();
+            
+             
+           
+            
             uiItem.AddOptionNew(GenerateOptions());
            
             defaultValue = (int)defaultVal;
-            base.Awake();
+            base.Initialized();
             
             uiItem.value =  currentValue.ToInt();
+            Apply();
+        }
+
+        private void Start()
+        {
+           
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
             });
-            Apply();
         }
+
         private void RestoreAction()
         {
             uiItem.value = defaultValue.ToInt(); // on change currentValue will be changed

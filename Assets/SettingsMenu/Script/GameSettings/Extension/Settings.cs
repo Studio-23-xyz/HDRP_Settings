@@ -13,19 +13,19 @@ namespace GameSettings
 {
     
    
-    public class Settings : MonoBehaviour
+    public abstract class Settings : MonoBehaviour
     {
-        // AddOption, Read, Write, RestoreDefault,
-       
-      //  [SerializeField] protected string key = "";
+         
         protected object defaultValue = 0 ;
         [SerializeField] protected bool isLive;
-        
         protected object currentValue ;
-
         private string settingsPath;
-        public virtual void Awake()
+
+      
+        public abstract void Setup();
+        public virtual void Initialized()
         {
+            
             settingsPath =  Path.Combine(Application.persistentDataPath, $"{gameObject.name}.config");
             if (!File.Exists(settingsPath))
             {
@@ -52,15 +52,13 @@ namespace GameSettings
             var json = File.ReadAllText(settingsPath);
             return JsonConvert.DeserializeObject<object>(json);
         }
-
-        /*protected string GetName()
-        {
-           return $"{Regex.Replace(gameObject.name, "[A-Z]", " $0")}";
-        }*/
+        
         protected string FloatToText(float value)
         {
             return $"{gameObject.name} ({Math.Round(value * 100)}%)";
         }
+
+        
     }
 
 }
