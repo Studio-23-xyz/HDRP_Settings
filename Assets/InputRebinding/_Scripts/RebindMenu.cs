@@ -1,17 +1,20 @@
 using Studio23.Input.Rebinding;
 using System.Collections.Generic;
+using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
+using UnityEngine.UI;
 
 public class RebindMenu : MonoBehaviour
 {
     public Transform UiElementParent;
-    public RebindUI RebindUiPrefab;
     public RebindAction RebindActionPrefab;
-
     public InputActionAsset InputAsset;
-    public PlayerControls PlayerControlsAsset;
+
+    public GameObject RebindOverlay;
+    public TextMeshProUGUI RebindOverlayText;
+
 
     [ContextMenu("Generate Rebinding UI")]
     public void GenerateRebindingElements()
@@ -34,7 +37,16 @@ public class RebindMenu : MonoBehaviour
             var rebindAction = Instantiate(RebindActionPrefab, UiElementParent);
             rebindAction.actionReference = inputActionReference;
             rebindAction.gameObject.name = inputActionReference.name;
-            rebindAction.bindingId = "1";
+            rebindAction.rebindOverlay = RebindOverlay;
+            rebindAction.rebindPrompt = RebindOverlayText;
+            //rebindAction.gameObject.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() =>
+            //{
+            //    rebindAction.StartInteractiveRebind();
+            //});
+            //rebindAction.gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
+            //{
+            //    rebindAction.ResetToDefault();
+            //});
             //if (inputActionReference.action.bindings[0].isComposite)
             //{
             //    Debug.Log(

@@ -420,6 +420,11 @@ public class RebindAction : MonoBehaviour
         if (m_ActionLabel != null)
         {
             var action = m_Action?.action;
+            if (action == null || action.bindings[0].isComposite)
+            {
+                Debug.LogWarning($"Action not set!");
+                return;
+            }
             m_ActionLabel.text = action != null ? action.name : string.Empty;
         }
     }
