@@ -1,10 +1,8 @@
-using Studio23.Input.Rebinding;
 using System.Collections.Generic;
 using TMPro;
 using UnityEditor;
 using UnityEngine;
 using UnityEngine.InputSystem;
-using UnityEngine.UI;
 
 public class RebindMenu : MonoBehaviour
 {
@@ -14,6 +12,9 @@ public class RebindMenu : MonoBehaviour
 
     public GameObject RebindOverlay;
     public TextMeshProUGUI RebindOverlayText;
+
+    [Space(5)] 
+    public Transform ParentObject;
 
 
     [ContextMenu("Generate Rebinding UI")]
@@ -39,30 +40,20 @@ public class RebindMenu : MonoBehaviour
             rebindAction.gameObject.name = inputActionReference.name;
             rebindAction.rebindOverlay = RebindOverlay;
             rebindAction.rebindPrompt = RebindOverlayText;
-            //rebindAction.gameObject.transform.GetChild(1).GetComponent<Button>().onClick.AddListener(() =>
-            //{
-            //    rebindAction.StartInteractiveRebind();
-            //});
-            //rebindAction.gameObject.transform.GetChild(2).GetComponent<Button>().onClick.AddListener(() =>
-            //{
-            //    rebindAction.ResetToDefault();
-            //});
-            //if (inputActionReference.action.bindings[0].isComposite)
-            //{
-            //    Debug.Log(
-            //        $"Composite binding {inputActionReference.action.name} & number of bindings {inputActionReference.action.bindings.Count}");
-            //    for (int i = 1; i < 5; i++)
-            //    {
-            //        var compositeBinding = Instantiate(RebindUiPrefab, UiElementParent);
-            //        compositeBinding.SetInputActionReference(inputActionReference, i);
-            //        compositeBinding.gameObject.name = inputActionReference.action.bindings[i].name;
-            //    }
+        }
+    }
 
-            //    continue;
-            //}
-            //var rebindElement = Instantiate(RebindUiPrefab, UiElementParent);
-            //rebindElement.SetInputActionReference(inputActionReference, -1);
-            //rebindElement.gameObject.name = inputActionReference.name;
+    private void OnEnable()
+    {
+        LoadKeybinds();
+        UpdateRebindElements();
+    }
+
+    private void UpdateRebindElements()
+    {
+        foreach (Transform rebindElement in UiElementParent)
+        {
+            rebindElement.GetComponent<RebindAction>().UpdateBindingDisplay();
         }
     }
 
@@ -73,5 +64,36 @@ public class RebindMenu : MonoBehaviour
         {
             DestroyImmediate(child.gameObject);
         }
+    }
+
+    /// <summary>
+    /// Used to store changed keybinds in PlayerPrefs under the key "rebinds" 
+    /// </summary>
+    public void SaveKeybinds()
+    {
+        var rebinds = InputAsset.SaveBindingOverridesAsJson();
+        PlayerPrefs.SetString("rebinds", rebinds);
+    }
+
+    /// <summary>
+    /// Reset all keybind overrides
+    /// </summary>
+    public void RestoreDefaultKeybinds()
+    {
+        foreach (InputAction inputAction in InputAsset)
+        {
+            inputAction.RemoveAllBindingOverrides();
+        }
+        UpdateRebindElements();
+    }
+
+    /// <summary>
+    /// Responsible for loading keybinds from PlayerPrefs saved under the key "rebinds"
+    /// </summary>
+    public void LoadKeybinds()
+    {
+        var rebinds = PlayerPrefs.GetString("rebinds");
+        if (!string.IsNullOrEmpty(rebinds))
+            InputAsset.LoadBindingOverridesFromJson(rebinds);
     }
 }

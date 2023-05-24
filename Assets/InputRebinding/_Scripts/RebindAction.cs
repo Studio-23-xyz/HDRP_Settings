@@ -4,6 +4,7 @@ using TMPro;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine;
+using Studio23.Input.Rebinding;
 
 public class RebindAction : MonoBehaviour
 {
@@ -34,6 +35,8 @@ public class RebindAction : MonoBehaviour
             UpdateBindingDisplay();
         }
     }
+
+    public bool ExcludeMouse = false;
 
     public InputBinding.DisplayStringOptions displayStringOptions
     {
@@ -305,7 +308,9 @@ public class RebindAction : MonoBehaviour
 
         // Give listeners a chance to act on the rebind starting.
         m_RebindStartEvent?.Invoke(this, m_RebindOperation);
-
+        if (ExcludeMouse)
+            m_RebindOperation.WithControlsExcluding($"Mouse");
+        m_RebindOperation.WithCancelingThrough($"<Keyboard>/escape");
         m_RebindOperation.Start();
     }
 
