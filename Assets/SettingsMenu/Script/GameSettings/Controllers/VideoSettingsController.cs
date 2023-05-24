@@ -13,7 +13,7 @@ namespace GameSettings
 
         public List<QualitySetting> QualitySettingsPreset;
 
-        public static Action<QualityName> QualityChangedAction;
+        public Action<QualityName> QualityChangedAction;
         public Action ApplyAction;
         public Action RestoreAction;
 

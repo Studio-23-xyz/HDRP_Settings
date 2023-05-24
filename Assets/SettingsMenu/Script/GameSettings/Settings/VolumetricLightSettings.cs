@@ -23,15 +23,27 @@ namespace GameSettings
             _videoSettingsController = FindObjectOfType<VideoSettingsController>();
             _videoSettingsController.ApplyAction += ApplyAction;
             _videoSettingsController.RestoreAction += RestoreAction;
+            
+            _videoSettingsController.QualityChangedAction += QualityChangedAction;
         }
 
         private void OnDisable()
         {
             _videoSettingsController.ApplyAction -= ApplyAction;
             _videoSettingsController.RestoreAction -= RestoreAction;
+            
+            _videoSettingsController.QualityChangedAction += QualityChangedAction;
         }
 
-        
+        private void QualityChangedAction(QualityName qualityName)
+        {
+            var setting = _videoSettingsController.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
+            if (setting != null)
+            {
+                
+                uiItem.isOn = setting.volumetricLight;;
+            }
+        }
         public override void Setup()
         {
             data = FindObjectsOfType<HDAdditionalLightData>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0];

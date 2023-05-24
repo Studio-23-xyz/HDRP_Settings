@@ -29,7 +29,7 @@ namespace GameSettings
             _videoSettingsController.ApplyAction += ApplyAction;
             _videoSettingsController.RestoreAction += RestoreAction;
 
-            VideoSettingsController.QualityChangedAction += QualityChangedAction;
+            _videoSettingsController.QualityChangedAction += QualityChangedAction;
         }
 
         private void QualityChangedAction(QualityName qualityName)
@@ -47,7 +47,7 @@ namespace GameSettings
             _videoSettingsController.ApplyAction -= ApplyAction;
             _videoSettingsController.RestoreAction -= RestoreAction;
 
-           VideoSettingsController.QualityChangedAction -= QualityChangedAction;
+            _videoSettingsController.QualityChangedAction -= QualityChangedAction;
         }
 
         public override void Setup()

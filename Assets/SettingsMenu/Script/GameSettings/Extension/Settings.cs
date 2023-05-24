@@ -11,8 +11,6 @@ using UnityEngine.UI;
 
 namespace GameSettings
 {
-    
-   
     public abstract class Settings : MonoBehaviour
     {
          

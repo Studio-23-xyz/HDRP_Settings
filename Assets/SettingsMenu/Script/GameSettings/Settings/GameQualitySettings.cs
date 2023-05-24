@@ -53,7 +53,7 @@ namespace GameSettings
             {
                 currentValue = value;
                 if (isLive) Apply();
-                VideoSettingsController.QualityChangedAction?.Invoke( (QualityName)currentValue.ToInt());
+                videoSettingsController.QualityChangedAction?.Invoke( (QualityName)currentValue.ToInt());
             });
         }
 

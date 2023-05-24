@@ -20,19 +20,32 @@ namespace GameSettings
         private VolumeProfile data;
          private AmbientOcclusion component;
       
-        private void OnEnable()
-        {
-            _videoSettingsController = FindObjectOfType<VideoSettingsController>();
-            _videoSettingsController.ApplyAction += ApplyAction;
-            _videoSettingsController.RestoreAction += RestoreAction;
-        }
+         private void OnEnable()
+         {
+             _videoSettingsController = FindObjectOfType<VideoSettingsController>();
+             _videoSettingsController.ApplyAction += ApplyAction;
+             _videoSettingsController.RestoreAction += RestoreAction;
+            
+             _videoSettingsController.QualityChangedAction += QualityChangedAction;
+         }
 
-        private void OnDisable()
-        {
-            _videoSettingsController.ApplyAction -= ApplyAction;
-            _videoSettingsController.RestoreAction -= RestoreAction;
-        }
+         private void OnDisable()
+         {
+             _videoSettingsController.ApplyAction -= ApplyAction;
+             _videoSettingsController.RestoreAction -= RestoreAction;
+            
+             _videoSettingsController.QualityChangedAction += QualityChangedAction;
+         }
 
+         private void QualityChangedAction(QualityName qualityName)
+         {
+             var setting = _videoSettingsController.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
+             if (setting != null)
+             {
+                
+                 uiItem.isOn = setting.ambientOcclusion;;
+             }
+         }
         public override void Setup()
         {
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; 
