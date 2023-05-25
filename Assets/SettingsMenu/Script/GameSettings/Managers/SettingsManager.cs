@@ -34,7 +34,8 @@ namespace GameSettings
        private void Initialized()
        {
           
-           /*Type[] types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+           /*
+            Type[] types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
           _allSettings = (from Type type in types where type.IsSubclassOf(typeof(Settings)) select type).ToList();*/
            
            /*foreach (Type tp in _allSettings)
@@ -47,7 +48,8 @@ namespace GameSettings
                    method.Invoke(instance, null);
                }
               
-           }*/
+           }
+           */
            
            
             masterVolumeSettings.Setup();

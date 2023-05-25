@@ -30,7 +30,7 @@ namespace GameSettings
         public override void Setup()
         {
             
-            uiItem.Init(currentValue.ToFloat());
+           
 
            
             base.Initialized(defaultVal);
@@ -42,7 +42,7 @@ namespace GameSettings
         private void Start()
         {
           
-            
+            uiItem.Init(currentValue.ToFloat());
            
             uiItem.onValueChanged.AddListener((value) =>
             {

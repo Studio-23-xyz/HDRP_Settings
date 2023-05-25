@@ -47,7 +47,7 @@ namespace GameSettings
            
             base.Initialized(defaultVal);
             
-            uiItem.Init(minVal, maxVal, currentValue.ToFloat());
+           
             
             Apply();
             
@@ -56,6 +56,8 @@ namespace GameSettings
         private void Start()
         {
            
+            uiItem.Init(minVal, maxVal, currentValue.ToFloat());
+            
             label.text = FloatToText(defaultVal);
            
             uiItem.onValueChanged.AddListener((value) =>

@@ -35,23 +35,25 @@ namespace GameSettings
 
         public override void Setup()
         {
-            
-             
-           
-            
-            uiItem.AddOptionNew(GenerateOptions());
+
+
+
+
+            GenerateOptions();
            
            
             base.Initialized((int)defaultVal);
             
-            uiItem.value =  currentValue.ToInt();
+           
             Apply();
         }
 
         private void Start()
         {
            
-           
+            uiItem.AddOptionNew(GetOptions());
+            uiItem.value =  currentValue.ToInt();
+            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
@@ -77,7 +79,7 @@ namespace GameSettings
             Screen.fullScreenMode = setting;
         }
 
-        private List<TMP_Dropdown.OptionData> GenerateOptions()
+        private void GenerateOptions()
         {
             settings = new List<FullScreenMode>();
             var x = 0;
@@ -87,10 +89,16 @@ namespace GameSettings
                 x++;
             }
 
+           
+        }
+        private List<TMP_Dropdown.OptionData> GetOptions()
+        {
+            
+
             return settings.Select(x => Regex.Replace(x.ToString(), "([a-z])([A-Z])", "$1 $2"))
                 .Select(newVal => new TMP_Dropdown.OptionData(newVal)).ToList();
         }
-
+        
         public FullScreenMode Get()
         {
             return settings[currentValue.ToInt()];

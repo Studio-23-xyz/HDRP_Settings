@@ -40,12 +40,13 @@ namespace GameSettings
         {
             
             base.Initialized(defaultVal);
-            uiItem.Init(currentValue.ToFloat());
+            
             Apply();
         }
 
         private void Start()
         {
+            uiItem.Init(currentValue.ToFloat());
             
             label.text = FloatToText(defaultVal);
            

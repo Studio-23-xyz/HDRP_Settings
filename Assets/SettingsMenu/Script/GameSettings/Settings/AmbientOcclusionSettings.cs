@@ -52,12 +52,12 @@ namespace GameSettings
             data.TryGet(typeof(AmbientOcclusion), out component);
              
             base.Initialized(defaultVal);
-            uiItem.isOn = currentValue.ToBool();
+           
             Apply();
         }
         private void Start()
         {
-            
+            uiItem.isOn = currentValue.ToBool();
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;

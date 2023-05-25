@@ -38,7 +38,7 @@ namespace GameSettings
 
         public override void Setup()
         {
-            uiItem.AddOptionNew(GenerateOptions());
+            uiItem.AddOptionNew(GetOptions());
            
             base.Initialized((int) defaultVal);
             uiItem.value = currentValue.ToInt();
@@ -75,10 +75,11 @@ namespace GameSettings
             QualitySettings.SetQualityLevel(currentValue.ToInt(), true);
         }
 
-        private List<TMP_Dropdown.OptionData> GenerateOptions()
+        
+        private List<TMP_Dropdown.OptionData> GetOptions()
         {
             
-        //uiItem.AddOptions(QualitySettings.names.ToList());
+            //uiItem.AddOptions(QualitySettings.names.ToList());
             List<TMP_Dropdown.OptionData> optionData = new List<TMP_Dropdown.OptionData>();
             foreach (var item in  Enum.GetValues(typeof(QualityName))  )
             {

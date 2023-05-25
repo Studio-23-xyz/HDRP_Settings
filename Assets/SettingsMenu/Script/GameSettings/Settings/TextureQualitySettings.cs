@@ -51,8 +51,8 @@ namespace GameSettings
     {
         
         
-        uiItem.ClearOptions();
-        uiItem.AddOptionNew(GenerateOptions());
+        
+      
 
        
         base.Initialized((int)defaultVal);
@@ -68,7 +68,8 @@ namespace GameSettings
     private void Start()
     {
       
-
+        uiItem.AddOptionNew(GenerateOptions());
+        
         uiItem.onValueChanged.AddListener((value) =>
         {
             currentValue = value;

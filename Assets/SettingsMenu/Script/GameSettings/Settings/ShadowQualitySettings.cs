@@ -54,7 +54,7 @@ namespace GameSettings
         {
             data = FindObjectOfType<HDAdditionalLightData>();
             if(data)data.SetShadowResolutionOverride(false);
-            uiItem.AddOptionNew(GenerateOptions());
+          
             
             base.Initialized((int) defaultVal);
             uiItem.value = currentValue.ToInt();
@@ -63,6 +63,8 @@ namespace GameSettings
 
         private void Start()
         {
+            uiItem.AddOptionNew(GetOptions());
+            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
@@ -94,7 +96,7 @@ namespace GameSettings
 
         }
 
-        private List<TMP_Dropdown.OptionData> GenerateOptions()
+        private List<TMP_Dropdown.OptionData> GetOptions()
         {
             // settings  = new [] {"Low", "Medium", "High", "Ultra"};/*Def 0, low  || Light-> Low Medium High Ultra*/
 

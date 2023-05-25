@@ -53,14 +53,14 @@ namespace GameSettings
             data.TryGet(typeof(Vignette), out component);
              
             base.Initialized(defaultVal);
-            uiItem.isOn = currentValue.ToBool();
+           
            
             Apply();
         }
 
         private void Start()
         {
-           
+            uiItem.isOn = currentValue.ToBool();
            
             uiItem.onValueChanged.AddListener((value) =>
             {

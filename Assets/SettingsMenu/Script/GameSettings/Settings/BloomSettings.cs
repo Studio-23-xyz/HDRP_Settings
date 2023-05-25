@@ -56,7 +56,7 @@ namespace GameSettings
            
             
             base.Initialized(defaultVal);
-            uiItem.isOn = currentValue.ToBool();
+          
            
             Apply();
         }
@@ -64,6 +64,7 @@ namespace GameSettings
         private void Start()
         {
           
+            uiItem.isOn = currentValue.ToBool();
             
             uiItem.onValueChanged.AddListener((value) =>
             {

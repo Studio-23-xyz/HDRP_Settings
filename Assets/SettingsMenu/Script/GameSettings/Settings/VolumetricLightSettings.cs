@@ -49,13 +49,13 @@ namespace GameSettings
             data = FindObjectsOfType<HDAdditionalLightData>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0];
             
             base.Initialized(defaultVal);
-            uiItem.isOn = currentValue.ToBool();
+          
             Apply();
         }
 
         private void Start()
         {
-          
+            uiItem.isOn = currentValue.ToBool();
            
             uiItem.onValueChanged.AddListener((value) =>
             {

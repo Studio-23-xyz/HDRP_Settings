@@ -36,25 +36,15 @@ namespace GameSettings
         }
         public override void Setup()
         {
-            
-            
-            
-           
-        
-           
-            uiItem.AddOptionNew(GenerateOptions());
-           
-             
+            GenerateOptions();
             base.Initialized(defaultVal);
-           
-            uiItem.value =  currentValue.ToInt();
-           
             Apply();
         }
 
         private void Start()
         {
-            
+            uiItem.AddOptionNew(GetOptions());
+            uiItem.value =  currentValue.ToInt();
             
             uiItem.onValueChanged.AddListener((value) =>
             {
@@ -79,22 +69,22 @@ namespace GameSettings
            var setting = settings[currentValue.ToInt()];
            Screen.SetResolution(setting.width, setting.height, _fullScreenModeSettings.Get());
        }
-       private  List<TMP_Dropdown.OptionData> GenerateOptions()
+       private  void GenerateOptions()
        {
            settings = new List<Resolution>();
-        
-           settings = new List<Resolution>();
+           
            settings.AddRange(Screen.resolutions.ToList());
            settings.Reverse();
           
 
+           
+       }
+       private  List<TMP_Dropdown.OptionData> GetOptions()
+       {
            return settings.Select(x => Regex.Replace(x.ToString(), "([a-z])([A-Z])", "$1 $2")).Select(newVal => new TMP_Dropdown.OptionData(newVal)).ToList();
        }
-       
-       public Resolution Get()
-       {
-           return settings[currentValue.ToInt()];
-       }
+
+      
        
     }
        
