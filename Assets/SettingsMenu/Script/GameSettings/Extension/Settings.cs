@@ -13,17 +13,21 @@ namespace GameSettings
 {
     public abstract class Settings : MonoBehaviour
     {
-         
+        protected object currentValue { get; set; }
+        protected bool isLive { get; private set; }
+        
         private object defaultValue = 0 ;
-        [SerializeField] protected bool isLive;
-        protected object currentValue ;
+       
+       
+       
         private string settingsPath;
 
       
         public abstract void Setup();
-        public virtual void Initialized(object defVal)
+        public virtual void Initialized(object defVal, bool isLiveValue = false)
         {
             defaultValue = defVal;
+            isLive = isLiveValue;
             settingsPath =  Path.Combine(Application.persistentDataPath, $"{gameObject.name}.config");
             if (!File.Exists(settingsPath))
             {

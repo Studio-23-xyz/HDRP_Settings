@@ -3,48 +3,53 @@ using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
- 
-using System.Reflection;
+
+
 
 namespace GameSettings
 {
     public class SettingsManager : MonoBehaviour
     {
-       
-        
-        [SerializeField] private TMP_Text statusText;
 
-
-        
-       
-          public static SettingsManager InstanceX;
-          [Header("Audio Settings")]
         [SerializeField] private MasterVolumeSettings masterVolumeSettings;
         [SerializeField] private SFXVolumeSettings sfxVolumeSettings;
-         [SerializeField] private MusicVolumeSettings musicVolumeSettings;
-        [Header("Video Settings")]
+        [SerializeField] private MusicVolumeSettings musicVolumeSettings;
         [SerializeField] private FullScreenModeSettings fullScreenModeSettings;
         [SerializeField] private ScreenResolutionSettings screenResolutionSettings;
         [SerializeField] private FovSettings fovSettings;
-       
-      
+        [SerializeField] private GameQualitySettings gameQualitySettings;
+        [SerializeField] private TextureQualitySettings textureQualitySettings;
+        [SerializeField] private ShadowQualitySettings shadowQualitySettings;
         [SerializeField] private VSyncSettings vSyncSettings;
-        [SerializeField] private VolumetricLightSettings bVolumetricLightSettings;
+        [SerializeField] private VolumetricLightSettings volumetricLightSettings;
         [SerializeField] private BloomSettings bloomSettings;
         [SerializeField] private VignetteSettings vignetteSettings;
         [SerializeField] private AmbientOcclusionSettings ambientOcclusionSettings;
+        [SerializeField] private BrightnessSettings brightnessSettings;
         
-       [SerializeField] private GameQualitySettings gameQualitySettings;
-       [SerializeField] private TextureQualitySettings textureQualitySettings;
-       [SerializeField] private ShadowQualitySettings shadowQualitySettings;
-       [SerializeField] private BrightnessSettings brightnessSettings;
-
+        [SerializeField] private TMP_Text statusText;
+        public List<Settings> allSettings;
        private void Awake()=>Initialized();
 
        private void Initialized()
-        {
-            
-            
+       {
+          
+           /*Type[] types = System.Reflection.Assembly.GetExecutingAssembly().GetTypes();
+          _allSettings = (from Type type in types where type.IsSubclassOf(typeof(Settings)) select type).ToList();*/
+           
+           /*foreach (Type tp in _allSettings)
+           {
+               Debug.Log(tp);
+               MethodInfo method = tp.GetMethod("Setup");
+               if (method != null)
+               {
+                   object instance = Activator.CreateInstance(tp);
+                   method.Invoke(instance, null);
+               }
+              
+           }*/
+           
+           
             masterVolumeSettings.Setup();
             sfxVolumeSettings.Setup();
             musicVolumeSettings.Setup();
@@ -55,12 +60,12 @@ namespace GameSettings
             textureQualitySettings.Setup();
             shadowQualitySettings.Setup();
             vSyncSettings.Setup();
-            bVolumetricLightSettings.Setup();
+            volumetricLightSettings.Setup();
             bloomSettings.Setup();
             vignetteSettings.Setup();
             ambientOcclusionSettings.Setup();
             brightnessSettings.Setup(); 
-        }
+       }
         
         /*private string DeviceSettings()
         {

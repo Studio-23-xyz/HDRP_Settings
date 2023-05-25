@@ -64,7 +64,7 @@ namespace GameSettings
         private void Start()
         {
           
-           
+            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
