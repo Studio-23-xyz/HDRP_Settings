@@ -46,14 +46,15 @@ namespace GameSettings
                  uiItem.isOn = setting.ambientOcclusion;;
              }
          }
-        public override void Setup()
+        public override void Setup(string dbName)
         {
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; 
             data.TryGet(typeof(AmbientOcclusion), out component);
              
-            base.Initialized(defaultVal);
+            base.Initialized(defaultVal, dbName);
            
             Apply();
+            
         }
         private void Start()
         {

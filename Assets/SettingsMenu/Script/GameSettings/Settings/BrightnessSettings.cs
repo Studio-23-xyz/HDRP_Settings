@@ -38,14 +38,14 @@ namespace GameSettings
         }
 
 
-        public override void Setup()
+        public override void Setup(string dbName)
         {
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
             data.TryGet(typeof(ColorAdjustments), out component);
             
            
            
-            base.Initialized(defaultVal);
+            base.Initialized(defaultVal, dbName);
             
            
             

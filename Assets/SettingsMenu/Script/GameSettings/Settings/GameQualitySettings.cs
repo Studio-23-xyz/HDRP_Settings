@@ -36,12 +36,12 @@ namespace GameSettings
             videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Setup()
+        public override void Setup(string dbName)
         {
-            uiItem.AddOptionNew(GetOptions());
            
-            base.Initialized((int) defaultVal);
-            uiItem.value = currentValue.ToInt();
+           
+            base.Initialized((int) defaultVal, dbName);
+
             Apply();
         }
 
@@ -49,6 +49,9 @@ namespace GameSettings
 
         private void Start()
         {
+            uiItem.AddOptionNew(GetOptions());
+            uiItem.value = currentValue.ToInt();
+            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;

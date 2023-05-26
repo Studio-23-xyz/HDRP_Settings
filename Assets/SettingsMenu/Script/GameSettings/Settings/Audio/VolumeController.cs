@@ -34,13 +34,13 @@ namespace GameSettings
         public void Init(AudioSetting adoSetting)
         {
            audioSetting = adoSetting;
-           Setup();
+           Setup(name);
         }
-        public override void Setup()
+        public override void Setup(string dbName)
         {
             if(audioSetting == null) return;
             
-            base.Initialized(audioSetting.defaultValue, audioSetting.isLive);
+            base.Initialized(audioSetting.defaultValue, dbName, audioSetting.isLive);
             uiItem.Init(currentValue.ToFloat());
             Apply();
         }

@@ -27,13 +27,13 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Setup()
+        public override void Setup(string dbName)
         {
             
            
 
            
-            base.Initialized(defaultVal);
+            base.Initialized(defaultVal, dbName);
             
            
             Apply();

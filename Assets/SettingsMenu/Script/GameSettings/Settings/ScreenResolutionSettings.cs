@@ -15,7 +15,7 @@ namespace GameSettings
     [RequireComponent(typeof(TMP_Dropdown))]
     public class ScreenResolutionSettings : Settings
     {
-        private List<Resolution> settings { get; set; }
+        private List<Resolution> options { get; set; } = new();
         private VideoSettingsController _videoSettingsController;
         [SerializeField] private TMP_Dropdown uiItem;
         
@@ -34,15 +34,16 @@ namespace GameSettings
             _videoSettingsController.ApplyAction -= ApplyAction;
            
         }
-        public override void Setup()
+        public override void Setup(string dbName)
         {
-            GenerateOptions();
-            base.Initialized(defaultVal);
+            if (!options.Any()) GenerateOptions();
+            base.Initialized(defaultVal, dbName);
             Apply();
         }
 
         private void Start()
         {
+            if (!options.Any()) return;
             uiItem.AddOptionNew(GetOptions());
             uiItem.value =  currentValue.ToInt();
             
@@ -66,22 +67,22 @@ namespace GameSettings
         }
         public void Apply()
        {
-           var setting = settings[currentValue.ToInt()];
+           var setting = options[currentValue.ToInt()];
            Screen.SetResolution(setting.width, setting.height, _fullScreenModeSettings.Get());
        }
        private  void GenerateOptions()
        {
-           settings = new List<Resolution>();
+           options = new List<Resolution>();
            
-           settings.AddRange(Screen.resolutions.ToList());
-           settings.Reverse();
+           options.AddRange(Screen.resolutions.ToList());
+           options.Reverse();
           
 
            
        }
        private  List<TMP_Dropdown.OptionData> GetOptions()
        {
-           return settings.Select(x => Regex.Replace(x.ToString(), "([a-z])([A-Z])", "$1 $2")).Select(newVal => new TMP_Dropdown.OptionData(newVal)).ToList();
+           return options.Select(x => Regex.Replace(x.ToString(), "([a-z])([A-Z])", "$1 $2")).Select(newVal => new TMP_Dropdown.OptionData(newVal)).ToList();
        }
 
       

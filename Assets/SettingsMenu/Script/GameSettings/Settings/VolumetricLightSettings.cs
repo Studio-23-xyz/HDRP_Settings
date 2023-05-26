@@ -44,11 +44,11 @@ namespace GameSettings
                 uiItem.isOn = setting.volumetricLight;;
             }
         }
-        public override void Setup()
+        public override void Setup(string dbName)
         {
             data = FindObjectsOfType<HDAdditionalLightData>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0];
             
-            base.Initialized(defaultVal);
+            base.Initialized(defaultVal, dbName);
           
             Apply();
         }

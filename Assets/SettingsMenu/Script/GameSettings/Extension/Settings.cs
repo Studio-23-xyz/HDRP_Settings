@@ -22,19 +22,20 @@ namespace GameSettings
        
         private string settingsPath;
 
-      
-        public abstract void Setup();
-        public virtual void Initialized(object defVal, bool isLiveValue = false)
+        
+        public abstract void Setup(string dbName);
+        public virtual void Initialized(object defVal, string dbName, bool isLiveValue = false)
         {
             defaultValue = defVal;
             isLive = isLiveValue;
-            settingsPath =  Path.Combine(Application.persistentDataPath, $"{gameObject.name}.config");
+            settingsPath =  Path.Combine(Application.persistentDataPath, $"{dbName}.config");
             if (!File.Exists(settingsPath))
             {
                 currentValue = defaultValue;
                 Save();
             }
             else Select();
+            
         }
 
         public void Select()

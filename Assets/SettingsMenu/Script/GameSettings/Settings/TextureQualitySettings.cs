@@ -8,7 +8,6 @@ using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
 
-
 namespace GameSettings
 {
     [RequireComponent(typeof(TMP_Dropdown))]
@@ -47,7 +46,7 @@ namespace GameSettings
         }
     }
     
-    public override void Setup()
+    public override void Setup(string dbName)
     {
         
         
@@ -55,8 +54,8 @@ namespace GameSettings
       
 
        
-        base.Initialized((int)defaultVal);
-        uiItem.value = currentValue.ToInt();
+        base.Initialized((int)defaultVal, dbName);
+       
        
        
         Apply();
@@ -69,6 +68,7 @@ namespace GameSettings
     {
       
         uiItem.AddOptionNew(GenerateOptions());
+        uiItem.value = currentValue.ToInt();
         
         uiItem.onValueChanged.AddListener((value) =>
         {
@@ -107,5 +107,7 @@ namespace GameSettings
         }
         return optionData;
     }
+
+    
     }
 }

@@ -43,10 +43,10 @@ namespace GameSettings
             _videoSettingsController.QualityChangedAction -= QualityChangedAction;
         }
 
-        public override void Setup()
+        public override void Setup(string dbName)
         {
             
-            base.Initialized(defaultVal);
+            base.Initialized(defaultVal, dbName);
            
             Apply();
         }

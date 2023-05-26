@@ -9,8 +9,7 @@ namespace GameSettings
     [RequireComponent(typeof(Slider))]
     public class FovSettings : Settings
     {
-       
-        private VideoSettingsController _videoSettingsController;
+    private VideoSettingsController _videoSettingsController;
         [SerializeField] private Slider uiItem;
         
         [Range(0,1)]
@@ -30,7 +29,7 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Setup()
+        public override void Setup(string dbName)
         {
              
           
@@ -39,7 +38,7 @@ namespace GameSettings
 
            
            
-            base.Initialized(defaultVal);
+            base.Initialized(defaultVal, dbName);
             
            
             

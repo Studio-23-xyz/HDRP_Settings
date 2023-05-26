@@ -15,7 +15,7 @@ namespace GameSettings
     [RequireComponent(typeof(TMP_Dropdown))]
     public class FullScreenModeSettings : Settings
     {
-        private List<FullScreenMode> settings { get; set; }
+        private List<FullScreenMode> options { get; set; } = new();
         private VideoSettingsController _videoSettingsController;
         [SerializeField] private TMP_Dropdown uiItem;
         
@@ -33,32 +33,27 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Setup()
+        public override void Setup(string dbName)
         {
-
-
-
-
-            GenerateOptions();
-           
-           
-            base.Initialized((int)defaultVal);
-            
-           
+            if (!options.Any()) GenerateOptions();
+            base.Initialized((int)defaultVal, dbName);
             Apply();
         }
 
         private void Start()
         {
-           
+            if (!options.Any()) return;
             uiItem.AddOptionNew(GetOptions());
             uiItem.value =  currentValue.ToInt();
+             
             
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
             });
+
+
         }
 
         private void RestoreAction()
@@ -75,17 +70,17 @@ namespace GameSettings
 
         public void Apply()
         {
-            var setting = settings[currentValue.ToInt()];
+            var setting = options[currentValue.ToInt()];
             Screen.fullScreenMode = setting;
         }
 
         private void GenerateOptions()
         {
-            settings = new List<FullScreenMode>();
+            options = new List<FullScreenMode>();
             var x = 0;
             foreach (FullScreenMode fullScreenMode in Enum.GetValues(typeof(FullScreenMode)))
             {
-                if (x != 2) settings.Add(fullScreenMode);
+                if (x != 2) options.Add(fullScreenMode);
                 x++;
             }
 
@@ -95,13 +90,14 @@ namespace GameSettings
         {
             
 
-            return settings.Select(x => Regex.Replace(x.ToString(), "([a-z])([A-Z])", "$1 $2"))
+            return options.Select(x => Regex.Replace(x.ToString(), "([a-z])([A-Z])", "$1 $2"))
                 .Select(newVal => new TMP_Dropdown.OptionData(newVal)).ToList();
         }
         
         public FullScreenMode Get()
         {
-            return settings[currentValue.ToInt()];
+            if (!options.Any()) GenerateOptions();
+            return options[currentValue.ToInt()];
         }
     }
     
