@@ -36,7 +36,14 @@ public class RebindAction : MonoBehaviour
         }
     }
 
-    public bool ExcludeMouse = false;
+    public bool excludeMouse
+    {
+        get => m_ExcludeMouse;
+        set
+        {
+            m_ExcludeMouse = value;
+        }
+    }
 
     public InputBinding.DisplayStringOptions displayStringOptions
     {
@@ -199,7 +206,11 @@ public class RebindAction : MonoBehaviour
 
         // Set on label (if any).
         if (m_BindingText != null)
+        {
+            displayString = displayString.Replace($"LS/", $"Left Stick ");
+            displayString = displayString.Replace($"RS/", $"Right Stick ");
             m_BindingText.text = displayString;
+        }
 
         // Give listeners a chance to configure UI in response.
         m_UpdateBindingUIEvent?.Invoke(this, displayString, deviceLayoutName, controlPath);
@@ -308,7 +319,7 @@ public class RebindAction : MonoBehaviour
 
         // Give listeners a chance to act on the rebind starting.
         m_RebindStartEvent?.Invoke(this, m_RebindOperation);
-        if (ExcludeMouse)
+        if (m_ExcludeMouse)
             m_RebindOperation.WithControlsExcluding($"Mouse");
         m_RebindOperation.WithCancelingThrough($"<Keyboard>/escape");
         m_RebindOperation.Start();
@@ -389,6 +400,10 @@ public class RebindAction : MonoBehaviour
     [Tooltip("Optional text label that will be updated with prompt for user input.")]
     [SerializeField]
     private TextMeshProUGUI m_RebindText;
+
+    [Tooltip("Should this action exclude mouse buttons")] 
+    [SerializeField]
+    private bool m_ExcludeMouse;
 
     [Tooltip("Event that is triggered when the way the binding is display should be updated. This allows displaying "
         + "bindings in custom ways, e.g. using images instead of text.")]
