@@ -1,10 +1,10 @@
 ﻿using System.Collections.Generic;
 using System;
+using Assets.Tools_23___Dynamic_Input_Switching.Scripts;
 using TMPro;
 using UnityEngine.Events;
 using UnityEngine.InputSystem;
 using UnityEngine;
-using Studio23.Input.Rebinding;
 
 public class RebindAction : MonoBehaviour
 {
@@ -194,12 +194,13 @@ public class RebindAction : MonoBehaviour
         var displayString = string.Empty;
         var deviceLayoutName = default(string);
         var controlPath = default(string);
+        int bindingIndex = 0;
 
         // Get display string from action.
         var action = m_Action?.action;
         if (action != null)
         {
-            var bindingIndex = action.bindings.IndexOf(x => x.id.ToString() == m_BindingId);
+            bindingIndex = action.bindings.IndexOf(x => x.id.ToString() == m_BindingId);
             if (bindingIndex != -1)
                 displayString = action.GetBindingDisplayString(bindingIndex, out deviceLayoutName, out controlPath, displayStringOptions);
         }
@@ -207,8 +208,17 @@ public class RebindAction : MonoBehaviour
         // Set on label (if any).
         if (m_BindingText != null)
         {
-            displayString = displayString.Replace($"LS/", $"Left Stick ");
-            displayString = displayString.Replace($"RS/", $"Right Stick ");
+            //displayString = displayString.Replace($"LS", $"Left Stick");
+            //displayString = displayString.Replace($"RS", $"Right Stick");
+            //displayString = displayString.Replace($"/", $"");
+            //displayString = BindingDisplayHandler.Instance?.GetBindingSprite(displayString, action);
+            var newIndex = ActionToSpriteConverter.GetBindingIndex(deviceLayoutName, action.bindings[bindingIndex].isPartOfComposite);
+            Debug.Log($"New index {newIndex}");
+            displayString = ActionToSpriteConverter.ReplaceBindingToSpriteText(displayString,
+                action.bindings[newIndex],
+                m_ListOfTmpSpriteAssets.SpriteAssets[newIndex],
+                action.name,
+                deviceLayoutName);
             m_BindingText.text = displayString;
         }
 
@@ -404,6 +414,9 @@ public class RebindAction : MonoBehaviour
     [Tooltip("Should this action exclude mouse buttons")] 
     [SerializeField]
     private bool m_ExcludeMouse;
+
+    [SerializeField] 
+    private ListOfTmpSpriteAssetsSO m_ListOfTmpSpriteAssets;
 
     [Tooltip("Event that is triggered when the way the binding is display should be updated. This allows displaying "
         + "bindings in custom ways, e.g. using images instead of text.")]

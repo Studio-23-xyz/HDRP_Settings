@@ -370,6 +370,7 @@ MonoBehaviour:
   m_RebindOverlay: {fileID: 0}
   m_RebindText: {fileID: 0}
   m_ExcludeMouse: 0
+  m_ListOfTmpSpriteAssets: {fileID: 11400000, guid: 59705f2db81e7c6478325b82a78b7fb6, type: 2}
   m_UpdateBindingUIEvent:
     m_PersistentCalls:
       m_Calls: []

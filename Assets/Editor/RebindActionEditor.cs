@@ -22,6 +22,7 @@ public class RebindActionEditor : UnityEditor.Editor
         m_RebindStopEventProperty = serializedObject.FindProperty("m_RebindStopEvent");
         m_DisplayStringOptionsProperty = serializedObject.FindProperty("m_DisplayStringOptions");
         m_ExcludeMouseProperty = serializedObject.FindProperty("m_ExcludeMouse");
+        m_ListOfTmpSpriteAssetsProperty = serializedObject.FindProperty("m_ListOfTmpSpriteAssets");
 
         RefreshBindingOptions();
     }
@@ -60,6 +61,7 @@ public class RebindActionEditor : UnityEditor.Editor
             EditorGUILayout.PropertyField(m_RebindOverlayProperty);
             EditorGUILayout.PropertyField(m_RebindTextProperty);
             EditorGUILayout.PropertyField(m_ExcludeMouseProperty);
+            EditorGUILayout.PropertyField(m_ListOfTmpSpriteAssetsProperty);
         }
 
         // Events section.
@@ -158,6 +160,7 @@ public class RebindActionEditor : UnityEditor.Editor
     private SerializedProperty m_UpdateBindingUIEventProperty;
     private SerializedProperty m_DisplayStringOptionsProperty;
     private SerializedProperty m_ExcludeMouseProperty;
+    private SerializedProperty m_ListOfTmpSpriteAssetsProperty;
 
     private GUIContent m_BindingLabel = new GUIContent("Binding");
     private GUIContent m_DisplayOptionsLabel = new GUIContent("Display Options");

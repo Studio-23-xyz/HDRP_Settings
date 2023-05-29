@@ -13,10 +13,6 @@ public class RebindMenu : MonoBehaviour
     public GameObject RebindOverlay;
     public TextMeshProUGUI RebindOverlayText;
 
-    [Space(5)] 
-    public Transform ParentObject;
-
-
     [ContextMenu("Generate Rebinding UI")]
     public void GenerateRebindingElements()
     {
