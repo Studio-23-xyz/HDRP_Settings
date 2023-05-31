@@ -50,13 +50,13 @@ namespace GameSettings
             _videoSettingsController.QualityChangedAction -= QualityChangedAction;
         }
 
-        public override void Setup(string dbName)
+        public override void Setup()
         {
             data = FindObjectOfType<HDAdditionalLightData>();
             if(data)data.SetShadowResolutionOverride(false);
           
             
-            base.Initialized((int) defaultVal, dbName);
+            base.Initialized((int) defaultVal,GetType().Name);
            
             Apply();
         }

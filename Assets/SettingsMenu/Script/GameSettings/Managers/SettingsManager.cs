@@ -10,19 +10,19 @@ namespace GameSettings
 {
     public class SettingsManager : MonoBehaviour
     {
+        [SerializeField] private AudioSettingsController audioSettingsController;
+        [SerializeField] private VideoSettingsController videoSettingsController;
+        [SerializeField] private OtherSettingsController otherSettingsController;
+        
         [SerializeField] private TMP_Text statusText;
-        public List<Settings> settings;
+       
 
         private void Awake()
         {
-            settings = FindObjectsOfType<Settings>(true).ToList();
-            foreach (var setting in settings)
-            {
-                setting.Setup(setting.name);
-            }
-
+            audioSettingsController.Initialized();
+            videoSettingsController.Initialized();
+            otherSettingsController.Initialized();
         }
-
         private string DeviceSettings()
         {
             string output = null;

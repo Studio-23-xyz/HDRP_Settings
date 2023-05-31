@@ -38,7 +38,7 @@ RenderSettings:
   m_ReflectionIntensity: 1
   m_CustomReflection: {fileID: 0}
   m_Sun: {fileID: 0}
-  m_IndirectSpecularColor: {r: 2443.795, g: 2466.537, b: 2781.6738, a: 1}
+  m_IndirectSpecularColor: {r: 2351.2969, g: 2399.9395, b: 2739.6191, a: 1}
   m_UseRadianceAmbientProbe: 0
 --- !u!157 &3
 LightmapSettings:
@@ -3733,23 +3733,10 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 0fdfa16c881d42a5890664b57b341851, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  masterVolumeSettings: {fileID: 1515663177}
-  sfxVolumeSettings: {fileID: 1903047162}
-  musicVolumeSettings: {fileID: 252552720}
-  fullScreenModeSettings: {fileID: 4269820212838411464}
-  screenResolutionSettings: {fileID: 4269820211390072794}
-  fovSettings: {fileID: 7962756690371030072}
-  gameQualitySettings: {fileID: 7962756688511894053}
-  textureQualitySettings: {fileID: 7962756689461790594}
-  shadowQualitySettings: {fileID: 7962756690018038789}
-  vSyncSettings: {fileID: 7962756689741846850}
-  volumetricLightSettings: {fileID: 2049801277}
-  bloomSettings: {fileID: 608552316}
-  vignetteSettings: {fileID: 1626168399}
-  ambientOcclusionSettings: {fileID: 1743297902}
-  brightnessSettings: {fileID: 7962756689604772980}
+  audioSettingsController: {fileID: 721365386}
+  videoSettingsController: {fileID: 4269820211964395631}
+  otherSettingsController: {fileID: 2141128140}
   statusText: {fileID: 4269820212501060696}
-  allSettings: []
 --- !u!1 &275320386
 GameObject:
   m_ObjectHideFlags: 3
@@ -12092,7 +12079,8 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   audioSettings:
-  - isLive: 1
+  - settingsName: Menu Volume
+    isLive: 1
     audioMixerGroup: {fileID: 8054432490332825733, guid: 1a5cf24acfa248044974212b807a53b1, type: 2}
     defaultValue: 0.75
     exposedParameter: BGVol
@@ -12100,6 +12088,7 @@ MonoBehaviour:
   volumeControllerTemplate: {fileID: 5962653454192703095, guid: 963c65855ac47024da86cb60abf047fe, type: 3}
   applyButton: {fileID: 1714378783}
   restoreButton: {fileID: 294009746}
+  settings: []
 --- !u!114 &721365387
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -38562,6 +38551,7 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 6fe55e5f8b994961adace9a9a0ab11bd, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  settings: []
 --- !u!114 &2141128141
 MonoBehaviour:
   m_ObjectHideFlags: 0
@@ -42023,6 +42013,7 @@ MonoBehaviour:
     ambientOcclusion: 0
   applyButton: {fileID: 4269820211122512354}
   restoreButton: {fileID: 4269820212112394033}
+  settings: []
 --- !u!114 &4269820212002680028
 MonoBehaviour:
   m_ObjectHideFlags: 0

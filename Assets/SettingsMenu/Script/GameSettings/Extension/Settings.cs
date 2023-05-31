@@ -23,7 +23,7 @@ namespace GameSettings
         private string settingsPath;
 
         
-        public abstract void Setup(string dbName);
+        public abstract void Setup();
         public virtual void Initialized(object defVal, string dbName, bool isLiveValue = false)
         {
             defaultValue = defVal;
@@ -56,9 +56,9 @@ namespace GameSettings
             return JsonConvert.DeserializeObject<object>(json);
         }
         
-        protected string FloatToText(float value)
+        protected string FloatToText(float value, string label)
         {
-            return $"{gameObject.name} ({Math.Round(value * 100)}%)";
+            return $"{label} ({Math.Round(value * 100)}%)";
         }
 
         

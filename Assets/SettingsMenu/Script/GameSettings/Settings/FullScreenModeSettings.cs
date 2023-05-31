@@ -33,10 +33,10 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Setup(string dbName)
+        public override void Setup()
         {
             if (!options.Any()) GenerateOptions();
-            base.Initialized((int)defaultVal, dbName);
+            base.Initialized((int)defaultVal, GetType().Name);
             Apply();
         }
 

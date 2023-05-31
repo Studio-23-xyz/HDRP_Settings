@@ -34,13 +34,13 @@ namespace GameSettings
         public void Init(AudioSetting adoSetting)
         {
            audioSetting = adoSetting;
-           Setup(name);
+           Setup();
         }
-        public override void Setup(string dbName)
+        public override void Setup()
         {
             if(audioSetting == null) return;
             
-            base.Initialized(audioSetting.defaultValue, dbName, audioSetting.isLive);
+            base.Initialized(audioSetting.defaultValue, name, audioSetting.isLive);
             uiItem.Init(currentValue.ToFloat());
             Apply();
         }
@@ -48,13 +48,13 @@ namespace GameSettings
         private void Start()
         {
             
-            label.text = FloatToText(audioSetting.defaultValue);
+            label.text = FloatToText(audioSetting.defaultValue, audioSetting.settingsName);
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
-                label.text = FloatToText(value);
+                label.text = FloatToText(value, audioSetting.settingsName);
             });
         }
 

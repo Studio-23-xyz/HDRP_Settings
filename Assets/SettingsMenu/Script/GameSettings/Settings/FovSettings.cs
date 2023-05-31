@@ -29,7 +29,7 @@ namespace GameSettings
             _videoSettingsController.RestoreAction -= RestoreAction;
         }
 
-        public override void Setup(string dbName)
+        public override void Setup()
         {
              
           
@@ -38,7 +38,7 @@ namespace GameSettings
 
            
            
-            base.Initialized(defaultVal, dbName);
+            base.Initialized(defaultVal, GetType().Name);
             
            
             
@@ -51,13 +51,13 @@ namespace GameSettings
            
             uiItem.Init(currentValue.ToFloat());
             
-            label.text = FloatToText(defaultVal);
+            label.text = FloatToText(defaultVal, gameObject.name);
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
-                label.text = FloatToText(value);
+                label.text = FloatToText(value, gameObject.name);
             });
         }
 

@@ -1,6 +1,7 @@
 using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Serialization;
@@ -21,8 +22,14 @@ namespace GameSettings
         [SerializeField] private Button restoreButton;
        
        
+        public List<Settings> settings;
 
-       
+        public void Initialized()
+        {
+            settings = GetComponentsInChildren<Settings>(true).ToList();
+            settings.ForEach(setting => setting.Setup());
+        }
+
         private void Start()
         {
             applyButton.onClick.AddListener(ApplyAction.Invoke);

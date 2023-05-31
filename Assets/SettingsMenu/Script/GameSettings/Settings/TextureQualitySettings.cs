@@ -46,7 +46,7 @@ namespace GameSettings
         }
     }
     
-    public override void Setup(string dbName)
+    public override void Setup()
     {
         
         
@@ -54,7 +54,7 @@ namespace GameSettings
       
 
        
-        base.Initialized((int)defaultVal, dbName);
+        base.Initialized((int)defaultVal, GetType().Name);
        
        
        

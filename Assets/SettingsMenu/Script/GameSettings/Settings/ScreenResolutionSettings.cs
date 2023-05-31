@@ -34,10 +34,10 @@ namespace GameSettings
             _videoSettingsController.ApplyAction -= ApplyAction;
            
         }
-        public override void Setup(string dbName)
+        public override void Setup()
         {
             if (!options.Any()) GenerateOptions();
-            base.Initialized(defaultVal, dbName);
+            base.Initialized(defaultVal, GetType().Name);
             Apply();
         }
 

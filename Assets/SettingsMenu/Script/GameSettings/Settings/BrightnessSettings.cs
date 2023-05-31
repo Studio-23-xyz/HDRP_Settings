@@ -38,14 +38,14 @@ namespace GameSettings
         }
 
 
-        public override void Setup(string dbName)
+        public override void Setup()
         {
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
             data.TryGet(typeof(ColorAdjustments), out component);
             
            
            
-            base.Initialized(defaultVal, dbName);
+            base.Initialized(defaultVal, GetType().Name);
             
            
             
@@ -58,13 +58,13 @@ namespace GameSettings
            
             uiItem.Init(minVal, maxVal, currentValue.ToFloat());
             
-            label.text = FloatToText(defaultVal);
+            label.text = FloatToText(defaultVal, gameObject.name);
            
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
-                label.text = FloatToText(value);
+                label.text = FloatToText(value, gameObject.name);
             });
         }
 

@@ -47,12 +47,12 @@ namespace GameSettings
             }
         }
 
-        public override void Setup(string dbName)
+        public override void Setup()
         {
             data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
             data.TryGet(typeof(Vignette), out component);
              
-            base.Initialized(defaultVal, dbName);
+            base.Initialized(defaultVal, GetType().Name);
            
            
             Apply();
