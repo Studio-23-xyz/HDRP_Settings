@@ -274,8 +274,8 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 32
     m_Scale: 1
-    m_Name: KBM_32
-    m_HashCode: -1284211718
+    m_Name: Kb_d
+    m_HashCode: 2726162
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 33
@@ -490,8 +490,8 @@ MonoBehaviour:
     m_Unicode: 65534
     m_GlyphIndex: 68
     m_Scale: 1
-    m_Name: KBM_68
-    m_HashCode: -1284211627
+    m_Name: Kb_lmb
+    m_HashCode: -1326169227
   - m_ElementType: 2
     m_Unicode: 65534
     m_GlyphIndex: 69

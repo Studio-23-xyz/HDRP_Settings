@@ -1178,6 +1178,72 @@ public partial class @DummyRebindMap: IInputActionCollection2, IDisposable
                 },
                 {
                     ""name"": """",
+                    ""id"": ""138de264-681b-4720-a4ce-5ab3c9ad894a"",
+                    ""path"": ""<XInputController>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""XBox"",
+                    ""action"": ""WeaponHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""3c83a9e7-95db-4b2d-9374-7297eded031f"",
+                    ""path"": ""<DualShockGamepad>/buttonNorth"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""WeaponHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""8fb64434-05e1-4ffb-ba02-dcbe5de7c5c2"",
+                    ""path"": ""<DualShockGamepad>/rightTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Playstation"",
+                    ""action"": ""WeaponHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""4d7a87ae-6979-4416-bd62-39530545dd2e"",
+                    ""path"": ""<DualShockGamepad>/leftTrigger"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Playstation"",
+                    ""action"": ""WeaponHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""e4272c56-fd2f-42ec-babd-cbbacd64fcd6"",
+                    ""path"": ""<DualShockGamepad>/leftShoulder"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Playstation"",
+                    ""action"": ""WeaponHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
+                    ""id"": ""0e01c909-6579-40c6-93df-d536b3bace33"",
+                    ""path"": ""<DualShockGamepad>/rightStickPress"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Playstation"",
+                    ""action"": ""WeaponHold"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": """",
                     ""id"": ""4380655a-3bad-461a-99ab-73085bcbdf33"",
                     ""path"": ""<Mouse>/position"",
                     ""interactions"": """",
