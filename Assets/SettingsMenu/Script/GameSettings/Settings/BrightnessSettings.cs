@@ -45,7 +45,7 @@ namespace GameSettings
             
            
            
-            base.Initialized(defaultVal, GetType().Name);
+            base.Initialized(defaultVal, GetType().Name,true);
             
            
             
