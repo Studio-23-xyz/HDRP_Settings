@@ -15,12 +15,14 @@ using System.Collections.Generic;
 using UnityEngine.InputSystem;
 using UnityEngine.InputSystem.Utilities;
 
-public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
+namespace Assets.Tools_23_Dynamic_Input_Switching.Scripts
 {
-    public InputActionAsset asset { get; }
-    public @PlayerInputActions()
+    public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
     {
-        asset = InputActionAsset.FromJson(@"{
+        public InputActionAsset asset { get; }
+        public @PlayerInputActions()
+        {
+            asset = InputActionAsset.FromJson(@"{
     ""name"": ""PlayerInputActions"",
     ""maps"": [
         {
@@ -28,7 +30,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
             ""id"": ""ea98c999-f5dd-4593-9650-7303bb6caa34"",
             ""actions"": [
                 {
-                    ""name"": ""Action1"",
+                    ""name"": ""Sword Attack"",
                     ""type"": ""Button"",
                     ""id"": ""21bdad61-d456-4707-b6dc-f275e5f8df94"",
                     ""expectedControlType"": ""Button"",
@@ -37,7 +39,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""initialStateCheck"": false
                 },
                 {
-                    ""name"": ""Action2"",
+                    ""name"": ""Shield Attack"",
                     ""type"": ""Button"",
                     ""id"": ""dcc0e516-959f-417a-a18f-9ce50b51d276"",
                     ""expectedControlType"": ""Button"",
@@ -53,6 +55,15 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""processors"": """",
                     ""interactions"": """",
                     ""initialStateCheck"": false
+                },
+                {
+                    ""name"": ""Action4"",
+                    ""type"": ""Value"",
+                    ""id"": ""8dc84d75-ccdb-4fd1-a0ca-83a1b67a2cf1"",
+                    ""expectedControlType"": ""Vector2"",
+                    ""processors"": """",
+                    ""interactions"": """",
+                    ""initialStateCheck"": true
                 }
             ],
             ""bindings"": [
@@ -63,7 +74,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Action1"",
+                    ""action"": ""Sword Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -74,7 +85,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Xbox"",
-                    ""action"": ""Action1"",
+                    ""action"": ""Sword Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -85,7 +96,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Keyboard"",
-                    ""action"": ""Action2"",
+                    ""action"": ""Shield Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -96,7 +107,7 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""interactions"": """",
                     ""processors"": """",
                     ""groups"": ""Xbox"",
-                    ""action"": ""Action2"",
+                    ""action"": ""Shield Attack"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
                 },
@@ -121,6 +132,171 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
                     ""action"": ""Action3"",
                     ""isComposite"": false,
                     ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""WASD"",
+                    ""id"": ""b9a919b5-5d79-479f-9412-5a2036a6aee5"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""d02bcbac-f18c-4da5-9caf-fd2ebdddd5a1"",
+                    ""path"": ""<Keyboard>/w"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""115e6491-e44b-4b0c-a7cd-ca91acff683d"",
+                    ""path"": ""<Keyboard>/s"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""4febe4b5-608f-4194-a03a-69fd39be68e5"",
+                    ""path"": ""<Keyboard>/a"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""05524b25-fd93-4bee-8c6f-13bccadf8010"",
+                    ""path"": ""<Keyboard>/d"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Keyboard"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""Xbox_LS"",
+                    ""id"": ""5afbaf86-bbe1-4871-93e2-49fc4cdae55d"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""edb8a2be-097a-4f9c-81d3-71652f8a5dd8"",
+                    ""path"": ""<XInputController>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""48a4fda8-0a16-46db-aae5-064cd2ea105b"",
+                    ""path"": ""<XInputController>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""abd0ff49-ab8f-4e21-9507-1a541dd6a7be"",
+                    ""path"": ""<XInputController>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": ""Xbox"",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""319b6a2d-fe02-43a0-9133-f0d0aa75fd88"",
+                    ""path"": ""<XInputController>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""PS_LS"",
+                    ""id"": ""79cc4b44-11e4-4332-bf76-893a95daaf2a"",
+                    ""path"": ""2DVector"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": true,
+                    ""isPartOfComposite"": false
+                },
+                {
+                    ""name"": ""up"",
+                    ""id"": ""31c267c3-11eb-48bd-abb3-8b122ca25143"",
+                    ""path"": ""<DualShockGamepad>/leftStick/up"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""down"",
+                    ""id"": ""a6e0e0e2-fdae-4a4c-b92a-7ecf50f07b7c"",
+                    ""path"": ""<DualShockGamepad>/leftStick/down"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""left"",
+                    ""id"": ""7a81a95c-cf6f-42f7-840f-848689376701"",
+                    ""path"": ""<DualShockGamepad>/leftStick/left"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
+                },
+                {
+                    ""name"": ""right"",
+                    ""id"": ""5d5fc89a-ee1a-4650-957a-355eae17c7b3"",
+                    ""path"": ""<DualShockGamepad>/leftStick/right"",
+                    ""interactions"": """",
+                    ""processors"": """",
+                    ""groups"": """",
+                    ""action"": ""Action4"",
+                    ""isComposite"": false,
+                    ""isPartOfComposite"": true
                 }
             ]
         }
@@ -150,152 +326,163 @@ public partial class @PlayerInputActions: IInputActionCollection2, IDisposable
         }
     ]
 }");
+            // Ground
+            m_Ground = asset.FindActionMap("Ground", throwIfNotFound: true);
+            m_Ground_SwordAttack = m_Ground.FindAction("Sword Attack", throwIfNotFound: true);
+            m_Ground_ShieldAttack = m_Ground.FindAction("Shield Attack", throwIfNotFound: true);
+            m_Ground_Action3 = m_Ground.FindAction("Action3", throwIfNotFound: true);
+            m_Ground_Action4 = m_Ground.FindAction("Action4", throwIfNotFound: true);
+        }
+
+        public void Dispose()
+        {
+            UnityEngine.Object.Destroy(asset);
+        }
+
+        public InputBinding? bindingMask
+        {
+            get => asset.bindingMask;
+            set => asset.bindingMask = value;
+        }
+
+        public ReadOnlyArray<InputDevice>? devices
+        {
+            get => asset.devices;
+            set => asset.devices = value;
+        }
+
+        public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
+
+        public bool Contains(InputAction action)
+        {
+            return asset.Contains(action);
+        }
+
+        public IEnumerator<InputAction> GetEnumerator()
+        {
+            return asset.GetEnumerator();
+        }
+
+        IEnumerator IEnumerable.GetEnumerator()
+        {
+            return GetEnumerator();
+        }
+
+        public void Enable()
+        {
+            asset.Enable();
+        }
+
+        public void Disable()
+        {
+            asset.Disable();
+        }
+
+        public IEnumerable<InputBinding> bindings => asset.bindings;
+
+        public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
+        {
+            return asset.FindAction(actionNameOrId, throwIfNotFound);
+        }
+
+        public int FindBinding(InputBinding bindingMask, out InputAction action)
+        {
+            return asset.FindBinding(bindingMask, out action);
+        }
+
         // Ground
-        m_Ground = asset.FindActionMap("Ground", throwIfNotFound: true);
-        m_Ground_Action1 = m_Ground.FindAction("Action1", throwIfNotFound: true);
-        m_Ground_Action2 = m_Ground.FindAction("Action2", throwIfNotFound: true);
-        m_Ground_Action3 = m_Ground.FindAction("Action3", throwIfNotFound: true);
-    }
-
-    public void Dispose()
-    {
-        UnityEngine.Object.Destroy(asset);
-    }
-
-    public InputBinding? bindingMask
-    {
-        get => asset.bindingMask;
-        set => asset.bindingMask = value;
-    }
-
-    public ReadOnlyArray<InputDevice>? devices
-    {
-        get => asset.devices;
-        set => asset.devices = value;
-    }
-
-    public ReadOnlyArray<InputControlScheme> controlSchemes => asset.controlSchemes;
-
-    public bool Contains(InputAction action)
-    {
-        return asset.Contains(action);
-    }
-
-    public IEnumerator<InputAction> GetEnumerator()
-    {
-        return asset.GetEnumerator();
-    }
-
-    IEnumerator IEnumerable.GetEnumerator()
-    {
-        return GetEnumerator();
-    }
-
-    public void Enable()
-    {
-        asset.Enable();
-    }
-
-    public void Disable()
-    {
-        asset.Disable();
-    }
-
-    public IEnumerable<InputBinding> bindings => asset.bindings;
-
-    public InputAction FindAction(string actionNameOrId, bool throwIfNotFound = false)
-    {
-        return asset.FindAction(actionNameOrId, throwIfNotFound);
-    }
-
-    public int FindBinding(InputBinding bindingMask, out InputAction action)
-    {
-        return asset.FindBinding(bindingMask, out action);
-    }
-
-    // Ground
-    private readonly InputActionMap m_Ground;
-    private List<IGroundActions> m_GroundActionsCallbackInterfaces = new List<IGroundActions>();
-    private readonly InputAction m_Ground_Action1;
-    private readonly InputAction m_Ground_Action2;
-    private readonly InputAction m_Ground_Action3;
-    public struct GroundActions
-    {
-        private @PlayerInputActions m_Wrapper;
-        public GroundActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
-        public InputAction @Action1 => m_Wrapper.m_Ground_Action1;
-        public InputAction @Action2 => m_Wrapper.m_Ground_Action2;
-        public InputAction @Action3 => m_Wrapper.m_Ground_Action3;
-        public InputActionMap Get() { return m_Wrapper.m_Ground; }
-        public void Enable() { Get().Enable(); }
-        public void Disable() { Get().Disable(); }
-        public bool enabled => Get().enabled;
-        public static implicit operator InputActionMap(GroundActions set) { return set.Get(); }
-        public void AddCallbacks(IGroundActions instance)
+        private readonly InputActionMap m_Ground;
+        private List<IGroundActions> m_GroundActionsCallbackInterfaces = new List<IGroundActions>();
+        private readonly InputAction m_Ground_SwordAttack;
+        private readonly InputAction m_Ground_ShieldAttack;
+        private readonly InputAction m_Ground_Action3;
+        private readonly InputAction m_Ground_Action4;
+        public struct GroundActions
         {
-            if (instance == null || m_Wrapper.m_GroundActionsCallbackInterfaces.Contains(instance)) return;
-            m_Wrapper.m_GroundActionsCallbackInterfaces.Add(instance);
-            @Action1.started += instance.OnAction1;
-            @Action1.performed += instance.OnAction1;
-            @Action1.canceled += instance.OnAction1;
-            @Action2.started += instance.OnAction2;
-            @Action2.performed += instance.OnAction2;
-            @Action2.canceled += instance.OnAction2;
-            @Action3.started += instance.OnAction3;
-            @Action3.performed += instance.OnAction3;
-            @Action3.canceled += instance.OnAction3;
-        }
+            private @PlayerInputActions m_Wrapper;
+            public GroundActions(@PlayerInputActions wrapper) { m_Wrapper = wrapper; }
+            public InputAction @SwordAttack => m_Wrapper.m_Ground_SwordAttack;
+            public InputAction @ShieldAttack => m_Wrapper.m_Ground_ShieldAttack;
+            public InputAction @Action3 => m_Wrapper.m_Ground_Action3;
+            public InputAction @Action4 => m_Wrapper.m_Ground_Action4;
+            public InputActionMap Get() { return m_Wrapper.m_Ground; }
+            public void Enable() { Get().Enable(); }
+            public void Disable() { Get().Disable(); }
+            public bool enabled => Get().enabled;
+            public static implicit operator InputActionMap(GroundActions set) { return set.Get(); }
+            public void AddCallbacks(IGroundActions instance)
+            {
+                if (instance == null || m_Wrapper.m_GroundActionsCallbackInterfaces.Contains(instance)) return;
+                m_Wrapper.m_GroundActionsCallbackInterfaces.Add(instance);
+                @SwordAttack.started += instance.OnSwordAttack;
+                @SwordAttack.performed += instance.OnSwordAttack;
+                @SwordAttack.canceled += instance.OnSwordAttack;
+                @ShieldAttack.started += instance.OnShieldAttack;
+                @ShieldAttack.performed += instance.OnShieldAttack;
+                @ShieldAttack.canceled += instance.OnShieldAttack;
+                @Action3.started += instance.OnAction3;
+                @Action3.performed += instance.OnAction3;
+                @Action3.canceled += instance.OnAction3;
+                @Action4.started += instance.OnAction4;
+                @Action4.performed += instance.OnAction4;
+                @Action4.canceled += instance.OnAction4;
+            }
 
-        private void UnregisterCallbacks(IGroundActions instance)
-        {
-            @Action1.started -= instance.OnAction1;
-            @Action1.performed -= instance.OnAction1;
-            @Action1.canceled -= instance.OnAction1;
-            @Action2.started -= instance.OnAction2;
-            @Action2.performed -= instance.OnAction2;
-            @Action2.canceled -= instance.OnAction2;
-            @Action3.started -= instance.OnAction3;
-            @Action3.performed -= instance.OnAction3;
-            @Action3.canceled -= instance.OnAction3;
-        }
+            private void UnregisterCallbacks(IGroundActions instance)
+            {
+                @SwordAttack.started -= instance.OnSwordAttack;
+                @SwordAttack.performed -= instance.OnSwordAttack;
+                @SwordAttack.canceled -= instance.OnSwordAttack;
+                @ShieldAttack.started -= instance.OnShieldAttack;
+                @ShieldAttack.performed -= instance.OnShieldAttack;
+                @ShieldAttack.canceled -= instance.OnShieldAttack;
+                @Action3.started -= instance.OnAction3;
+                @Action3.performed -= instance.OnAction3;
+                @Action3.canceled -= instance.OnAction3;
+                @Action4.started -= instance.OnAction4;
+                @Action4.performed -= instance.OnAction4;
+                @Action4.canceled -= instance.OnAction4;
+            }
 
-        public void RemoveCallbacks(IGroundActions instance)
-        {
-            if (m_Wrapper.m_GroundActionsCallbackInterfaces.Remove(instance))
-                UnregisterCallbacks(instance);
-        }
+            public void RemoveCallbacks(IGroundActions instance)
+            {
+                if (m_Wrapper.m_GroundActionsCallbackInterfaces.Remove(instance))
+                    UnregisterCallbacks(instance);
+            }
 
-        public void SetCallbacks(IGroundActions instance)
-        {
-            foreach (var item in m_Wrapper.m_GroundActionsCallbackInterfaces)
-                UnregisterCallbacks(item);
-            m_Wrapper.m_GroundActionsCallbackInterfaces.Clear();
-            AddCallbacks(instance);
+            public void SetCallbacks(IGroundActions instance)
+            {
+                foreach (var item in m_Wrapper.m_GroundActionsCallbackInterfaces)
+                    UnregisterCallbacks(item);
+                m_Wrapper.m_GroundActionsCallbackInterfaces.Clear();
+                AddCallbacks(instance);
+            }
         }
-    }
-    public GroundActions @Ground => new GroundActions(this);
-    private int m_KeyboardSchemeIndex = -1;
-    public InputControlScheme KeyboardScheme
-    {
-        get
+        public GroundActions @Ground => new GroundActions(this);
+        private int m_KeyboardSchemeIndex = -1;
+        public InputControlScheme KeyboardScheme
         {
-            if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
-            return asset.controlSchemes[m_KeyboardSchemeIndex];
+            get
+            {
+                if (m_KeyboardSchemeIndex == -1) m_KeyboardSchemeIndex = asset.FindControlSchemeIndex("Keyboard");
+                return asset.controlSchemes[m_KeyboardSchemeIndex];
+            }
         }
-    }
-    private int m_XboxSchemeIndex = -1;
-    public InputControlScheme XboxScheme
-    {
-        get
+        private int m_XboxSchemeIndex = -1;
+        public InputControlScheme XboxScheme
         {
-            if (m_XboxSchemeIndex == -1) m_XboxSchemeIndex = asset.FindControlSchemeIndex("Xbox");
-            return asset.controlSchemes[m_XboxSchemeIndex];
+            get
+            {
+                if (m_XboxSchemeIndex == -1) m_XboxSchemeIndex = asset.FindControlSchemeIndex("Xbox");
+                return asset.controlSchemes[m_XboxSchemeIndex];
+            }
         }
-    }
-    public interface IGroundActions
-    {
-        void OnAction1(InputAction.CallbackContext context);
-        void OnAction2(InputAction.CallbackContext context);
-        void OnAction3(InputAction.CallbackContext context);
+        public interface IGroundActions
+        {
+            void OnSwordAttack(InputAction.CallbackContext context);
+            void OnShieldAttack(InputAction.CallbackContext context);
+            void OnAction3(InputAction.CallbackContext context);
+            void OnAction4(InputAction.CallbackContext context);
+        }
     }
 }

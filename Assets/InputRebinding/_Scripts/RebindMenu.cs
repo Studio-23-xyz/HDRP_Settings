@@ -39,11 +39,11 @@ public class RebindMenu : MonoBehaviour
         }
     }
 
-    private void OnEnable()
-    {
-        LoadKeybinds();
-        UpdateRebindElements();
-    }
+    //private void OnEnable()
+    //{
+    //    LoadKeybinds();
+    //    UpdateRebindElements();
+    //}
 
     private void UpdateRebindElements()
     {

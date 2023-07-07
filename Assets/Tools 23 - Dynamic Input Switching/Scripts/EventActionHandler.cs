@@ -1,6 +1,6 @@
 using UnityEngine;
 
-namespace Assets.Tools_23___Dynamic_Input_Switching.Scripts
+namespace Assets.Tools_23_Dynamic_Input_Switching.Scripts
 {
     public abstract class EventActionHandler : MonoBehaviour
     {

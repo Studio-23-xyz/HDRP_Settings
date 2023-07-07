@@ -134,6 +134,7 @@ GameObject:
   - component: {fileID: 190220551}
   - component: {fileID: 190220553}
   - component: {fileID: 190220552}
+  - component: {fileID: 190220554}
   m_Layer: 5
   m_Name: BindingSprite
   m_TagString: Untagged
@@ -258,6 +259,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 190220550}
   m_CullTransparentMesh: 1
+--- !u!114 &190220554
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 190220550}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9cbbf2dfd40245a716fba69ca234e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Action: {fileID: -6627106881108172577, guid: 3c39caa4ed55ba348ba0fbe2c933b088, type: 3}
+  m_BindingId: b9a919b5-5d79-479f-9412-5a2036a6aee5
+  m_DisplayStringOptions: 0
+  m_ActionLabel: {fileID: 1244006857}
+  m_ListOfTmpSpriteAssets: {fileID: 0}
 --- !u!1001 &383094956
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -352,8 +370,6 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 7bb437e58adce4a47bb34f3edeae54c0, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  BindingSprite: {fileID: 190220552}
-  BindingSprite2: {fileID: 927531284}
 --- !u!136 &383094959
 CapsuleCollider:
   m_ObjectHideFlags: 0
@@ -391,19 +407,7 @@ MonoBehaviour:
       m_Calls: []
   m_ControlsChangedEvent:
     m_PersistentCalls:
-      m_Calls:
-      - m_Target: {fileID: 383094958}
-        m_TargetAssemblyTypeName: PlayerController, Assembly-CSharp
-        m_MethodName: UpdateBindingSprite
-        m_Mode: 1
-        m_Arguments:
-          m_ObjectArgument: {fileID: 0}
-          m_ObjectArgumentAssemblyTypeName: UnityEngine.Object, UnityEngine
-          m_IntArgument: 0
-          m_FloatArgument: 0
-          m_StringArgument: 
-          m_BoolArgument: 0
-        m_CallState: 2
+      m_Calls: []
   m_ActionEvents:
   - m_PersistentCalls:
       m_Calls: []
@@ -417,6 +421,10 @@ MonoBehaviour:
       m_Calls: []
     m_ActionId: e4475fbc-b37b-46a2-ab48-d448baaab04f
     m_ActionName: Ground/Action3[/Keyboard/e,/XInputControllerWindows/rightTrigger]
+  - m_PersistentCalls:
+      m_Calls: []
+    m_ActionId: 8dc84d75-ccdb-4fd1-a0ca-83a1b67a2cf1
+    m_ActionName: Ground/Action4[/Keyboard/w,/Keyboard/s,/Keyboard/a,/Keyboard/d]
   m_NeverAutoSwitchControlSchemes: 0
   m_DefaultControlScheme: 
   m_DefaultActionMap: Ground
@@ -878,6 +886,7 @@ GameObject:
   m_Component:
   - component: {fileID: 927531283}
   - component: {fileID: 927531285}
+  - component: {fileID: 927531286}
   - component: {fileID: 927531284}
   m_Layer: 5
   m_Name: BindingSprite (1)
@@ -1003,6 +1012,23 @@ CanvasRenderer:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 927531282}
   m_CullTransparentMesh: 1
+--- !u!114 &927531286
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInstance: {fileID: 0}
+  m_PrefabAsset: {fileID: 0}
+  m_GameObject: {fileID: 927531282}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: f5e9cbbf2dfd40245a716fba69ca234e, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  m_Action: {fileID: 387946516760076526, guid: 3c39caa4ed55ba348ba0fbe2c933b088, type: 3}
+  m_BindingId: b9a919b5-5d79-479f-9412-5a2036a6aee5
+  m_DisplayStringOptions: 0
+  m_ActionLabel: {fileID: 420142655}
+  m_ListOfTmpSpriteAssets: {fileID: 0}
 --- !u!1 &973344761
 GameObject:
   m_ObjectHideFlags: 0
@@ -1132,7 +1158,9 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   _listOfTmpSpriteAssets: {fileID: 11400000, guid: 41f5965697655974c898d2fa1b8867ee, type: 2}
-  _deviceType: 0
+  ListOfBindingSpriteFields:
+  - {fileID: 927531286}
+  - {fileID: 190220554}
 --- !u!1 &1244006855
 GameObject:
   m_ObjectHideFlags: 0

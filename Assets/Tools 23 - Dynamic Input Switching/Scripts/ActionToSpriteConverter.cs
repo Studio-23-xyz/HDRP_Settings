@@ -1,52 +1,43 @@
 using TMPro;
-using UnityEngine;
-using UnityEngine.InputSystem;
 
-namespace Assets.Tools_23___Dynamic_Input_Switching.Scripts
+namespace Assets.Tools_23_Dynamic_Input_Switching.Scripts
 {
     public static class ActionToSpriteConverter
     {
-        public static string ReplaceBindingToSpriteText(string textToDisplay, InputBinding actionNeeded,
-            TMP_SpriteAsset spriteAsset, string actionName, string deviceName = "")
+        /// <summary>
+        /// Public wrapper to return the desired formatted string which TextMeshPro will then convert to the desired sprite asset. 
+        /// </summary>
+        /// <param name="textToDisplay">Button that is bound to the InputAction we are currently dealing with.</param>
+        /// <param name="spriteAsset">The sprite asset that we will use to find the sprite from.</param>
+        /// <param name="deviceName">To compare and use the required suffix to get the sprite from the intended InputDevice.</param>
+        /// <returns>Returns the TMP Sprite asset formatted string that will fetch the sprite from the desired sprite sheet.</returns>
+        public static string ReplaceBindingToSpriteText(string textToDisplay,
+            TMP_SpriteAsset spriteAsset, string deviceName)
         {
-            Debug.Log($"InputBinding Action {actionNeeded.ToString()} & text to display {textToDisplay}");
             string stringBtnName = textToDisplay;
-            stringBtnName = RenameInput(stringBtnName, actionName, deviceName);
+            stringBtnName = RenameInput(stringBtnName, deviceName);
 
             textToDisplay = textToDisplay.Replace(textToDisplay, $"<sprite=\"{spriteAsset.name}\" name=\"{stringBtnName}\">");
             return textToDisplay;
         }
 
-        public static int GetBindingIndex(string deviceName, bool isComposite)
-        {
-            Debug.Log($"Device name received {deviceName}");
-            if (string.Equals(deviceName, $"Keyboard") || string.Equals(deviceName, $"Mouse"))
-                return 0;
-            else if (string.Equals(deviceName, $"XInputControllerWindows"))
-                return 1;
-            else if (string.Equals(deviceName, $"DualShockGamepad"))
-                return 1;
-            return 0;
-        }
-
-        private static string RenameInput(string stringBtnName, string actionName, string deviceName)
+        /// <summary>
+        /// Generates a string format for the desired sprite corresponding to the spritesheet
+        /// </summary>
+        /// <param name="stringBtnName">The binding button of the given InputAction</param>
+        /// <param name="deviceName">Device name is derived from the InputAction name as the entire string contains required InputDevice when set to different control schemes from the InputAction asset</param>
+        /// <returns>Renames the action string formatted for TMP Sprite Asset readability.</returns>
+        private static string RenameInput(string stringBtnName, string deviceName)
         {
             string bindingDisplayString = "";
-            if (string.Equals("Keyboard", deviceName) || string.Equals(deviceName, $"Mouse"))
+            if (deviceName.Contains($"Keyboard") || deviceName.Contains($"Mouse"))
                 bindingDisplayString += $"Kb_";
-            else if (string.Equals(deviceName, $"XInputControllerWindows"))
+            else if (deviceName.Contains($"XInput"))
                 bindingDisplayString += $"Xbox_";
-            else if (string.Equals(deviceName, $"DualShockGamepad"))
+            else if (deviceName.Contains($"DualShock"))
                 bindingDisplayString += $"PS_";
             bindingDisplayString += stringBtnName.ToLower();
-            Debug.Log($"BindingSprite identifier {bindingDisplayString}");
-            //stringBtnName = stringBtnName.Replace($"[{inputDeviceName}]", string.Empty);
-            //stringBtnName = stringBtnName.Replace($"{actionName}:", string.Empty);
-            //stringBtnName = stringBtnName.Replace($"<Keyboard>/", $"Kb_");
-            //stringBtnName = stringBtnName.Replace($"<XInputController>/", $"Xbox_");
-            //stringBtnName = stringBtnName.Replace($"<DualShockGamepad>/", $"PS_");
-            //stringBtnName = stringBtnName.Replace($"[Xbox]", string.Empty);
-            //stringBtnName = stringBtnName.Replace($"[PS]", string.Empty);
+            bindingDisplayString = bindingDisplayString.Replace($" ", "");
             return bindingDisplayString;
         }
     }
