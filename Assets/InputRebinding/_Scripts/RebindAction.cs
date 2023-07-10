@@ -150,6 +150,16 @@ public class RebindAction : MonoBehaviour
 		}
 	}
 
+	public UnityEvent OnRebindComplete
+	{
+		get
+		{
+			if (m_RebindCompleteEvent == null)
+				m_RebindCompleteEvent = new UnityEvent();
+			return m_RebindCompleteEvent;
+		}
+	}
+
 	/// <summary>
 	/// When an interactive rebind is in progress, this is the rebind operation controller.
 	/// Otherwise, it is <c>null</c>.
@@ -189,9 +199,9 @@ public class RebindAction : MonoBehaviour
 	/// <summary>
 	/// Trigger a refresh of the currently displayed binding.
 	/// </summary>
+	[ContextMenu("Update Binding Display")]
 	public void UpdateBindingDisplay()
 	{
-		Debug.Log($"Called !!!");
 		var displayString = string.Empty;
 		var deviceLayoutName = default(string);
 		var controlPath = default(string);
@@ -210,23 +220,15 @@ public class RebindAction : MonoBehaviour
 		if (m_BindingText != null)
 		{
 			var newIndex = bindingIndex;
-			//Debug.Log($"New index {newIndex}");
-			//displayString = ActionToSpriteConverter.ReplaceBindingToSpriteText(displayString,
-			// m_ListOfTmpSpriteAssets.SpriteAssets[newIndex], deviceLayoutName);
-			//displayString = ActionToSpriteConverter.ReplaceBindingToSpriteText(displayString,
-			//    action.bindings[newIndex],
-			//    m_ListOfTmpSpriteAssets.SpriteAssets[newIndex],
-			//    action.name,
-			//    deviceLayoutName);
 
-			int deviceIndex = GameInput.Instance.GetInputDeviceIndex();
+			//int deviceIndex = GameInput.Instance.GetInputDeviceIndex();
 
 			//var sprite = FetchSprite(action, deviceIndex, action.bindings[0].isComposite);
-			var sprite =
-				ActionToSpriteConverter.ReplaceBindingToSpriteText(displayString, m_ListOfTmpSpriteAssets.SpriteAssets[deviceIndex],
-					action.ToString());
-			m_BindingText.text = sprite;
-			//m_BindingText.text = displayString;
+			//var sprite =
+			//	ActionToSpriteConverter.ReplaceBindingToSpriteText(displayString, m_ListOfTmpSpriteAssets.SpriteAssets[deviceIndex],
+			//		action.ToString());
+			//m_BindingText.text = sprite;
+			m_BindingText.text = displayString;
 		}
 
 		// Give listeners a chance to configure UI in response.
@@ -278,6 +280,12 @@ public class RebindAction : MonoBehaviour
 		if (!ResolveActionAndBinding(out var action, out var bindingIndex))
 			return;
 
+		//if (SwapResetBidings(action, bindingIndex))
+		//{
+		//	UpdateBindingDisplay();
+		//	return;
+		//}
+
 		if (action.bindings[bindingIndex].isComposite)
 		{
 			// It's a composite. Remove overrides from part bindings.
@@ -289,6 +297,46 @@ public class RebindAction : MonoBehaviour
 			action.RemoveBindingOverride(bindingIndex);
 		}
 		UpdateBindingDisplay();
+	}
+
+	/// <summary>
+	/// Check for duplicate rebindings when the binding is going to be set to default
+	/// </summary>
+	/// <param name="action"></param>
+	/// <param name="bindingIndex"></param>
+	/// <param name="bindingToSwap"></param>
+	/// <returns></returns>
+	/// <exception cref="NotImplementedException"></exception>
+	private bool SwapResetBidings(InputAction action, int bindingIndex, InputBinding bindingToSwap)
+	{
+		InputBinding newBinding = action.bindings[bindingIndex];
+		string oldBindingForTargetAction = action.bindings[bindingIndex].path;
+		string oldBinding = bindingToSwap.path;
+
+		Debug.Log(
+			$"<color=#B71EFF> Action that is being rebound {action.name} & has the binding of {oldBindingForTargetAction}</color>" +
+			$"\n<color=#1E92FF>Old action that needs to be swapped is {oldBinding}</color>");
+
+		action.actionMap.FindAction(bindingToSwap.action).ApplyBindingOverride(oldBindingForTargetAction);
+
+		//for (int i = 0; i < action.actionMap.bindings.Count; ++i)
+		//{
+		//	InputBinding matchingBinding = action.actionMap.bindings[i];
+		//	if (matchingBinding.action == newBinding.action)
+		//	{
+		//		continue;
+		//	}
+		//	if (matchingBinding.effectivePath == newBinding.path)
+		//	{
+		//		Debug.Log("Duplicate binding found for reset to default: " + newBinding.effectivePath);
+		//		// Swap the two actions.
+				
+		//		action.actionMap.FindAction(matchingBinding.action).ApplyBindingOverride(i, newBinding.overridePath);
+		//		action.RemoveBindingOverride(bindingIndex);
+		//		return true;
+		//	}
+		//}
+		return false;
 	}
 
 	/// <summary>
@@ -315,6 +363,7 @@ public class RebindAction : MonoBehaviour
 
 	private void PerformInteractiveRebind(InputAction action, int bindingIndex, bool allCompositeParts = false)
 	{
+		var previousBinding = action.bindings[bindingIndex];
 		m_RebindOperation?.Cancel(); // Will null out m_RebindOperation.
 
 		void CleanUp()
@@ -336,8 +385,25 @@ public class RebindAction : MonoBehaviour
 			.OnComplete(
 				operation =>
 				{
+					action.Enable();
 					m_RebindOverlay?.SetActive(false);
 					m_RebindStopEvent?.Invoke(this, operation);
+					if (CheckForDuplicateBindings(action, bindingIndex, allCompositeParts))
+					{
+						var newBinding = action.bindings[bindingIndex];
+						var bindings = action.actionMap.bindings;
+						foreach (var binding in bindings)
+						{
+							if (binding.action == newBinding.action)
+								continue;
+							if (binding.effectivePath == newBinding.effectivePath)
+							{
+								SwapResetBidings(action, bindingIndex, binding);
+								Debug.Log($"<color=#FF461E>Rebinded {action.name} to {newBinding}</color>\n<color=#7DFF1E>Binding that matched {binding.action} & is now changed to {binding.effectivePath}</color>");
+							}
+						}
+					}
+
 					UpdateBindingDisplay();
 					CleanUp();
 
@@ -349,7 +415,8 @@ public class RebindAction : MonoBehaviour
 						if (nextBindingIndex < action.bindings.Count && action.bindings[nextBindingIndex].isPartOfComposite)
 							PerformInteractiveRebind(action, nextBindingIndex, true);
 					}
-					action.Enable();
+
+					OnRebindComplete?.Invoke();
 				});
 
 		// If it's a part binding, show the name of the part in the UI.
@@ -378,6 +445,31 @@ public class RebindAction : MonoBehaviour
 			m_RebindOperation.WithControlsExcluding($"Mouse");
 		m_RebindOperation.WithCancelingThrough($"<Keyboard>/escape");
 		m_RebindOperation.Start();
+	}
+
+	private bool CheckForDuplicateBindings(InputAction action, int bindingIndex, bool allCompositeParts = false)
+	{
+		InputBinding newBinding = action.bindings[bindingIndex];
+		foreach (InputBinding binding in action.actionMap.bindings)
+		{
+			if (binding.action == newBinding.action)
+				continue;
+			if (binding.effectivePath == newBinding.effectivePath)
+			{
+				return true;
+			}
+
+		}
+
+		if (allCompositeParts)
+		{
+			for (int i = 1; i < bindingIndex; ++i)
+			{
+				if (action.bindings[i].effectivePath == newBinding.effectivePath)
+					return true;
+			}
+		}
+		return false;
 	}
 
 	protected void OnEnable()
@@ -477,6 +569,8 @@ public class RebindAction : MonoBehaviour
 	[Tooltip("Event that is triggered when an interactive rebind is complete or has been aborted.")]
 	[SerializeField]
 	private InteractiveRebindEvent m_RebindStopEvent;
+	[SerializeField]
+	private UnityEvent m_RebindCompleteEvent;
 
 	private InputActionRebindingExtensions.RebindingOperation m_RebindOperation;
 
@@ -488,8 +582,8 @@ public class RebindAction : MonoBehaviour
 
 	protected void OnValidate()
 	{
-		//UpdateActionLabel();
-		//UpdateBindingDisplay();
+		UpdateActionLabel();
+		UpdateBindingDisplay();
 	}
 
 #endif
@@ -516,5 +610,11 @@ public class RebindAction : MonoBehaviour
 	[Serializable]
 	public class InteractiveRebindEvent : UnityEvent<RebindAction, InputActionRebindingExtensions.RebindingOperation>
 	{
+	}
+
+	[Serializable]
+	public class RebindCompletionEvent : UnityEvent
+	{
+
 	}
 }

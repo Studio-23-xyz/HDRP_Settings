@@ -45,6 +45,11 @@ public class RebindMenu : MonoBehaviour
     //    UpdateRebindElements();
     //}
 
+    public void RefreshBindingText()
+    {
+        UpdateRebindElements();
+    }
+
     private void UpdateRebindElements()
     {
         foreach (Transform rebindElement in UiElementParent)
@@ -65,16 +70,18 @@ public class RebindMenu : MonoBehaviour
     /// <summary>
     /// Used to store changed keybinds in PlayerPrefs under the key "rebinds" 
     /// </summary>
+    [ContextMenu("Save Keybinds")]
     public void SaveKeybinds()
     {
         var rebinds = InputAsset.SaveBindingOverridesAsJson();
         PlayerPrefs.SetString("rebinds", rebinds);
     }
 
-    /// <summary>
-    /// Reset all keybind overrides
-    /// </summary>
-    public void RestoreDefaultKeybinds()
+	/// <summary>
+	/// Reset all keybind overrides
+	/// </summary>
+	[ContextMenu("Restore Defaults")]
+	public void RestoreDefaultKeybinds()
     {
         foreach (InputAction inputAction in InputAsset)
         {
@@ -83,13 +90,20 @@ public class RebindMenu : MonoBehaviour
         UpdateRebindElements();
     }
 
-    /// <summary>
-    /// Responsible for loading keybinds from PlayerPrefs saved under the key "rebinds"
-    /// </summary>
-    public void LoadKeybinds()
+	/// <summary>
+	/// Responsible for loading keybinds from PlayerPrefs saved under the key "rebinds"
+	/// </summary>
+	[ContextMenu("Load Last Saved Binds")]
+	public void LoadKeybinds()
     {
         var rebinds = PlayerPrefs.GetString("rebinds");
         if (!string.IsNullOrEmpty(rebinds))
             InputAsset.LoadBindingOverridesFromJson(rebinds);
     }
+
+    [ContextMenu("Delete all prefs")]
+	public void ClearPlayerPrefs()
+	{
+        PlayerPrefs.DeleteAll();
+	}
 }

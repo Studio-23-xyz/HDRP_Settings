@@ -6,7 +6,7 @@ using UnityEngine;
 /// A custom inspector for <see cref="RebindActionUI"/> which provides a more convenient way for
 /// picking the binding which to rebind.
 /// </summary>
-[CustomEditor(typeof(RebindAction))]
+[CustomEditor(typeof(RebindAction)), CanEditMultipleObjects]
 public class RebindActionEditor : UnityEditor.Editor
 {
     protected void OnEnable()
@@ -20,6 +20,7 @@ public class RebindActionEditor : UnityEditor.Editor
         m_UpdateBindingUIEventProperty = serializedObject.FindProperty("m_UpdateBindingUIEvent");
         m_RebindStartEventProperty = serializedObject.FindProperty("m_RebindStartEvent");
         m_RebindStopEventProperty = serializedObject.FindProperty("m_RebindStopEvent");
+        m_RebindCompleteEventProperty = serializedObject.FindProperty("m_RebindCompleteEvent");
         m_DisplayStringOptionsProperty = serializedObject.FindProperty("m_DisplayStringOptions");
         m_ExcludeMouseProperty = serializedObject.FindProperty("m_ExcludeMouse");
         m_ListOfTmpSpriteAssetsProperty = serializedObject.FindProperty("m_ListOfTmpSpriteAssets");
@@ -72,7 +73,8 @@ public class RebindActionEditor : UnityEditor.Editor
             EditorGUILayout.PropertyField(m_RebindStartEventProperty);
             EditorGUILayout.PropertyField(m_RebindStopEventProperty);
             EditorGUILayout.PropertyField(m_UpdateBindingUIEventProperty);
-        }
+            EditorGUILayout.PropertyField(m_RebindCompleteEventProperty);
+		}
 
         if (EditorGUI.EndChangeCheck())
         {
@@ -157,7 +159,8 @@ public class RebindActionEditor : UnityEditor.Editor
     private SerializedProperty m_RebindTextProperty;
     private SerializedProperty m_RebindStartEventProperty;
     private SerializedProperty m_RebindStopEventProperty;
-    private SerializedProperty m_UpdateBindingUIEventProperty;
+    private SerializedProperty m_RebindCompleteEventProperty;
+	private SerializedProperty m_UpdateBindingUIEventProperty;
     private SerializedProperty m_DisplayStringOptionsProperty;
     private SerializedProperty m_ExcludeMouseProperty;
     private SerializedProperty m_ListOfTmpSpriteAssetsProperty;
