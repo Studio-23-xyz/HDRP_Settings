@@ -7,7 +7,7 @@ using UnityEngine.UI;
 namespace GameSettings
 {
     [RequireComponent(typeof(Toggle))]
-    public class VSyncSettings : Settings
+    public class InvertYSettings : Settings
     {
        
         private VideoSettingsController _videoSettingsController;
@@ -77,10 +77,9 @@ namespace GameSettings
 
         public void Apply()
         {
-            Debug.Log($"currentValue.ToBool() {currentValue.ToInt()}");
-            QualitySettings.vSyncCount = currentValue.ToBool() ? 1 : 0; //? 0 dont, 1 every v blank;
-        }
-        
+           var r = currentValue.ToBool() ? 1 : 0;  
+           Debug.Log($"{GetType().Name}: {r}");
+        } 
 
         
     }

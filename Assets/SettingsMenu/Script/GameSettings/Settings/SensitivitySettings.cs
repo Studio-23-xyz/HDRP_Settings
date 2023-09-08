@@ -1,71 +1,77 @@
 ﻿using System;
 using System.Linq;
-using Cinemachine;
+using TMPro;
 using UnityEngine;
+using UnityEngine.Rendering;
+using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
 namespace GameSettings
 {
-    [RequireComponent(typeof(Toggle))]
-    public class VSyncSettings : Settings
+    [RequireComponent(typeof(Slider))]
+    public class SensitivitySettings : Settings
     {
        
         private VideoSettingsController _videoSettingsController;
-        [SerializeField] private Toggle uiItem;
-        
-        [SerializeField] private bool defaultVal = true; 
+        [SerializeField] private Slider uiItem;
         
       
+        
+        [SerializeField] private float minVal = 0.01f; 
+        [SerializeField] private float maxVal =  5f; 
+         
+        [SerializeField] private float defaultVal = 0.1f; 
+        [SerializeField] private TMP_Text label;
+        
+        /*private VolumeProfile data;
+        private ColorAdjustments component;*/
+        
         private void OnEnable()
         {
             _videoSettingsController = FindObjectOfType<VideoSettingsController>();
             _videoSettingsController.ApplyAction += ApplyAction;
             _videoSettingsController.RestoreAction += RestoreAction;
-
-            _videoSettingsController.QualityChangedAction += QualityChangedAction;
-        }
-
-        private void QualityChangedAction(QualityName qualityName)
-        {
-            var setting = _videoSettingsController.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
-            if (setting != null)
-            {
-                
-                uiItem.isOn = setting.vSyncCount;;
-            }
         }
 
         private void OnDisable()
         {
             _videoSettingsController.ApplyAction -= ApplyAction;
             _videoSettingsController.RestoreAction -= RestoreAction;
-
-            _videoSettingsController.QualityChangedAction -= QualityChangedAction;
         }
+
 
         public override void Setup()
         {
             
-            base.Initialized(defaultVal,GetType().Name);
+            
            
+           
+            base.Initialized(defaultVal, GetType().Name);
+            
+           
+            
             Apply();
+            
         }
 
         private void Start()
         {
-          
-            uiItem.isOn = currentValue.ToBool();
+           
+            uiItem.Init(minVal, maxVal, currentValue.ToFloat());
             
+            label.text = FloatToText(defaultVal, gameObject.name);
+           
             uiItem.onValueChanged.AddListener((value) =>
             {
                 currentValue = value;
                 if(isLive) Apply();
+                label.text = FloatToText(value, gameObject.name);
             });
         }
 
         private void RestoreAction()
         {
-            uiItem.isOn = defaultVal; // on change currentValue will be changed
+            uiItem.value = defaultVal; // on change currentValue will be changed
             base.Save();
             if(!isLive) Apply(); // if Live then already applied this
         }
@@ -77,10 +83,13 @@ namespace GameSettings
 
         public void Apply()
         {
-            Debug.Log($"currentValue.ToBool() {currentValue.ToInt()}");
-            QualitySettings.vSyncCount = currentValue.ToBool() ? 1 : 0; //? 0 dont, 1 every v blank;
+            
+            
+            var r = currentValue.ToFloat();  
+            Debug.Log($"{GetType().Name}: {r}");
+            
+            
         }
-        
 
         
     }
