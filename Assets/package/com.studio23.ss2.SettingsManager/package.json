@@ -1,0 +1,27 @@
+{
+  "name": "com.studio23.https://github.com/Studio-23-xyz/SettingsManager",
+  "displayName": "Studio23 - Settings Manager",
+  "version": "0.0.0",
+  "unity": "2022.3.9f1",
+  "description": "A package to modify ingame settings such as, graphics, audio and input.",
+  "keywords": [
+    "unity",
+	"unity3d",
+	"upm",
+    "studio23",
+    "utility"
+  ],
+  "homepage": "https://github.com/studio23/https://github.com/Studio-23-xyz/SettingsManager.git",
+  "bugs": {
+    "url": "https://github.com/studio23/https://github.com/Studio-23-xyz/SettingsManager/issues"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+ssh://git@github.com/studio23/https://github.com/Studio-23-xyz/SettingsManager.git"
+  },
+  "license": "MIT",
+  "author": "Studio23 (https://studio-23.xyz/)",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  }
+}
