@@ -1,61 +1,48 @@
-﻿using UnityEngine;
+﻿using System.Collections.Generic;
+using UnityEngine;
 using UnityEngine.UI;
 
-namespace com.studio23.ss2.UI
+namespace Studio23.SS2.SettingsManager.UI
 {
-    public class TabSystemController: MonoBehaviour
-    {
-        public GameObject SoundTab;
-        public GameObject VideoTab;
-        public GameObject ControlsTab;
+	public class TabSystemController : MonoBehaviour
+	{
+		public List<GameObject> SettingsTabs;
+		public List<Button> TabButtons;
 
-        public Button SoundTabButton;
-        public Button VideoTabButton;
-        public Button ControlsTabButton;
+		public Color SelectedTabColor;
+		public Color DeselectedTabColor;
 
-        public Color SelectedTabColor;
-        public Color DeselectedTabColor;
+		private void Start()
+		{
+			Initialize();
+		}
 
-        private void Start()
-        {
-            // Set the initial active tab
-            ActivateTab(SoundTab);
-            UpdateTabButtonColors(SoundTabButton);
+		private void Initialize()
+		{
+			for (int i = 0; i < TabButtons.Count - 1; i++)
+			{
+				var i1 = i;
+				TabButtons[i1].onClick.AddListener(() =>
+				{
+					CleanupTabs();
+					UpdateUi(i1);
+				});
+			}
+		}
 
-            // Assign tab buttons' onClick events
-            SoundTabButton.onClick.AddListener(() =>
-            {
-                ActivateTab(SoundTab);
-                UpdateTabButtonColors(SoundTabButton);
-            });
+		private void UpdateUi(int i)
+		{
+			SettingsTabs[i].SetActive(true);
+			TabButtons[i].image.color = SelectedTabColor;
+		}
 
-            VideoTabButton.onClick.AddListener(() =>
-            {
-                ActivateTab(VideoTab);
-                UpdateTabButtonColors(VideoTabButton);
-            });
-
-            ControlsTabButton.onClick.AddListener(() =>
-            {
-                ActivateTab(ControlsTab);
-                UpdateTabButtonColors(ControlsTabButton);
-            });
-        }
-
-        private void ActivateTab(GameObject tab)
-        {
-            // Activate the selected tab
-            SoundTab.SetActive(tab == SoundTab);
-            VideoTab.SetActive(tab == VideoTab);
-            ControlsTab.SetActive(tab == ControlsTab);
-        }
-
-        private void UpdateTabButtonColors(Button selectedButton)
-        {
-            // Update tab button colors
-            SoundTabButton.image.color = selectedButton == SoundTabButton ? SelectedTabColor : DeselectedTabColor;
-            VideoTabButton.image.color = selectedButton == VideoTabButton ? SelectedTabColor : DeselectedTabColor;
-            ControlsTabButton.image.color = selectedButton == ControlsTabButton ? SelectedTabColor : DeselectedTabColor;
-        }
-    }
+		private void CleanupTabs()
+		{
+			for (int i = 0; i < TabButtons.Count; i++)
+			{
+				SettingsTabs[i].SetActive(false);
+				TabButtons[i].image.color = DeselectedTabColor;
+			}
+		}
+	}
 }

@@ -1,5 +1,4 @@
 using TMPro;
-using UnityEngine;
 
 public static class TMP_TextExtensions
 {

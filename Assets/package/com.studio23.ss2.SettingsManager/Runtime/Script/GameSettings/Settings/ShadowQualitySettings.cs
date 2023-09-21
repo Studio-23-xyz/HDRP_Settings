@@ -1,12 +1,14 @@
-﻿using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+﻿using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Data;
+using Studio23.SS2.SettingsManager.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
-using ShadowQuality = com.studio23.ss2.Core.ShadowQuality;
+using ShadowQuality = Studio23.SS2.SettingsManager.Data.ShadowQuality;
 
 
 namespace GameSettings
@@ -62,18 +64,18 @@ namespace GameSettings
 		private void Start()
 		{
 			uiItem.AddOptionNew(GetOptions());
-			uiItem.value = currentValue.ToInt();
+			uiItem.value = CurrentValue.ToInt();
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.value = (int)defaultVal; // on change currentValue will be changed
+			uiItem.value = (int)defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -87,7 +89,7 @@ namespace GameSettings
 		public void Apply()
 		{
 
-			data.SetShadowResolutionLevel(currentValue.ToInt());
+			data.SetShadowResolutionLevel(CurrentValue.ToInt());
 
 			/*var hdRenderPipelineAsset = GetRpQualityAsset();
             GraphicsSettings.renderPipelineAsset = null;
@@ -97,7 +99,7 @@ namespace GameSettings
 
 		private List<TMP_Dropdown.OptionData> GetOptions()
 		{
-			// settings  = new [] {"Low", "Medium", "High", "Ultra"};/*Def 0, low  || Light-> Low Medium High Ultra*/
+			// Settings  = new [] {"Low", "Medium", "High", "Ultra"};/*Def 0, low  || Light-> Low Medium High Ultra*/
 
 
 

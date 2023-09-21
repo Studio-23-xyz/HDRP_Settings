@@ -1,5 +1,6 @@
-﻿using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+﻿using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Extension;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -9,7 +10,7 @@ namespace GameSettings
 	public class DpiResolutionSettings : Settings
 	{
 
-		private VideoSettingsController _videoSettingsController;
+		private SettingsController _videoSettingsController;
 		[SerializeField] private Slider uiItem;
 
 		[SerializeField] private float defaultVal = 1;
@@ -17,7 +18,7 @@ namespace GameSettings
 
 		private void OnEnable()
 		{
-			_videoSettingsController = FindObjectOfType<VideoSettingsController>();
+			_videoSettingsController = FindObjectOfType<SettingsController>();
 			_videoSettingsController.ApplyAction += ApplyAction;
 			_videoSettingsController.RestoreAction += RestoreAction;
 		}
@@ -30,12 +31,7 @@ namespace GameSettings
 
 		public override void Setup()
 		{
-
-
-
-
 			base.Initialized(defaultVal, GetType().Name);
-
 
 			Apply();
 		}
@@ -43,18 +39,18 @@ namespace GameSettings
 		private void Start()
 		{
 
-			uiItem.Init(currentValue.ToFloat());
+			uiItem.Init(CurrentValue.ToFloat());
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.value = defaultVal; // on change currentValue will be changed
+			uiItem.value = defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -66,7 +62,7 @@ namespace GameSettings
 
 		public void Apply()
 		{
-			QualitySettings.resolutionScalingFixedDPIFactor = Mathf.Clamp01(currentValue.ToFloat()); // default 1, 0-1
+			QualitySettings.resolutionScalingFixedDPIFactor = Mathf.Clamp01(CurrentValue.ToFloat()); // default 1, 0-1
 
 		}
 

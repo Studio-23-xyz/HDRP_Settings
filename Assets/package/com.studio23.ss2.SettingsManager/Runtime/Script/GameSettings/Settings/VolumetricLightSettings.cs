@@ -1,5 +1,7 @@
-﻿using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+﻿using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Data;
+using Studio23.SS2.SettingsManager.Extension;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
@@ -55,18 +57,18 @@ namespace GameSettings
 
 		private void Start()
 		{
-			uiItem.isOn = currentValue.ToBool();
+			uiItem.isOn = CurrentValue.ToBool();
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.isOn = defaultVal; // on change currentValue will be changed
+			uiItem.isOn = defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -79,7 +81,7 @@ namespace GameSettings
 		public void Apply()
 		{
 
-			data.affectsVolumetric = currentValue.ToBool();
+			data.affectsVolumetric = CurrentValue.ToBool();
 		}
 
 

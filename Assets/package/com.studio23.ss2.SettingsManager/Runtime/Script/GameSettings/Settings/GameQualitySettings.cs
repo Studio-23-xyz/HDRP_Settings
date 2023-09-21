@@ -1,5 +1,7 @@
-using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Data;
+using Studio23.SS2.SettingsManager.Extension;
 using System;
 using System.Collections.Generic;
 using TMPro;
@@ -47,19 +49,19 @@ namespace GameSettings
 		private void Start()
 		{
 			uiItem.AddOptionNew(GetOptions());
-			uiItem.value = currentValue.ToInt();
+			uiItem.value = CurrentValue.ToInt();
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
-				videoSettingsController.QualityChangedAction?.Invoke((QualityName)currentValue.ToInt());
+				videoSettingsController.QualityChangedAction?.Invoke((QualityName)CurrentValue.ToInt());
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.value = (int)defaultVal; // on change currentValue will be changed
+			uiItem.value = (int)defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -72,7 +74,7 @@ namespace GameSettings
 
 		public void Apply()
 		{
-			QualitySettings.SetQualityLevel(currentValue.ToInt(), true);
+			QualitySettings.SetQualityLevel(CurrentValue.ToInt(), true);
 		}
 
 

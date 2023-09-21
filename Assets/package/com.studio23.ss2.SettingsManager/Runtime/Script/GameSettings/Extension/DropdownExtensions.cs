@@ -1,6 +1,5 @@
 using System.Collections.Generic;
 using TMPro;
-using UnityEngine.UI;
 
 public static class TMP_DropdownExtensions
 {

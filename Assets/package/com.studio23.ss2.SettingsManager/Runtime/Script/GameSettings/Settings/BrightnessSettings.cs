@@ -1,5 +1,6 @@
-﻿using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+﻿using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Extension;
 using System.Linq;
 using TMPro;
 using UnityEngine;
@@ -57,13 +58,13 @@ namespace GameSettings
 		private void Start()
 		{
 
-			uiItem.Init(minVal, maxVal, currentValue.ToFloat());
+			uiItem.Init(minVal, maxVal, CurrentValue.ToFloat());
 
 			label.text = FloatToText(defaultVal, gameObject.name);
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 				label.text = FloatToText(value, gameObject.name);
 			});
@@ -71,7 +72,7 @@ namespace GameSettings
 
 		private void RestoreAction()
 		{
-			uiItem.value = defaultVal; // on change currentValue will be changed
+			uiItem.value = defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -84,7 +85,7 @@ namespace GameSettings
 		public void Apply()
 		{
 
-			component.postExposure.value = Mathf.Clamp(currentValue.ToFloat(), minVal, maxVal);
+			component.postExposure.value = Mathf.Clamp(CurrentValue.ToFloat(), minVal, maxVal);
 		}
 
 

@@ -1,61 +1,44 @@
-﻿using System;
+﻿using GameSettings;
+using System;
 using System.Collections.Generic;
-using System.Linq;
-using com.studio23.ss2.Core.Component;
-using GameSettings;
 using UnityEngine;
 using UnityEngine.Audio;
-using UnityEngine.UI;
 
-namespace com.studio23.ss2.Core
+namespace Studio23.SS2.SettingsManager.Core
 {
-    [Serializable]
-    public class AudioSetting
-    {
-        public string settingsName= "Volume Settings";
-        public bool isLive = true;
-        public AudioMixerGroup audioMixerGroup;
-        [Range(0, 1)] public float defaultValue = 0.75f;
-        public string exposedParameter;
-    }
+	[Serializable]
+	public class AudioSetting
+	{
+		public string SettingsName = "Volume Settings";
+		public bool IsLive = true;
+		public AudioMixerGroup AudioMixerGroup;
+		[Range(0, 1)]
+		public float DefaultValue = 0.75f;
+		public string ExposedParameter;
+	}
 
-   public class AudioSettingsController : MonoBehaviour
-   {
-       [SerializeField] private List<AudioSetting> audioSettings;
-       [SerializeField] private Transform containerTransform;
-       [SerializeField] private VolumeController volumeControllerTemplate;
-        public Action ApplyAction;
-        public Action RestoreAction;
+	public class AudioSettingsController : SettingsController
+	{
+		[SerializeField] private List<AudioSetting> _audioSettings;
+		[SerializeField] private Transform _containerTransform;
+		[SerializeField] private VolumeController _volumeControllerTemplate;
 
-        [SerializeField] private Button applyButton;
-        [SerializeField] private Button restoreButton;
+		public override void Initialize()
+		{
+			base.Initialize();
+			InitializedSubAudioSettings();
+		}
 
-        public List<Settings> settings;
-        public void Initialized()
-        {
-            settings = GetComponentsInChildren<Settings>(true).ToList();
-            settings.ForEach(setting => setting.Setup());
+		private void InitializedSubAudioSettings()
+		{
+			var i = 0;
+			foreach (var audioSetting in _audioSettings)
+			{
+				var volumeController = Instantiate(_volumeControllerTemplate, _containerTransform);
+				volumeController.name += i++;
+				volumeController.Init(audioSetting);
+			}
+		}
+	}
 
-            InitializedOthersAudioSettings();
-        }
-
-        private void InitializedOthersAudioSettings()
-        {
-            var i = 0;
-            foreach (var audioSetting in audioSettings)
-            {
-                var volumeController = Instantiate(volumeControllerTemplate,containerTransform);
-                volumeController.name += i++;
-                volumeController.Init(audioSetting);
-            }
-        }
-        private void Start()
-        {
-                applyButton.onClick.AddListener(ApplyAction.Invoke);
-                restoreButton.onClick.AddListener(RestoreAction.Invoke);
-        }
-
-       
-    }
-    
 }

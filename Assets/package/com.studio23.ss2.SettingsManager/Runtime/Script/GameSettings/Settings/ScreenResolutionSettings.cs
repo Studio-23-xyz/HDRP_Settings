@@ -1,5 +1,6 @@
-using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Extension;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
@@ -41,18 +42,18 @@ namespace GameSettings
 		{
 			if (!options.Any()) return;
 			uiItem.AddOptionNew(GetOptions());
-			uiItem.value = currentValue.ToInt();
+			uiItem.value = CurrentValue.ToInt();
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.value = defaultVal; // on change currentValue will be changed
+			uiItem.value = defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -63,7 +64,7 @@ namespace GameSettings
 		}
 		public void Apply()
 		{
-			var setting = options[currentValue.ToInt()];
+			var setting = options[CurrentValue.ToInt()];
 			Screen.SetResolution(setting.width, setting.height, _fullScreenModeSettings.Get());
 		}
 		private void GenerateOptions()

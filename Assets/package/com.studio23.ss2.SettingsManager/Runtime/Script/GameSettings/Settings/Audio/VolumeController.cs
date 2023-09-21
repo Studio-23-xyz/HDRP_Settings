@@ -1,5 +1,6 @@
-﻿using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+﻿using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Extension;
 using TMPro;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
@@ -32,31 +33,32 @@ namespace GameSettings
 			audioSetting = adoSetting;
 			Setup();
 		}
+
 		public override void Setup()
 		{
 			if (audioSetting == null) return;
 
-			base.Initialized(audioSetting.defaultValue, name, audioSetting.isLive);
-			uiItem.Init(currentValue.ToFloat());
+			base.Initialized(audioSetting.DefaultValue, name, audioSetting.IsLive);
+			uiItem.Init(CurrentValue.ToFloat());
 			Apply();
 		}
 
 		private void Start()
 		{
 
-			label.text = FloatToText(audioSetting.defaultValue, audioSetting.settingsName);
+			label.text = FloatToText(audioSetting.DefaultValue, audioSetting.SettingsName);
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
-				label.text = FloatToText(value, audioSetting.settingsName);
+				label.text = FloatToText(value, audioSetting.SettingsName);
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.value = audioSetting.defaultValue; // on change currentValue will be changed
+			uiItem.value = audioSetting.DefaultValue; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -68,7 +70,7 @@ namespace GameSettings
 
 		public void Apply()
 		{
-			audioSetting.audioMixerGroup.audioMixer.SetFloat(audioSetting.exposedParameter, currentValue.ToFloat().GetAttenuation());
+			audioSetting.AudioMixerGroup.audioMixer.SetFloat(audioSetting.ExposedParameter, CurrentValue.ToFloat().GetAttenuation());
 
 		}
 

@@ -1,5 +1,6 @@
-using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -41,12 +42,12 @@ namespace GameSettings
 		{
 			if (!options.Any()) return;
 			uiItem.AddOptionNew(GetOptions());
-			uiItem.value = currentValue.ToInt();
+			uiItem.value = CurrentValue.ToInt();
 
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 			});
 
@@ -55,7 +56,7 @@ namespace GameSettings
 
 		private void RestoreAction()
 		{
-			uiItem.value = (int)defaultVal; // on change currentValue will be changed
+			uiItem.value = (int)defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -67,7 +68,7 @@ namespace GameSettings
 
 		public void Apply()
 		{
-			var setting = options[currentValue.ToInt()];
+			var setting = options[CurrentValue.ToInt()];
 			Screen.fullScreenMode = setting;
 		}
 
@@ -94,7 +95,7 @@ namespace GameSettings
 		public FullScreenMode Get()
 		{
 			if (!options.Any()) GenerateOptions();
-			return options[currentValue.ToInt()];
+			return options[CurrentValue.ToInt()];
 		}
 	}
 

@@ -1,28 +1,17 @@
 using System;
 using System.IO;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text.RegularExpressions;
 using Newtonsoft.Json;
-using TMPro;
 using UnityEngine;
-using UnityEngine.Serialization;
-using UnityEngine.UI;
 
-namespace com.studio23.ss2.Core.Component
+namespace Studio23.SS2.SettingsManager.Core.Component
 {
     public abstract class Settings : MonoBehaviour
     {
-        protected object currentValue { get; set; }
+        protected object CurrentValue { get; set; }
         protected bool isLive { get; private set; }
-        
         private object defaultValue = 0 ;
-       
-       
-       
         private string settingsPath;
 
-        
         public abstract void Setup();
         public virtual void Initialized(object defVal, string dbName, bool isLiveValue = false)
         {
@@ -31,22 +20,21 @@ namespace com.studio23.ss2.Core.Component
             settingsPath =  Path.Combine(Application.persistentDataPath, $"{dbName}.config");
             if (!File.Exists(settingsPath))
             {
-                currentValue = defaultValue;
+                CurrentValue = defaultValue;
                 Save();
             }
             else Select();
-            
         }
 
         public void Select()
         {
-            currentValue = LoadValue();
+            CurrentValue = LoadValue();
         }
        
 
         public virtual void Save()
         {
-            var contents = JsonConvert.SerializeObject(currentValue);
+            var contents = JsonConvert.SerializeObject(CurrentValue);
             File.WriteAllText(settingsPath, contents);
         }
       
@@ -60,8 +48,5 @@ namespace com.studio23.ss2.Core.Component
         {
             return $"{label} ({Math.Round(value * 100)}%)";
         }
-
-        
     }
-
 }

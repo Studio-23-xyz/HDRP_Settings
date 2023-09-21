@@ -1,7 +1,7 @@
 ﻿using Cinemachine;
-using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
-using System;
+using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Extension;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -51,13 +51,13 @@ namespace GameSettings
 		private void Start()
 		{
 
-			uiItem.Init(currentValue.ToFloat());
+			uiItem.Init(CurrentValue.ToFloat());
 
 			label.text = FloatToText(defaultVal, gameObject.name);
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 				label.text = FloatToText(value, gameObject.name);
 			});
@@ -65,7 +65,7 @@ namespace GameSettings
 
 		private void RestoreAction()
 		{
-			uiItem.value = defaultVal; // on change currentValue will be changed
+			uiItem.value = defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -77,7 +77,7 @@ namespace GameSettings
 
 		public void Apply()
 		{
-			virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(currentValue.ToFloat()) * 60f;
+			virtualCamera.m_Lens.FieldOfView = 60f + Mathf.Clamp01(CurrentValue.ToFloat()) * 60f;
 
 			// float : 0 - 1, 60-120
 

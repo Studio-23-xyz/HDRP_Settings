@@ -1,5 +1,7 @@
-﻿using com.studio23.ss2.Core;
-using com.studio23.ss2.Core.Component;
+﻿using Studio23.SS2.SettingsManager.Core;
+using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Data;
+using Studio23.SS2.SettingsManager.Extension;
 using System;
 using System.Collections.Generic;
 using System.Linq;
@@ -11,7 +13,7 @@ namespace GameSettings
 	[RequireComponent(typeof(TMP_Dropdown))]
 	public class TextureQualitySettings : Settings
 	{
-		//   public string[] settings { get; private set; }
+		//   public string[] Settings { get; private set; }
 		private VideoSettingsController _videoSettingsController;
 		[SerializeField] private TMP_Dropdown uiItem;
 
@@ -66,18 +68,18 @@ namespace GameSettings
 		{
 
 			uiItem.AddOptionNew(GenerateOptions());
-			uiItem.value = currentValue.ToInt();
+			uiItem.value = CurrentValue.ToInt();
 
 			uiItem.onValueChanged.AddListener((value) =>
 			{
-				currentValue = value;
+				CurrentValue = value;
 				if (isLive) Apply();
 			});
 		}
 
 		private void RestoreAction()
 		{
-			uiItem.value = (int)defaultVal; // on change currentValue will be changed
+			uiItem.value = (int)defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
@@ -91,12 +93,12 @@ namespace GameSettings
 		public void Apply()
 		{
 
-			QualitySettings.globalTextureMipmapLimit = currentValue.ToInt(); // 0 - fullRes, limit 0-3
+			QualitySettings.globalTextureMipmapLimit = CurrentValue.ToInt(); // 0 - fullRes, limit 0-3
 		}
 
 		private List<TMP_Dropdown.OptionData> GenerateOptions()
 		{
-			// settings  = new [] {"High", "Medium", "Low", "Very Low"};/*Full ,Half, Quarter, Eighth*/
+			// Settings  = new [] {"High", "Medium", "Low", "Very Low"};/*Full ,Half, Quarter, Eighth*/
 
 			List<TMP_Dropdown.OptionData> optionData = new List<TMP_Dropdown.OptionData>();
 			foreach (var item in Enum.GetValues(typeof(TextureQuality)))
