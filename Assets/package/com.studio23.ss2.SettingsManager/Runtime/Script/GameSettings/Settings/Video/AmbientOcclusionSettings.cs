@@ -1,14 +1,13 @@
-﻿using Studio23.SS2.SettingsManager.Data;
-using Studio23.SS2.SettingsManager.Core;
-using Studio23.SS2.SettingsManager.Core.Component;
-using Studio23.SS2.SettingsManager.Extension;
+﻿using Studio23.SS2.SettingsManager.Core.Component;
+using Studio23.SS2.SettingsManager.Data;
 using System.Linq;
+using Studio23.SS2.SettingsManager.Extensions;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(Toggle))]
 	public class AmbientOcclusionSettings : Settings
@@ -19,21 +18,6 @@ namespace GameSettings
 		private VolumeProfile data;
 		private ScreenSpaceAmbientOcclusion component;
 
-		//private void OnEnable()
-		//{
-		//	_videoSettingsController = FindObjectOfType<VideoSettingsController>();
-		//	_videoSettingsController.ApplyAction += ApplyAction;
-		//	_videoSettingsController.RestoreAction += RestoreAction;
-		//	_videoSettingsController.QualityChangedAction += QualityChangedAction;
-		//}
-
-		//private void OnDisable()
-		//{
-		//	_videoSettingsController.ApplyAction -= ApplyAction;
-		//	_videoSettingsController.RestoreAction -= RestoreAction;
-		//	_videoSettingsController.QualityChangedAction += QualityChangedAction;
-		//}
-
 		protected override void OnQualityChanged(QualityName qualityName)
 		{
 			var setting = VideoSettingsController.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
@@ -42,6 +26,7 @@ namespace GameSettings
 				uiItem.isOn = setting.ambientOcclusion; ;
 			}
 		}
+
 		public override void Setup()
 		{
 			data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile;
@@ -51,6 +36,7 @@ namespace GameSettings
 			Apply();
 
 		}
+
 		private void Start()
 		{
 			uiItem.isOn = CurrentValue.ToBool();
@@ -59,9 +45,7 @@ namespace GameSettings
 				CurrentValue = value;
 				if (isLive) Apply();
 			});
-
 		}
-
 
 		public override void RestoreAction()
 		{
@@ -79,10 +63,5 @@ namespace GameSettings
 		{
 			component.active = CurrentValue.ToBool();
 		}
-
-
 	}
-
-
-
 }

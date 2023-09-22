@@ -1,6 +1,6 @@
 ﻿using UnityEngine.UI;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Extensions
 {
     public static class SliderExtensions
     {

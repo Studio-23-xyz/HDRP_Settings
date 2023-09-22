@@ -1,5 +1,4 @@
 ﻿using System.Collections.Generic;
-using Cysharp.Threading.Tasks;
 using UnityEngine;
 using UnityEngine.UI;
 
@@ -25,7 +24,6 @@ namespace Studio23.SS2.SettingsManager.UI
 				var temp = i;
 				TabButtons[temp].onClick.AddListener(() =>
 				{
-					Debug.Log($"Button pressed {TabButtons[temp].name}");
 					CleanupTabs();
 					UpdateUi(temp);
 				});
@@ -34,12 +32,10 @@ namespace Studio23.SS2.SettingsManager.UI
 
 		private void UpdateUi(int i)
 		{
-			
 			var tab = SettingsTabs[i];
 			tab.SetActive(true);
 			var tabButton = TabButtons[i];
 			tabButton.image.color = SelectedTabColor;
-			Debug.Log($"Currently activating {tab.name} & {tabButton.name}");
 		}
 
 		private void CleanupTabs()

@@ -1,6 +1,6 @@
 using System;
 
-namespace Studio23.SS2.SettingsManager.Extension
+namespace Studio23.SS2.SettingsManager.Extensions
 {
 	public static class ObjectExtensions
 	{

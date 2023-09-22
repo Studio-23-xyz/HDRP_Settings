@@ -9,6 +9,8 @@ namespace Studio23.SS2.SettingsManager.Core.Component
     public abstract class Settings : MonoBehaviour
     {
 	    protected VideoSettingsController VideoSettingsController;
+        protected AudioSettingsController AudioSettingsController;
+
 		protected object CurrentValue { get; set; }
         protected bool isLive { get; private set; }
         private object defaultValue = 0 ;
@@ -17,10 +19,15 @@ namespace Studio23.SS2.SettingsManager.Core.Component
         public virtual void OnEnable()
         {
             VideoSettingsController = FindObjectOfType<VideoSettingsController>();
+            
             VideoSettingsController.ApplyAction += ApplyAction;
             VideoSettingsController.RestoreAction += RestoreAction;
             VideoSettingsController.QualityChangedAction += OnQualityChanged;
-        }
+
+            AudioSettingsController = FindObjectOfType<AudioSettingsController>();
+            AudioSettingsController.ApplyAction += ApplyAction;
+            AudioSettingsController.RestoreAction += RestoreAction;
+		}
 
         protected virtual void OnQualityChanged(QualityName obj)
         {
@@ -32,7 +39,10 @@ namespace Studio23.SS2.SettingsManager.Core.Component
 	        VideoSettingsController.ApplyAction -= ApplyAction;
 	        VideoSettingsController.RestoreAction -= RestoreAction;
 	        VideoSettingsController.QualityChangedAction -= OnQualityChanged;
-		}
+
+	        AudioSettingsController.ApplyAction -= ApplyAction;
+            AudioSettingsController.RestoreAction -= RestoreAction;
+        }
 
 		public abstract void Setup();
         public virtual void Initialized(object defVal, string dbName, bool isLiveValue = false)
@@ -51,14 +61,12 @@ namespace Studio23.SS2.SettingsManager.Core.Component
         public abstract void ApplyAction();
         public abstract void RestoreAction();
 
-
-		public void Select()
+        public void Select()
         {
             CurrentValue = LoadValue();
         }
-       
 
-        public virtual void Save()
+		public virtual void Save()
         {
             var contents = JsonConvert.SerializeObject(CurrentValue);
             File.WriteAllText(settingsPath, contents);

@@ -11,12 +11,11 @@ using UnityEngine.Rendering.HighDefinition;
 using ShadowQuality = Studio23.SS2.SettingsManager.Data.ShadowQuality;
 
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(TMP_Dropdown))]
 	public class ShadowQualitySettings : Settings
 	{
-
 		private HDAdditionalLightData data;
 
 		public string[] settings { get; private set; }
@@ -37,10 +36,7 @@ namespace GameSettings
 		{
 			data = FindObjectOfType<HDAdditionalLightData>();
 			if (data) data.SetShadowResolutionOverride(false);
-
-
 			base.Initialized((int)defaultVal, GetType().Name);
-
 			Apply();
 		}
 
@@ -71,21 +67,12 @@ namespace GameSettings
 
 		public void Apply()
 		{
-
 			data.SetShadowResolutionLevel(CurrentValue.ToInt());
-
-			/*var hdRenderPipelineAsset = GetRpQualityAsset();
-            GraphicsSettings.renderPipelineAsset = null;
-            GraphicsSettings.renderPipelineAsset = hdRenderPipelineAsset;*/
-
 		}
 
 		private List<TMP_Dropdown.OptionData> GetOptions()
 		{
 			// Settings  = new [] {"Low", "Medium", "High", "Ultra"};/*Def 0, low  || Light-> Low Medium High Ultra*/
-
-
-
 			List<TMP_Dropdown.OptionData> optionData = new List<TMP_Dropdown.OptionData>();
 			foreach (var item in Enum.GetValues(typeof(ShadowQuality)))
 			{
@@ -93,7 +80,6 @@ namespace GameSettings
 			}
 
 			return optionData;
-
 		}
 	}
 }

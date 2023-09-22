@@ -8,19 +8,17 @@ using TMPro;
 using UnityEngine;
 
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(TMP_Dropdown))]
 	public class GameQualitySettings : Settings
 	{
 		[SerializeField] private TMP_Dropdown uiItem;
-
 		[SerializeField] private QualityName defaultVal = QualityName.Medium; //default 1; medium, 0 high, 2 low 
 
 		public override void Setup()
 		{
 			base.Initialized((int)defaultVal, GetType().Name);
-
 			Apply();
 		}
 
@@ -55,7 +53,6 @@ namespace GameSettings
 			QualitySettings.SetQualityLevel(CurrentValue.ToInt(), true);
 		}
 
-
 		private List<TMP_Dropdown.OptionData> GetOptions()
 		{
 			//uiItem.AddOptions(QualitySettings.names.ToList());
@@ -66,8 +63,5 @@ namespace GameSettings
 			}
 			return optionData;
 		}
-
 	}
-
-
 }

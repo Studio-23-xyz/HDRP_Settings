@@ -1,14 +1,14 @@
 ﻿using Studio23.SS2.SettingsManager.Core;
 using Studio23.SS2.SettingsManager.Core.Component;
-using Studio23.SS2.SettingsManager.Extension;
 using System.Linq;
+using Studio23.SS2.SettingsManager.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(Slider))]
 	public class BrightnessSettings : Settings

@@ -6,19 +6,17 @@ using System.Linq;
 using UnityEngine;
 using UnityEngine.UI;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(Toggle))]
 	public class VSyncSettings : Settings
 	{
 		[SerializeField] private Toggle _uiItem;
-
 		[SerializeField] private bool _defaultVal = true;
 
 		private void Start()
 		{
 			_uiItem.isOn = CurrentValue.ToBool();
-
 			_uiItem.onValueChanged.AddListener((value) =>
 			{
 				CurrentValue = value;
@@ -29,7 +27,6 @@ namespace GameSettings
 		public override void Setup()
 		{
 			base.Initialized(_defaultVal, GetType().Name);
-
 			Apply();
 		}
 
@@ -38,7 +35,6 @@ namespace GameSettings
 			var setting = VideoSettingsController.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
 			if (setting != null)
 			{
-
 				_uiItem.isOn = setting.vSyncCount; ;
 			}
 		}
@@ -56,6 +52,10 @@ namespace GameSettings
 			if (!isLive) Apply();  // if Live then already applied this
 		}
 
-		public void Apply() => QualitySettings.vSyncCount = CurrentValue.ToBool() ? 1 : 0; //? 0 dont, 1 every v blank;0
+		public void Apply()
+		{
+			QualitySettings.vSyncCount = CurrentValue.ToBool() ? 1 : 0;
+			//? 0 dont, 1 every v blank;0
+		}
 	}
 }

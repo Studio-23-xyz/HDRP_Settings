@@ -1,4 +1,4 @@
-﻿using GameSettings;
+﻿using Studio23.SS2.SettingsManager.Video;
 using System;
 using System.Collections.Generic;
 using UnityEngine;

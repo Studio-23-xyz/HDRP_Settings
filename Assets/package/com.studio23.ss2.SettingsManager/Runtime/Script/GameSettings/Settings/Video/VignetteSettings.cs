@@ -8,15 +8,12 @@ using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(Toggle))]
 	public class VignetteSettings : Settings
 	{
-
-		private VideoSettingsController _videoSettingsController;
 		[SerializeField] private Toggle uiItem;
-
 		[SerializeField] private bool defaultVal = true;
 
 		private VolumeProfile data;
@@ -27,7 +24,6 @@ namespace GameSettings
 			var setting = VideoSettingsController.QualitySettingsPreset.FirstOrDefault(x => x.names == qualityName);
 			if (setting != null)
 			{
-
 				uiItem.isOn = setting.vignette; ;
 			}
 		}
@@ -36,17 +32,13 @@ namespace GameSettings
 		{
 			data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
 			data.TryGet(typeof(Vignette), out component);
-
 			base.Initialized(defaultVal, GetType().Name);
-
-
 			Apply();
 		}
 
 		private void Start()
 		{
 			uiItem.isOn = CurrentValue.ToBool();
-
 			uiItem.onValueChanged.AddListener((value) =>
 			{
 				CurrentValue = value;
@@ -60,6 +52,7 @@ namespace GameSettings
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
+
 		public override void ApplyAction()
 		{
 			base.Save();
@@ -70,10 +63,5 @@ namespace GameSettings
 		{
 			component.active = CurrentValue.ToBool();
 		}
-
-
 	}
-
-
-
 }

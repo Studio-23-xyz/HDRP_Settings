@@ -7,6 +7,6 @@ public static class TMP_DropdownExtensions
     {
         dropdown.ClearOptions();
         dropdown.AddOptions(options);
-         dropdown.RefreshShownValue();
+	    dropdown.RefreshShownValue();
     }
 }

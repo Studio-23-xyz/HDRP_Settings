@@ -8,14 +8,13 @@ using System.Linq;
 using TMPro;
 using UnityEngine;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(TMP_Dropdown))]
 	public class TextureQualitySettings : Settings
 	{
 		//   public string[] Settings { get; private set; }
 		[SerializeField] private TMP_Dropdown uiItem;
-
 		[SerializeField] private TextureQuality defaultVal = TextureQuality.Medium;
 
 		protected override void OnQualityChanged(QualityName qualityName)
@@ -31,7 +30,6 @@ namespace GameSettings
 		public override void Setup()
 		{
 			base.Initialized((int)defaultVal, GetType().Name);
-
 			Apply();
 		}
 

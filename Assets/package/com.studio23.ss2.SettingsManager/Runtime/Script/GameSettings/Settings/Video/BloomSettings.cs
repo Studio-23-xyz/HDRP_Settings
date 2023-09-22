@@ -1,43 +1,23 @@
 ﻿using Studio23.SS2.SettingsManager.Core;
 using Studio23.SS2.SettingsManager.Core.Component;
 using Studio23.SS2.SettingsManager.Data;
-using Studio23.SS2.SettingsManager.Extension;
 using System.Linq;
+using Studio23.SS2.SettingsManager.Extensions;
 using UnityEngine;
 using UnityEngine.Rendering;
 using UnityEngine.Rendering.HighDefinition;
 using UnityEngine.UI;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(Toggle))]
 	public class BloomSettings : Settings
 	{
-
-		private VideoSettingsController _videoSettingsController;
 		[SerializeField] private Toggle uiItem;
-
 		[SerializeField] private bool defaultVal = true;
 
 		private VolumeProfile data;
 		private Bloom component;
-
-		//private void OnEnable()
-		//{
-		//	_videoSettingsController = FindObjectOfType<VideoSettingsController>();
-		//	_videoSettingsController.ApplyAction += ApplyAction;
-		//	_videoSettingsController.RestoreAction += RestoreAction;
-
-		//	_videoSettingsController.QualityChangedAction += QualityChangedAction;
-		//}
-
-		//private void OnDisable()
-		//{
-		//	_videoSettingsController.ApplyAction -= ApplyAction;
-		//	_videoSettingsController.RestoreAction -= RestoreAction;
-
-		//	_videoSettingsController.QualityChangedAction += QualityChangedAction;
-		//}
 
 		protected override void OnQualityChanged(QualityName qualityName)
 		{
@@ -48,25 +28,18 @@ namespace GameSettings
 			}
 		}
 		
-
 		public override void Setup()
 		{
 			data = FindObjectsOfType<Volume>().OrderBy(m => m.transform.GetSiblingIndex()).ToArray()[0].sharedProfile; //FindObjectOfType<Volume>();
 			data.TryGet(typeof(Bloom), out component);
-
-
-
 			base.Initialized(defaultVal, GetType().Name);
-
 
 			Apply();
 		}
 
 		private void Start()
 		{
-
 			uiItem.isOn = CurrentValue.ToBool();
-
 			uiItem.onValueChanged.AddListener((value) =>
 			{
 				CurrentValue = value;
@@ -90,10 +63,5 @@ namespace GameSettings
 		{
 			component.active = CurrentValue.ToBool();
 		}
-
-
 	}
-
-
-
 }

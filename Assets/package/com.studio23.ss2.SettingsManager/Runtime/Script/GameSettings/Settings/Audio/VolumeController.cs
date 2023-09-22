@@ -1,33 +1,19 @@
 ﻿using Studio23.SS2.SettingsManager.Core;
 using Studio23.SS2.SettingsManager.Core.Component;
-using Studio23.SS2.SettingsManager.Extension;
+using Studio23.SS2.SettingsManager.Extensions;
 using TMPro;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
 
-namespace GameSettings
+namespace Studio23.SS2.SettingsManager.Video
 {
 	[RequireComponent(typeof(Slider))]
 	public class VolumeController : Settings
 	{
 		[SerializeField] private Slider uiItem;
 		[SerializeField] private TMP_Text label;
-
-		private AudioSettingsController _audioSettingsController;
 		private AudioSetting audioSetting;
-		//private void OnEnable()
-		//{
-		//	_audioSettingsController ??= FindObjectOfType<AudioSettingsController>();
-		//	_audioSettingsController.ApplyAction += ApplyAction;
-		//	_audioSettingsController.RestoreAction += RestoreAction;
-		//}
-
-		//private void OnDisable()
-		//{
-		//	_audioSettingsController.ApplyAction -= ApplyAction;
-		//	_audioSettingsController.RestoreAction -= RestoreAction;
-		//}
-
+		
 		public void Init(AudioSetting adoSetting)
 		{
 			audioSetting = adoSetting;
@@ -71,12 +57,6 @@ namespace GameSettings
 		public void Apply()
 		{
 			audioSetting.AudioMixerGroup.audioMixer.SetFloat(audioSetting.ExposedParameter, CurrentValue.ToFloat().GetAttenuation());
-
 		}
-
-
 	}
-
-
-
 }
