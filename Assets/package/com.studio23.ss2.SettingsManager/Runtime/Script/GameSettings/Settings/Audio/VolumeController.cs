@@ -15,18 +15,18 @@ namespace GameSettings
 
 		private AudioSettingsController _audioSettingsController;
 		private AudioSetting audioSetting;
-		private void OnEnable()
-		{
-			_audioSettingsController ??= FindObjectOfType<AudioSettingsController>();
-			_audioSettingsController.ApplyAction += ApplyAction;
-			_audioSettingsController.RestoreAction += RestoreAction;
-		}
+		//private void OnEnable()
+		//{
+		//	_audioSettingsController ??= FindObjectOfType<AudioSettingsController>();
+		//	_audioSettingsController.ApplyAction += ApplyAction;
+		//	_audioSettingsController.RestoreAction += RestoreAction;
+		//}
 
-		private void OnDisable()
-		{
-			_audioSettingsController.ApplyAction -= ApplyAction;
-			_audioSettingsController.RestoreAction -= RestoreAction;
-		}
+		//private void OnDisable()
+		//{
+		//	_audioSettingsController.ApplyAction -= ApplyAction;
+		//	_audioSettingsController.RestoreAction -= RestoreAction;
+		//}
 
 		public void Init(AudioSetting adoSetting)
 		{
@@ -56,13 +56,13 @@ namespace GameSettings
 			});
 		}
 
-		private void RestoreAction()
+		public override void RestoreAction()
 		{
 			uiItem.value = audioSetting.DefaultValue; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
-		private void ApplyAction()
+		public override void ApplyAction()
 		{
 			base.Save();
 			if (!isLive) Apply();  // if Live then already applied this

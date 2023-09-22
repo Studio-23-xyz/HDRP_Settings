@@ -1,18 +1,40 @@
 using System;
 using System.IO;
 using Newtonsoft.Json;
+using Studio23.SS2.SettingsManager.Data;
 using UnityEngine;
 
 namespace Studio23.SS2.SettingsManager.Core.Component
 {
     public abstract class Settings : MonoBehaviour
     {
-        protected object CurrentValue { get; set; }
+	    protected VideoSettingsController VideoSettingsController;
+		protected object CurrentValue { get; set; }
         protected bool isLive { get; private set; }
         private object defaultValue = 0 ;
         private string settingsPath;
 
-        public abstract void Setup();
+        public virtual void OnEnable()
+        {
+            VideoSettingsController = FindObjectOfType<VideoSettingsController>();
+            VideoSettingsController.ApplyAction += ApplyAction;
+            VideoSettingsController.RestoreAction += RestoreAction;
+            VideoSettingsController.QualityChangedAction += OnQualityChanged;
+        }
+
+        protected virtual void OnQualityChanged(QualityName obj)
+        {
+
+        }
+
+        public virtual void OnDisable()
+        {
+	        VideoSettingsController.ApplyAction -= ApplyAction;
+	        VideoSettingsController.RestoreAction -= RestoreAction;
+	        VideoSettingsController.QualityChangedAction -= OnQualityChanged;
+		}
+
+		public abstract void Setup();
         public virtual void Initialized(object defVal, string dbName, bool isLiveValue = false)
         {
             defaultValue = defVal;
@@ -26,7 +48,11 @@ namespace Studio23.SS2.SettingsManager.Core.Component
             else Select();
         }
 
-        public void Select()
+        public abstract void ApplyAction();
+        public abstract void RestoreAction();
+
+
+		public void Select()
         {
             CurrentValue = LoadValue();
         }

@@ -16,18 +16,18 @@ namespace GameSettings
 		[SerializeField] private float defaultVal = 1;
 
 
-		private void OnEnable()
-		{
-			_videoSettingsController = FindObjectOfType<SettingsController>();
-			_videoSettingsController.ApplyAction += ApplyAction;
-			_videoSettingsController.RestoreAction += RestoreAction;
-		}
+		//private void OnEnable()
+		//{
+		//	_videoSettingsController = FindObjectOfType<SettingsController>();
+		//	_videoSettingsController.ApplyAction += ApplyAction;
+		//	_videoSettingsController.RestoreAction += RestoreAction;
+		//}
 
-		private void OnDisable()
-		{
-			_videoSettingsController.ApplyAction -= ApplyAction;
-			_videoSettingsController.RestoreAction -= RestoreAction;
-		}
+		//private void OnDisable()
+		//{
+		//	_videoSettingsController.ApplyAction -= ApplyAction;
+		//	_videoSettingsController.RestoreAction -= RestoreAction;
+		//}
 
 		public override void Setup()
 		{
@@ -48,13 +48,13 @@ namespace GameSettings
 			});
 		}
 
-		private void RestoreAction()
+		public override void RestoreAction()
 		{
 			uiItem.value = defaultVal; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
-		private void ApplyAction()
+		public override void ApplyAction()
 		{
 			base.Save();
 			if (!isLive) Apply();  // if Live then already applied this
