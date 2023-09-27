@@ -8,7 +8,7 @@
   "documentationUrl": "https://openupm.com/packages/com.studio23.ss2.settingsmanager/",
   "scopedRegistries":[
   {
-	  "name": "Studio 23"
+	  "name": "Studio 23",
 	  "url": "https://package.openupm.com",
 	  "scopes": [
 		"com.studio23.ss2"
