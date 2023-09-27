@@ -31,7 +31,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5962653454984285043}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -88,7 +87,7 @@ GameObject:
   - component: {fileID: 5962653454192703094}
   - component: {fileID: 5962653454192703095}
   m_Layer: 5
-  m_Name: AudioController
+  m_Name: VolumeSlider
   m_TagString: Untagged
   m_Icon: {fileID: 0}
   m_NavMeshLayer: 0
@@ -111,7 +110,6 @@ RectTransform:
   - {fileID: 5962653454604367673}
   - {fileID: 5962653454490832602}
   m_Father: {fileID: 0}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}
@@ -162,10 +160,10 @@ MonoBehaviour:
   m_FillRect: {fileID: 5962653453782216841}
   m_HandleRect: {fileID: 5962653455461027096}
   m_Direction: 0
-  m_MinValue: 0
+  m_MinValue: 0.001
   m_MaxValue: 1
   m_WholeNumbers: 0
-  m_Value: 0
+  m_Value: 0.001
   m_OnValueChanged:
     m_PersistentCalls:
       m_Calls: []
@@ -181,13 +179,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd54201ae18f90241bd8879474a70019, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
-  uiItem: {fileID: 5962653454192703094}
-  label: {fileID: 5962653454490832603}
-  audioSetting:
-    isLive: 1
-    audioMixerGroup: {fileID: 0}
-    defaultValue: 0.75
-    exposedParameter: 
+  _volumeSlider: {fileID: 5962653454192703094}
+  _sliderLabel: {fileID: 5962653454490832603}
 --- !u!1 &5962653454490832601
 GameObject:
   m_ObjectHideFlags: 0
@@ -219,7 +212,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5962653454192703092}
-  m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 1}
   m_AnchorMax: {x: 0, y: 1}
@@ -355,7 +347,6 @@ RectTransform:
   m_Children:
   - {fileID: 5962653455461027096}
   m_Father: {fileID: 5962653454192703092}
-  m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 1, y: 1}
@@ -393,7 +384,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5962653454192703092}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
@@ -468,7 +458,6 @@ RectTransform:
   m_Children:
   - {fileID: 5962653453782216841}
   m_Father: {fileID: 5962653454192703092}
-  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0.25}
   m_AnchorMax: {x: 1, y: 0.75}
@@ -506,7 +495,6 @@ RectTransform:
   m_ConstrainProportionsScale: 0
   m_Children: []
   m_Father: {fileID: 5962653454604367673}
-  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
   m_AnchorMin: {x: 0, y: 0}
   m_AnchorMax: {x: 0, y: 0}

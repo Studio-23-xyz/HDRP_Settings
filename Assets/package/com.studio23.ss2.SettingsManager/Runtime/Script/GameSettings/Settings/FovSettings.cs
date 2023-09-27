@@ -1,7 +1,6 @@
 ﻿using Cinemachine;
-using Studio23.SS2.SettingsManager.Core;
 using Studio23.SS2.SettingsManager.Core.Component;
-using Studio23.SS2.SettingsManager.Extension;
+using Studio23.SS2.SettingsManager.Extensions;
 using TMPro;
 using UnityEngine;
 using UnityEngine.UI;
@@ -28,12 +27,12 @@ namespace Studio23.SS2.SettingsManager.Video
 		private void Start()
 		{
 			uiItem.Init(CurrentValue.ToFloat());
-			label.text = FloatToText(defaultVal, gameObject.name);
+			label.text = SliderExtensions.FloatToText(defaultVal, gameObject.name);
 			uiItem.onValueChanged.AddListener((value) =>
 			{
 				CurrentValue = value;
 				if (isLive) Apply();
-				label.text = FloatToText(value, gameObject.name);
+				label.text = SliderExtensions.FloatToText(value, gameObject.name);
 			});
 		}
 

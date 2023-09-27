@@ -1,9 +1,9 @@
 using Studio23.SS2.SettingsManager.Core;
 using Studio23.SS2.SettingsManager.Core.Component;
-using Studio23.SS2.SettingsManager.Extension;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text.RegularExpressions;
+using Studio23.SS2.SettingsManager.Extensions;
 using TMPro;
 using UnityEngine;
 

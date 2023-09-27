@@ -5,49 +5,50 @@ using TMPro;
 using UnityEngine;
 using Slider = UnityEngine.UI.Slider;
 
-namespace Studio23.SS2.SettingsManager.Video
+namespace Studio23.SS2.SettingsManager.Audio
 {
 	[RequireComponent(typeof(Slider))]
 	public class VolumeController : Settings
 	{
-		[SerializeField] private Slider uiItem;
-		[SerializeField] private TMP_Text label;
-		private AudioSetting audioSetting;
-		
+		[SerializeField] private Slider _volumeSlider;
+		[SerializeField] private TMP_Text _sliderLabel;
+		private AudioSetting _audioSetting;
+
 		public void Init(AudioSetting adoSetting)
 		{
-			audioSetting = adoSetting;
+			_audioSetting = adoSetting;
 			Setup();
 		}
 
 		public override void Setup()
 		{
-			if (audioSetting == null) return;
+			if (_audioSetting == null) return;
 
-			base.Initialized(audioSetting.DefaultValue, name, audioSetting.IsLive);
-			uiItem.Init(CurrentValue.ToFloat());
+			base.Initialized(_audioSetting.DefaultValue, name, _audioSetting.IsLive);
+			_volumeSlider.Init(CurrentValue.ToFloat());
+			_sliderLabel.text = SliderExtensions.FloatToText(CurrentValue.ToFloat(), _audioSetting.SettingsName);
 			Apply();
 		}
 
 		private void Start()
 		{
+			_sliderLabel.text = SliderExtensions.FloatToText(_audioSetting.DefaultValue, _audioSetting.SettingsName);
 
-			label.text = FloatToText(audioSetting.DefaultValue, audioSetting.SettingsName);
-
-			uiItem.onValueChanged.AddListener((value) =>
+			_volumeSlider.onValueChanged.AddListener((value) =>
 			{
 				CurrentValue = value;
 				if (isLive) Apply();
-				label.text = FloatToText(value, audioSetting.SettingsName);
+				_sliderLabel.text = SliderExtensions.FloatToText(value, _audioSetting.SettingsName);
 			});
 		}
 
 		public override void RestoreAction()
 		{
-			uiItem.value = audioSetting.DefaultValue; // on change CurrentValue will be changed
+			_volumeSlider.value = _audioSetting.DefaultValue; // on change CurrentValue will be changed
 			base.Save();
 			if (!isLive) Apply(); // if Live then already applied this
 		}
+
 		public override void ApplyAction()
 		{
 			base.Save();
@@ -56,7 +57,7 @@ namespace Studio23.SS2.SettingsManager.Video
 
 		public void Apply()
 		{
-			audioSetting.AudioMixerGroup.audioMixer.SetFloat(audioSetting.ExposedParameter, CurrentValue.ToFloat().GetAttenuation());
+			_audioSetting.AudioMixerGroup.audioMixer.SetFloat(_audioSetting.ExposedParameter, Mathf.Log10(CurrentValue.ToFloat())*20);
 		}
 	}
 }

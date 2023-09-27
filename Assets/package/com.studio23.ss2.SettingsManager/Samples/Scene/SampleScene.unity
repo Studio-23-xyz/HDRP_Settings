@@ -629,6 +629,11 @@ MonoBehaviour:
   m_Size: {x: 5, y: 5, z: 0.5}
   m_FadeFactor: 0.8
   m_Version: 2
+--- !u!224 &79994596 stripped
+RectTransform:
+  m_CorrespondingSourceObject: {fileID: 443408812199655747, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+  m_PrefabInstance: {fileID: 443408812683646993}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &85206421
 GameObject:
   m_ObjectHideFlags: 3
@@ -2986,17 +2991,6 @@ Transform:
   m_CorrespondingSourceObject: {fileID: 2884580647323923220, guid: ac309c43e63ab9c489ca158a0025b6e9, type: 3}
   m_PrefabInstance: {fileID: 291363433}
   m_PrefabAsset: {fileID: 0}
---- !u!114 &303121546 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 443408812977644419, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
-  m_PrefabInstance: {fileID: 443408812683646993}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &303614828
 GameObject:
   m_ObjectHideFlags: 0
@@ -8189,17 +8183,6 @@ MonoBehaviour:
   m_Size: {x: 7.3573437, y: 8.222879, z: 3}
   m_FadeFactor: 0.231
   m_Version: 2
---- !u!114 &651917611 stripped
-MonoBehaviour:
-  m_CorrespondingSourceObject: {fileID: 443408812182208526, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
-  m_PrefabInstance: {fileID: 443408812683646993}
-  m_PrefabAsset: {fileID: 0}
-  m_GameObject: {fileID: 0}
-  m_Enabled: 1
-  m_EditorHideFlags: 0
-  m_Script: {fileID: 11500000, guid: 4e29b1a8efbd4b44bb3f3716e73f07ff, type: 3}
-  m_Name: 
-  m_EditorClassIdentifier: 
 --- !u!1 &657911451
 GameObject:
   m_ObjectHideFlags: 0
@@ -31773,6 +31756,26 @@ PrefabInstance:
       propertyPath: m_AnchoredPosition.y
       value: -430
       objectReference: {fileID: 0}
+    - target: {fileID: 443408812182208524, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: m_IsActive
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408812182208527, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: m_AnchorMax.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408812182208527, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: m_AnchorMin.y
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408812182208527, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: m_AnchoredPosition.x
+      value: 0
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408812182208527, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: m_AnchoredPosition.y
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 443408812202902906, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_AnchorMax.y
       value: 1
@@ -31971,20 +31974,60 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 443408813328331161, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_IsActive
-      value: 0
+      value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 443408813328331162, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_Enabled
       value: 1
       objectReference: {fileID: 0}
     - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
-      propertyPath: _applyButton
-      value: 
-      objectReference: {fileID: 651917611}
+      propertyPath: Settings.Array.size
+      value: 0
+      objectReference: {fileID: 0}
     - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
-      propertyPath: _restoreButton
+      propertyPath: _containerTransform
       value: 
-      objectReference: {fileID: 303121546}
+      objectReference: {fileID: 79994596}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.size
+      value: 3
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[0].SettingsName
+      value: Master
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[1].SettingsName
+      value: BGM
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[2].SettingsName
+      value: SFX
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[0].AudioMixerGroup
+      value: 
+      objectReference: {fileID: 24300002, guid: 1a5cf24acfa248044974212b807a53b1, type: 2}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[1].AudioMixerGroup
+      value: 
+      objectReference: {fileID: 8054432490332825733, guid: 1a5cf24acfa248044974212b807a53b1, type: 2}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[2].AudioMixerGroup
+      value: 
+      objectReference: {fileID: 995858079695712961, guid: 1a5cf24acfa248044974212b807a53b1, type: 2}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[0].ExposedParameter
+      value: MasterVol
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[1].ExposedParameter
+      value: BGVol
+      objectReference: {fileID: 0}
+    - target: {fileID: 443408813328331163, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+      propertyPath: _audioSettings.Array.data[2].ExposedParameter
+      value: SFXVol
+      objectReference: {fileID: 0}
     - target: {fileID: 443408813532305144, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_AnchorMax.y
       value: 0
@@ -32019,15 +32062,15 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 443408813636310167, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_SizeDelta.y
-      value: 520
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 443408813636310167, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_AnchoredPosition.x
-      value: 533.12134
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 443408813636310167, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_AnchoredPosition.y
-      value: -260
+      value: 0
       objectReference: {fileID: 0}
     - target: {fileID: 4424293137984891838, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_AnchorMax.y
@@ -32143,7 +32186,7 @@ PrefabInstance:
       objectReference: {fileID: 0}
     - target: {fileID: 4780281760598788030, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_Name
-      value: SattingsManager
+      value: SettingsManager
       objectReference: {fileID: 0}
     - target: {fileID: 7192770630879179525, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
       propertyPath: m_RootOrder
@@ -32414,7 +32457,11 @@ PrefabInstance:
       value: -10
       objectReference: {fileID: 0}
     m_RemovedComponents: []
-    m_RemovedGameObjects: []
+    m_RemovedGameObjects:
+    - {fileID: 443408812542336718, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+    - {fileID: 443408812867911197, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+    - {fileID: 443408812429765095, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
+    - {fileID: 443408811976193876, guid: 274e4593d25383844ae754483a6c2d54, type: 3}
     m_AddedGameObjects: []
     m_AddedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: 274e4593d25383844ae754483a6c2d54, type: 3}

@@ -12,7 +12,7 @@ namespace Studio23.SS2.SettingsManager.Video
 	[RequireComponent(typeof(TMP_Dropdown))]
 	public class FullScreenModeSettings : Settings
 	{
-		private List<FullScreenMode> _fullscreenModes { get; set; }
+		private List<FullScreenMode> _fullscreenModes { get; set; } = new List<FullScreenMode>();
 		[SerializeField] private TMP_Dropdown uiItem;
 		[SerializeField] private FullScreenMode defaultVal;
 
@@ -25,6 +25,7 @@ namespace Studio23.SS2.SettingsManager.Video
 
 		private void Start()
 		{
+			if (!_fullscreenModes.Any()) return;
 			uiItem.AddOptionNew(GetOptions());
 			uiItem.value = CurrentValue.ToInt();
 
@@ -56,7 +57,13 @@ namespace Studio23.SS2.SettingsManager.Video
 
 		private void GenerateOptions()
 		{
-			
+			_fullscreenModes = new List<FullScreenMode>();
+			var x = 0;
+			foreach (FullScreenMode fullScreenMode in Enum.GetValues(typeof(FullScreenMode)))
+			{
+				if (x != 2) _fullscreenModes.Add(fullScreenMode);
+				x++;
+			}
 		}
 
 		private List<TMP_Dropdown.OptionData> GetOptions()
@@ -71,7 +78,4 @@ namespace Studio23.SS2.SettingsManager.Video
 			return _fullscreenModes[CurrentValue.ToInt()];
 		}
 	}
-
-
-
 }

@@ -1,7 +1,7 @@
 ﻿using Studio23.SS2.SettingsManager.Core;
 using Studio23.SS2.SettingsManager.Core.Component;
 using Studio23.SS2.SettingsManager.Data;
-using Studio23.SS2.SettingsManager.Extension;
+using Studio23.SS2.SettingsManager.Extensions;
 using System.Linq;
 using UnityEngine;
 using UnityEngine.Rendering.HighDefinition;
