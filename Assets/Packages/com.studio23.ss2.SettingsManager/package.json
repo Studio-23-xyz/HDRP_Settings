@@ -1,0 +1,45 @@
+{
+  "name": "com.studio23.ss2.settingsmanager",
+  "displayName": "Settings Manager",
+  "version": "0.0.9",
+  "unity": "2022.3",
+  "unityRelease": "9f1",
+  "description": "A package to modify ingame settings such as, graphics, audio and input for HDRP projects.",
+  "documentationUrl": "https://openupm.com/packages/com.studio23.ss2.settingsmanager/",
+  "scopedRegistries":[
+  {
+	  "name": "Studio 23",
+	  "url": "https://package.openupm.com",
+	  "scopes": [
+		"com.studio23.ss2"
+	  ]
+  }],
+  "keywords": [
+    "unity",
+	  "unity3d",
+	  "upm",
+    "studio23",
+    "utility",
+	  "settings",
+	  "hdrp",
+	  "quality",
+	  "preset"
+  ],
+  "dependencies": {
+    "com.unity.nuget.newtonsoft-json": "3.2.1",
+	"com.unity.cinemachine": "2.9.5",
+	"com.unity.render-pipelines.high-definition": "14.0.8",
+	"com.unity.inputsystem": "1.7.0",
+	"com.cysharp.unitask": "2.4.1"
+ },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/Studio-23-xyz/SettingsManager.git"
+  },
+  "license": "MIT",
+  "author": {
+	  "name": "Studio 23",
+	  "email": "contact@studio-23.xyz",
+	  "url": "https://studio-23.xyz"
+  }
+}
