@@ -1,5 +1,4 @@
-﻿using TMPro;
-using UnityEngine;
+﻿using UnityEngine;
 
 namespace Studio23.SS2.SettingsManager.Core
 {
@@ -7,7 +6,6 @@ namespace Studio23.SS2.SettingsManager.Core
 	{
 		[SerializeField] private AudioSettingsController _audioSettingsController;
 		[SerializeField] private VideoSettingsController _videoSettingsController;
-		[SerializeField] private TMP_Text _statusText;
 
 		private void Awake()
 		{
@@ -21,8 +19,6 @@ namespace Studio23.SS2.SettingsManager.Core
 			output += $"fullScreenMode: {Screen.fullScreenMode} \n";
 			output += $"currentResolution: {Screen.currentResolution} \n";
 			output += $"vSyncCount: {QualitySettings.vSyncCount} \n";
-			// output += $"brightness: {_autoExposure.keyValue.value/4.0f} \n";
-			// output += $"fov: {virtualCamera.m_Lens.FieldOfView} \n";
 			output += $"dpi: {QualitySettings.resolutionScalingFixedDPIFactor} \n";
 			output += $"GetQualityLevel: {QualitySettings.GetQualityLevel()} \n";
 			output += $"masterTextureLimit: {QualitySettings.globalTextureMipmapLimit.ToString()} \n";
